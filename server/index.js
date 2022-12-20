@@ -3,6 +3,7 @@ require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
+const authRoute = require("./routes/authRoute");
 
 app.use(express.json());
 app.use(
@@ -13,6 +14,7 @@ app.use(
 );
 
 app.use("", userRoute);
+app.use("", authRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("Server Start At: " + process.env.PORT);

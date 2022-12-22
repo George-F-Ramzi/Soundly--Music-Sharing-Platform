@@ -14,4 +14,10 @@ Router.route("/upload").post(
   controller.UploadSong
 );
 
+Router.route("/follow/:userId").post(JWT, controller.Follow);
+Router.route("/unfollow/:userId").post(JWT, controller.UnFollow);
+Router.route("/song/:songId").get(JWT, controller.GetSong);
+Router.route("/comment/:songId").post(JWT, controller.DoComment);
+Router.route("/profile/:userId").get(JWT, controller.GetProfile);
+
 module.exports = Router;

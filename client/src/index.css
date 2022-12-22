@@ -1,8 +1,11 @@
-body {
-  background-color: var(--dark-10);
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark-10);
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +17,8 @@ body {
 }
 
 #root {
-  width: 1184px;
+  width: 100%;
+  max-width: 1184px;
   min-height: -webkit-fill-available;
   min-height: 100vh;
   padding: 0 32px;
@@ -75,4 +79,126 @@ body {
   --h5: 20px;
   --body1: 16px;
   --body2: 14px;
+}
+
+/* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+  line-height: 150%;
+}
+.body1,
+.body2 {
+  padding: 0px;
+  margin: 0px;
+  font-weight: 300;
+  line-height: 150%;
+}
+
+/* Input Fields */
+
+.form {
+  width: 100% !important;
+  max-width: 648px !important;
+  margin-top: 32px;
+}
+
+.form > .btn {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 16px;
+  background-color: var(--dark-9);
+  border: 0.5px solid var(--neutral-8);
+  border-radius: 4px;
+  padding-left: 16px;
+}
+
+.input::placeholder {
+  font-size: var(--body1);
+  color: var(--neutral-3);
+}
+
+.input:focus {
+  font-size: var(--body1);
+  color: var(--neutral-3);
+}
+
+.input:valid {
+  font-size: var(--body1);
+  color: var(--neutral-3);
+}
+
+.input:invalid {
+  font-size: var(--body1);
+  color: var(--neutral-3);
+}
+
+.input.input--big {
+  height: 64px;
+}
+
+.input.input--small {
+  height: 48px;
+}
+
+.form-info {
+  margin-top: 36px;
+  color: var(--neutral-1);
+}
+
+.error__text {
+  width: 100%;
+  height: 36px;
+  font-size: var(--body1);
+  color: white;
+  background-color: red;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  font-size: var(--body1);
+}
+
+/* Buttons */
+
+.btn {
+  border-radius: 4px;
+  padding: 8px 16px;
+  border: 0;
+  color: var(--dark-10);
+  background: var(--gradient-1);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn--big {
+  font-size: var(--h5);
+  font-weight: bold;
+  height: 64px;
+}
+
+.btn--small {
+  font-size: var(--body1);
+  font-weight: 500;
+  height: 48px;
+}
+
+/* Links */
+
+a {
+  text-decoration: none;
+  color: var(--primary-5);
 }

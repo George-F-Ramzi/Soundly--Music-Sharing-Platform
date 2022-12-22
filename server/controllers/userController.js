@@ -58,7 +58,7 @@ const Register = async (req, res) => {
         .header({ "x-auth-token": token })
         .send("Registering Done");
     } else {
-      res.status(400).send("Email Already Registerd");
+      res.status(400).send("email Already Registerd");
     }
   } catch (error) {
     res.status(500).send("Something Wrong Happen");

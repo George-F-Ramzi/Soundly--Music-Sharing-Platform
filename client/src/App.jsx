@@ -2,7 +2,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./pages/landingPage";
 import Register, { RegisterAction } from "./elements/register";
 import Login, { loginAction } from "./elements/login";
-import NavBar from "./elements/navBar";
+import HomePage from "./pages/homePage";
+import ProfilePage from "./pages/profilePage";
+import SongPage from "./pages/songPage";
+import "./css/profile.css";
+import "./css/song.css";
+import "./css/page.css";
 
 function App() {
   const Router = createBrowserRouter([
@@ -16,7 +21,15 @@ function App() {
     },
     {
       path: "/home",
-      element: <NavBar />,
+      element: <HomePage />,
+    },
+    {
+      path: "/profile",
+      element: <ProfilePage />,
+    },
+    {
+      path: "/song",
+      element: <SongPage />,
     },
   ]);
   return <RouterProvider router={Router} />;

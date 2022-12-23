@@ -44,6 +44,23 @@
   font-size: 32px;
 }
 
+.write-comment {
+  width: 100%;
+  margin: 28px 0;
+  display: flex;
+}
+
+.write__img {
+  height: 64px;
+  min-width: 64px;
+  border-radius: 100px;
+  margin-right: 16px;
+}
+
+.input-comment {
+  border-radius: 100px !important;
+}
+
 @media screen and (max-width: 672px) {
   .value {
     font-size: var(--h5);

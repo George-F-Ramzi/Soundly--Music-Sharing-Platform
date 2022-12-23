@@ -1,0 +1,22 @@
+.comment {
+  display: flex;
+}
+
+.comment__img {
+  min-width: 64px;
+  height: 64px;
+  margin-right: 12px;
+  border-radius: 100px;
+}
+
+.theComment {
+  background-color: var(--dark-8);
+  border-radius: 8px;
+  color: var(--neutral-1);
+  padding: 12px;
+  max-width: 520px;
+}
+
+.comment-user {
+  margin-bottom: 8px;
+}

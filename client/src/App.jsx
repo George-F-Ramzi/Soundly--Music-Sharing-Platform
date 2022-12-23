@@ -5,6 +5,7 @@ import Login, { loginAction } from "./elements/login";
 import HomePage from "./pages/homePage";
 import ProfilePage from "./pages/profilePage";
 import SongPage from "./pages/songPage";
+import UploadPage from "./pages/uploadPage";
 import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
@@ -30,6 +31,10 @@ function App() {
     {
       path: "/song",
       element: <SongPage />,
+    },
+    {
+      path: "/upload",
+      element: <UploadPage />,
     },
   ]);
   return <RouterProvider router={Router} />;

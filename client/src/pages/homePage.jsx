@@ -3,6 +3,7 @@ import NavBar from "../elements/navBar";
 import SongCard from "../elements/songCard";
 import ArtistCard from "../elements/artistCard";
 import SongInPlaylist from "../elements/songInPlaylist";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -13,7 +14,9 @@ const HomePage = () => {
           <h3 className="ad__title">
             You can now share music with your followers
           </h3>
-          <button className="ad__btn">Start Uploading Now</button>
+          <Link to={"/upload"}>
+            <button className="ad__btn">Start Uploading Now</button>
+          </Link>
         </div>
         <div className="ad__img"></div>
       </div>

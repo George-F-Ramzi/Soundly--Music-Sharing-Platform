@@ -6,6 +6,8 @@ import HomePage from "./pages/homePage";
 import ProfilePage from "./pages/profilePage";
 import SongPage from "./pages/songPage";
 import UploadPage from "./pages/uploadPage";
+import InboxPage from "./pages/inboxPage";
+import SearchPage from "./pages/searchPage";
 import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
@@ -35,6 +37,14 @@ function App() {
     {
       path: "/upload",
       element: <UploadPage />,
+    },
+    {
+      path: "/inbox",
+      element: <InboxPage />,
+    },
+    {
+      path: "/search",
+      element: <SearchPage />,
     },
   ]);
   return <RouterProvider router={Router} />;

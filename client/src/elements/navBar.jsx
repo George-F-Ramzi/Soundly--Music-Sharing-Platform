@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="nav-bar">
-      <h5 className="logo">Soundly</h5>
+      <Link to={"/home"}>
+        <h5 className="logo">Soundly</h5>
+      </Link>
       <div className="search-input">
         <input
           name="search"
@@ -17,10 +19,14 @@ const NavBar = () => {
         <RiSearch2Line size={"24px"} className="field-icon" />
       </div>
       <div className="nav__btns">
-        <button className="nav__btn ">Upload</button>
-        <button className="nav__btn-icon ">
-          <RiInboxArchiveLine size={"24px"} />
-        </button>
+        <Link to={"/upload"}>
+          <button className="nav__btn ">Upload</button>
+        </Link>
+        <Link to={"/inbox"}>
+          <button className="nav__btn-icon ">
+            <RiInboxArchiveLine size={"24px"} />
+          </button>
+        </Link>
         <Link className="nav__img" to={"/profile"}>
           <img className="the-img" src="https://picsum.photos/200/300" />
         </Link>

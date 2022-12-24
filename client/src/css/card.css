@@ -9,7 +9,7 @@
 
 .card__img {
   height: 80px;
-  min-width: 80px;
+  max-width: 80px;
   border-radius: 8px;
   margin-left: 10px;
 }

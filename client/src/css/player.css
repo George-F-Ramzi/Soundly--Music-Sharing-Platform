@@ -1,0 +1,84 @@
+.player {
+  height: 100px;
+  width: 100%;
+  background-color: var(--dark-6);
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.Song-info {
+  display: flex;
+  align-items: center;
+  margin-right: 44px;
+}
+
+.player__img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.info__title {
+  font-size: var(--h5);
+  color: var(--neutral-1);
+  margin-bottom: 4px;
+}
+
+.info__subtitle {
+  font-size: var(--body1);
+  color: var(--neutral-4);
+}
+
+.controller {
+  display: flex;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  height: 28px;
+  background-color: var(--dark-9);
+  border-radius: 100px;
+  margin: 0 12px;
+  position: relative;
+}
+
+.inner-bar {
+  width: 32%;
+  height: 100%;
+  background: var(--gradient-1);
+  border-radius: 100px;
+}
+
+.con-icon {
+  font-size: 36px;
+  color: white;
+  cursor: pointer;
+}
+
+.margin-right {
+  margin: 0 16px 0 44px;
+}
+
+.left-dur {
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.right-dur {
+  position: absolute;
+  right: 1%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}

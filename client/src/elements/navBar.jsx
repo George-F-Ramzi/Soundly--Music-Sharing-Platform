@@ -1,9 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "../css/navBar.css";
 import { RiSearch2Line, RiInboxArchiveLine, RiMenu5Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { NavBarData } from "../api/authApi";
+import lodash from "lodash";
 
 const NavBar = () => {
+  const [data, setData] = useState();
+  useEffect(() => {
+    Profile();
+  }, []);
+
+  const Profile = async () => {
+    const id = await NavBarData();
+    setData(id);
+  };
   return (
     <div className="nav-bar">
       <Link to={"/home"}>
@@ -28,7 +39,11 @@ const NavBar = () => {
           </button>
         </Link>
         <Link className="nav__img" to={"/profile"}>
-          <img className="the-img" src="https://picsum.photos/200/300" />
+          {lodash.isEmpty(data) ? (
+            ""
+          ) : (
+            <img className="the-img" src={data.photoUrl} />
+          )}
         </Link>
       </div>
       <button className="show nav__btn-icon ">

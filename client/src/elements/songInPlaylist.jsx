@@ -1,18 +1,18 @@
 import React from "react";
 import { RiPlayCircleFill } from "react-icons/ri";
 
-const SongInPlaylist = () => {
+const SongInPlaylist = ({ data }) => {
   return (
     <tr>
       <td>:</td>
       <td>
         <div className="playlist__div">
-          <img className="playlist__img" src="https://picsum.photos/200/300" />
-          Song Name
+          <img className="playlist__img" src={data.coverUrl} />
+          {data.songName}
         </div>
       </td>
-      <td className="artist-field">Arisit Name</td>
-      <td className="likes-field">Likes</td>
+      <td className="artist-field">{data.username}</td>
+      <td className="likes-field">{data.likes}</td>
       <td>
         <RiPlayCircleFill size={"32px"} />
       </td>

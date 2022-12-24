@@ -82,6 +82,15 @@ const Artists = async (req, res) => {
   }
 };
 
+const PlaylistOfWeek = async (req, res) => {
+  try {
+    const result = await mysql.query("call SongsOfWeek()");
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
 const GetProfile = async (req, res) => {
   const { userId } = req.params;
 
@@ -122,6 +131,20 @@ const DoComment = async (req, res) => {
   }
 };
 
+const NavBar = async (req, res) => {
+  const { _Id } = req.user;
+  const findSql = "select id,photoUrl from Users where id = ?";
+  try {
+    const profile = await mysql.query(findSql, [_Id]);
+    if (lodash.isEmpty(profile[0][0])) {
+      throw Error("Profile Did Not Exist");
+    }
+    res.status(200).json(profile[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -130,4 +153,6 @@ module.exports = {
   GetProfile,
   DoComment,
   Artists,
+  PlaylistOfWeek,
+  NavBar,
 };

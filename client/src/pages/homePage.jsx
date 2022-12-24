@@ -4,7 +4,6 @@ import SongCard from "../elements/songCard";
 import ArtistCard from "../elements/artistCard";
 import SongInPlaylist from "../elements/songInPlaylist";
 import { Link, useLoaderData } from "react-router-dom";
-import lodash from "lodash";
 
 const HomePage = () => {
   const data = useLoaderData();
@@ -57,21 +56,9 @@ const HomePage = () => {
               </tr>
             </thead>
             <tbody>
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
+              {data.Week.map((song, index) => (
+                <SongInPlaylist key={index} data={song} />
+              ))}
             </tbody>
           </table>
         </div>

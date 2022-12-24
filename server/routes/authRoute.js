@@ -18,7 +18,9 @@ Router.route("/follow/:userId").post(JWT, controller.Follow);
 Router.route("/unfollow/:userId").post(JWT, controller.UnFollow);
 Router.route("/discover").get(JWT, controller.Discover);
 Router.route("/artists").get(JWT, controller.Artists);
+Router.route("/playlist").get(JWT, controller.PlaylistOfWeek);
 Router.route("/comment/:songId").post(JWT, controller.DoComment);
 Router.route("/profile/:userId").get(JWT, controller.GetProfile);
+Router.route("/navbar").get(JWT, controller.NavBar);
 
 module.exports = Router;

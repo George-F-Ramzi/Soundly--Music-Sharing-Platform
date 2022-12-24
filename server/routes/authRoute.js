@@ -22,5 +22,6 @@ Router.route("/playlist").get(JWT, controller.PlaylistOfWeek);
 Router.route("/comment/:songId").post(JWT, controller.DoComment);
 Router.route("/profile/:userId").get(JWT, controller.GetProfile);
 Router.route("/navbar").get(JWT, controller.NavBar);
+Router.route("/song/:songId/:userId").get(JWT, controller.GetSong);
 
 module.exports = Router;

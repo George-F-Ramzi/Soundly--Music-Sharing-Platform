@@ -36,9 +36,9 @@ export const NavBarData = async () => {
   return data;
 };
 
-export const GetCurrentSong = async (id) => {
+export const GetCurrentSong = async (songId, userId) => {
   const token = localStorage.getItem("token");
-  const song = `http://localhost:3999/song/${id}`;
+  const song = `http://localhost:3999/song/${songId}/${userId}`;
   const { data } = await axios.get(song, {
     headers: { "x-auth-token": token },
   });

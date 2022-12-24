@@ -9,6 +9,7 @@ import UploadPage from "./pages/uploadPage";
 import InboxPage from "./pages/inboxPage";
 import SearchPage from "./pages/searchPage";
 import Player from "./elements/player";
+import { useState, createContext } from "react";
 import {
   Artists,
   Discover,
@@ -19,7 +20,8 @@ import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
 import "./css/player.css";
-import { useState } from "react";
+
+export const authContext = createContext();
 
 function App() {
   const [currentSong, setCurrentSong] = useState();
@@ -69,16 +71,18 @@ function App() {
     },
   ]);
 
-  const Song = async (id) => {
-    const data = await GetCurrentSong(id);
+  const Song = async (songId, userId) => {
+    const data = await GetCurrentSong(songId, userId);
     setCurrentSong(data);
     setShow(true);
   };
 
   return (
     <>
-      {show ? <Player data={currentSong} /> : ""}
-      <RouterProvider router={Router} />
+      <authContext.Provider value={{ Song, currentSong }}>
+        {show ? <Player /> : ""}
+        <RouterProvider router={Router} />
+      </authContext.Provider>
     </>
   );
 }

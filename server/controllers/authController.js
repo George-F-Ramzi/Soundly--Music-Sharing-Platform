@@ -145,6 +145,19 @@ const NavBar = async (req, res) => {
   }
 };
 
+const GetSong = async (req, res) => {
+  const { songId, userId } = req.params;
+  try {
+    const song = await mysql.query("call GetSong(?,?)", [songId, userId]);
+    if (lodash.isEmpty(song[0][0])) {
+      throw Error("Song Did Not Exist");
+    }
+    res.status(200).json(song[0][0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -155,4 +168,5 @@ module.exports = {
   Artists,
   PlaylistOfWeek,
   NavBar,
+  GetSong,
 };

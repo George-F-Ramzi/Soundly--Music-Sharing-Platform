@@ -8,6 +8,7 @@ import SongPage from "./pages/songPage";
 import UploadPage from "./pages/uploadPage";
 import InboxPage from "./pages/inboxPage";
 import SearchPage from "./pages/searchPage";
+import { Artists, Discover } from "./api/authApi";
 import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
@@ -25,6 +26,14 @@ function App() {
     {
       path: "/home",
       element: <HomePage />,
+      loader: async () => {
+        const data = {};
+        const songs = await Discover();
+        const users = await Artists();
+        data.Discover = songs;
+        data.Artists = users;
+        return data;
+      },
     },
     {
       path: "/profile",

@@ -3,9 +3,11 @@ import NavBar from "../elements/navBar";
 import SongCard from "../elements/songCard";
 import ArtistCard from "../elements/artistCard";
 import SongInPlaylist from "../elements/songInPlaylist";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import lodash from "lodash";
 
 const HomePage = () => {
+  const data = useLoaderData();
   return (
     <div className="home-page">
       <NavBar />
@@ -23,29 +25,17 @@ const HomePage = () => {
       <div className="section">
         <h3 className="section__title">Discover</h3>
         <div className="section__grid">
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
-          <SongCard />
+          {data.Discover.map((song, index) => (
+            <SongCard key={index} data={song} />
+          ))}
         </div>
       </div>
       <div className="section">
         <h3 className="section__title">Popular Artists</h3>
         <div className="section__grid">
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
-          <ArtistCard />
+          {data.Artists.map((artist, index) => (
+            <ArtistCard key={index} data={artist} />
+          ))}
         </div>
       </div>
       <div className="section">

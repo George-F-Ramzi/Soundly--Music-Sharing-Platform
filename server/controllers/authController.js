@@ -18,7 +18,7 @@ const UploadSong = async (req, res) => {
   if (error) {
     await cloudinary.uploader.destroy(songId, { resource_type: "video" });
     await cloudinary.uploader.destroy(photoId);
-    return res.status(400).send(error.message);
+    return res.status(400).json(error.message);
   }
 
   try {
@@ -57,24 +57,25 @@ const UnFollow = async (req, res) => {
 
   try {
     if (_Id === userId) throw Error("You Can't UnFollow Your Self");
-    const sqlStatment =
-      "delete from Followers where followerId = ? and beenFollowingId = ?";
-    await mysql.query(sqlStatment, [_Id, userId]);
+    await mysql.query("call UnFollow(?,?)", [_Id, userId]);
     res.status(200).send("UnFollowing Done");
   } catch (error) {
     res.status(400).send("Something Wrong Happen");
   }
 };
 
-const GetSong = async (req, res) => {
-  const { songId } = req.params;
+const Discover = async (req, res) => {
   try {
-    const sqlStatment =
-      "select id,songUrl,coverUrl,songName,userId  from Songs where id = ? ";
-    const result = await mysql.query(sqlStatment, [songId]);
-    if (lodash.isEmpty(result[0][0])) {
-      throw Error("Song Did Not Exist");
-    }
+    const result = await mysql.query("call Discover()");
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
+const Artists = async (req, res) => {
+  try {
+    const result = await mysql.query("call Artists()");
     res.status(200).json(result[0][0]);
   } catch (error) {
     res.status(400).send("Something Wrong Happen");
@@ -112,7 +113,7 @@ const DoComment = async (req, res) => {
     return res.status(400).send(error.message);
   }
 
-  const insertSql = "insert into Comments values (default,?,?,?,0,0)";
+  const insertSql = "insert into Comments values (default,?,?,?)";
   try {
     await mysql.query(insertSql, [_Id, songId, details]);
     res.status(200).send("Commenting Done");
@@ -125,7 +126,8 @@ module.exports = {
   UploadSong,
   Follow,
   UnFollow,
-  GetSong,
+  Discover,
   GetProfile,
   DoComment,
+  Artists,
 };

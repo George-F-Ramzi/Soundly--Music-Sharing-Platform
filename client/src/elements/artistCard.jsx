@@ -1,13 +1,13 @@
 import React from "react";
 import "../css/card.css";
 
-const ArtistCard = () => {
+const ArtistCard = ({ data }) => {
   return (
     <div className="card">
-      <img src="https://picsum.photos/200/300" className="card__img" />
+      <img src={data.photoURl} className="card__img" />
       <div className="card__info">
-        <h5 className="card__title">Artist Name Goes Here</h5>
-        <p className="card__subtitle body2">Followers Number</p>
+        <h5 className="card__title">{data.username}</h5>
+        <p className="card__subtitle body2">{data.followers}:Follower</p>
         <button className="card__follow">Follow</button>
       </div>
     </div>

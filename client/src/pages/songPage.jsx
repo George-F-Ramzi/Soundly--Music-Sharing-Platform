@@ -1,12 +1,10 @@
 import React from "react";
-import NavBar from "../elements/navBar";
 import { RiPlayCircleFill, RiHeart2Line } from "react-icons/ri";
 import Comment from "../elements/comment";
 
 const SongPage = () => {
   return (
     <div>
-      <NavBar />
       <div className="info-container">
         <img className="info__img" src="https://picsum.photos/200/300" />
         <h5 className="profile__name">Hello World</h5>

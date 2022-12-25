@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../elements/navBar";
 import SongCard from "../elements/songCard";
 import ArtistCard from "../elements/artistCard";
 import SongInPlaylist from "../elements/songInPlaylist";
@@ -9,7 +8,6 @@ const HomePage = () => {
   const data = useLoaderData();
   return (
     <div className="home-page">
-      <NavBar />
       <div className="landing-ad">
         <div className="ad-left">
           <h3 className="ad__title">

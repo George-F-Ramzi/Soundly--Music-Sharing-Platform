@@ -40,45 +40,12 @@
 .controller {
   display: flex;
   align-items: center;
-}
-
-.bar {
-  width: 100%;
-  height: 28px;
-  background-color: var(--dark-9);
-  border-radius: 100px;
-  margin: 0 12px;
-  position: relative;
-}
-
-.inner-bar {
-  width: 32%;
   height: 100%;
-  background: var(--gradient-1);
-  border-radius: 100px;
+  width: 100%;
 }
 
 .con-icon {
-  font-size: 36px;
+  font-size: 32px;
   color: white;
-  cursor: pointer;
-}
-
-.margin-right {
-  margin: 0 16px 0 44px;
-}
-
-.left-dur {
-  position: absolute;
-  left: 4%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.right-dur {
-  position: absolute;
-  right: 1%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+  margin: 0 16px;
 }

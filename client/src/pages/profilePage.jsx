@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../elements/navBar";
 import { RiEditFill } from "react-icons/ri";
 import SongCard from "../elements/songCard";
 import SongInPlaylist from "../elements/songInPlaylist";
@@ -7,7 +6,6 @@ import SongInPlaylist from "../elements/songInPlaylist";
 const ProfilePage = () => {
   return (
     <div>
-      <NavBar />
       <div className="info-container">
         <div className="info__img">
           <img className="img--" src="https://picsum.photos/200/300" />

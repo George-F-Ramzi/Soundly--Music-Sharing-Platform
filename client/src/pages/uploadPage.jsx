@@ -1,12 +1,10 @@
 import React from "react";
 import { Form } from "react-router-dom";
-import NavBar from "../elements/navBar";
 import "../css/upload.css";
 
 const UploadPage = () => {
   return (
     <div className="uploadPage">
-      <NavBar />
       <div className="upload">
         <Form className="upload-form">
           <input

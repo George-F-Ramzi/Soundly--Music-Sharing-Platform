@@ -1,39 +1,22 @@
 import React from "react";
-import SongCard from "../elements/songCard";
-import ArtistCard from "../elements/artistCard";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ArtistsSection from "../elements/artistsSection";
+import SongsSection from "../elements/songsSection";
 
 const HomePage = () => {
-  const data = useLoaderData();
   return (
     <div className="home-page">
       <div className="landing-ad">
-        <div className="ad-left">
-          <h3 className="ad__title">
-            You can now share music with your followers
-          </h3>
-          <Link to={"/upload"}>
-            <button className="ad__btn">Start Uploading Now</button>
-          </Link>
-        </div>
+        <h3 className="ad__title">
+          You can now share music with your followers
+        </h3>
+        <Link to={"/upload"}>
+          <button className="ad__btn">Start Uploading Now</button>
+        </Link>
         <div className="ad__img"></div>
       </div>
-      <div className="section">
-        <h3 className="section__title">Discover</h3>
-        <div className="section__grid">
-          {data.Discover.map((song, index) => (
-            <SongCard key={index} data={song} />
-          ))}
-        </div>
-      </div>
-      <div className="section">
-        <h3 className="section__title">Popular Artists</h3>
-        <div className="section__grid">
-          {data.Artists.map((artist, index) => (
-            <ArtistCard key={index} data={artist} />
-          ))}
-        </div>
-      </div>
+      <SongsSection />
+      <ArtistsSection />
     </div>
   );
 };

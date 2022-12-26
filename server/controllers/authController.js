@@ -82,15 +82,6 @@ const Artists = async (req, res) => {
   }
 };
 
-const PlaylistOfWeek = async (req, res) => {
-  try {
-    const result = await mysql.query("call SongsOfWeek()");
-    res.status(200).json(result[0][0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
-
 const GetProfile = async (req, res) => {
   const { userId } = req.params;
 
@@ -187,7 +178,6 @@ module.exports = {
   GetProfile,
   DoComment,
   Artists,
-  PlaylistOfWeek,
   NavBar,
   GetSong,
   DidIFollow,

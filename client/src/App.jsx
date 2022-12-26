@@ -17,7 +17,6 @@ import InboxPage from "./pages/inboxPage";
 import SearchPage from "./pages/searchPage";
 import NavBar from "./elements/navBar";
 import Player from "./elements/player";
-import { Artists, Discover, PlaylistOfWeek } from "./api/authApi";
 import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
@@ -39,20 +38,7 @@ function App() {
         <Route path="/login" element={<Login />} action={loginAction} />
       </Route>,
       <Route element={<AppLayout />}>
-        <Route
-          path="/home"
-          element={<HomePage />}
-          loader={async () => {
-            const data = {};
-            const songs = await Discover();
-            const users = await Artists();
-            const playlist = await PlaylistOfWeek();
-            data.Discover = songs;
-            data.Artists = users;
-            data.Week = playlist;
-            return data;
-          }}
-        />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/song" element={<SongPage />} />
         <Route path="/upload" element={<UploadPage />} />

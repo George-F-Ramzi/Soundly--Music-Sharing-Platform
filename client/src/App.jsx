@@ -31,6 +31,7 @@ function App() {
       <Outlet />
     </>
   );
+
   const Router = createBrowserRouter(
     createRoutesFromElements([
       <Route path="/" element={<LandingPage />}>

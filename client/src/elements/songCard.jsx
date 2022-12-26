@@ -1,5 +1,6 @@
 import "../css/card.css";
 import { RiPlayCircleFill } from "react-icons/ri";
+import { SetSong } from "./player";
 
 const SongCard = ({ data }) => {
   return (
@@ -9,7 +10,11 @@ const SongCard = ({ data }) => {
         <h5 className="card__title">{data.songName}</h5>
         <p className="card__subtitle body2">{data.username}</p>
         <div className="card__play">
-          <RiPlayCircleFill className="play__icon" size={"28px"} />
+          <RiPlayCircleFill
+            onClick={() => SetSong(data.id, data.userId)}
+            className="play__icon"
+            size={"28px"}
+          />
           <p className="play__text">{data.likes}:Likes</p>
         </div>
       </div>

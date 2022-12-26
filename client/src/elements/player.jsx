@@ -1,8 +1,19 @@
 import { RiHeart2Line } from "react-icons/ri";
 import lodash from "lodash";
-import React from "react";
+import React, { useState } from "react";
+import { GetCurrentSong } from "../api/authApi";
 
-const Player = ({ currentSong }) => {
+export let SetSong;
+
+const Player = () => {
+  const [currentSong, setCurrentSong] = useState();
+
+  SetSong = async (songId, userId) => {
+    const data = await GetCurrentSong(songId, userId);
+    setCurrentSong(data);
+  };
+
+  console;
   return (
     <React.Fragment>
       {lodash.isEmpty(currentSong) ? (
@@ -17,7 +28,7 @@ const Player = ({ currentSong }) => {
             </div>
           </div>
           <div className="controller">
-            <ReactPlayer url={currentSong.songUrl} />
+            <audio controls src={currentSong.songUrl} />
           </div>
           <RiHeart2Line className="con-icon" />
         </div>

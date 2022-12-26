@@ -55,3 +55,7 @@
   font-size: var(--body2);
   font-weight: bold;
 }
+
+.un--follow {
+  background: var(--neutral-3);
+}

@@ -44,3 +44,21 @@ export const GetCurrentSong = async (songId, userId) => {
   });
   return data;
 };
+
+export const DidIFollow = async (userId) => {
+  const token = localStorage.getItem("token");
+  const didIFollow = `http://localhost:3999/didIFollow/${userId}`;
+  return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
+};
+
+export const Follow = async (userId) => {
+  const token = localStorage.getItem("token");
+  const follow = `http://localhost:3999/follow/${userId}`;
+  return await axios.post(follow, {}, { headers: { "x-auth-token": token } });
+};
+
+export const UnFollow = async (userId) => {
+  const token = localStorage.getItem("token");
+  const unFollow = `http://localhost:3999/unFollow/${userId}`;
+  return await axios.post(unFollow, {}, { headers: { "x-auth-token": token } });
+};

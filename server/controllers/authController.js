@@ -158,6 +158,23 @@ const GetSong = async (req, res) => {
   }
 };
 
+const DidIFollow = async (req, res) => {
+  const { userId } = req.params;
+  const { _Id } = req.user;
+
+  const sqlStatment =
+    "select * from Followers where followerId = ? and beenFollowingId = ?";
+  try {
+    const song = await mysql.query(sqlStatment, [_Id, userId]);
+    if (lodash.isEmpty(song[0][0])) {
+      return res.status(204).send("You Don't Follow This User");
+    }
+    res.status(200).send("You Follow This User");
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -169,4 +186,5 @@ module.exports = {
   PlaylistOfWeek,
   NavBar,
   GetSong,
+  DidIFollow,
 };

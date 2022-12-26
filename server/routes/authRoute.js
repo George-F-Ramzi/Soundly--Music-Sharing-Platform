@@ -16,6 +16,7 @@ Router.route("/upload").post(
 
 Router.route("/follow/:userId").post(JWT, controller.Follow);
 Router.route("/unfollow/:userId").post(JWT, controller.UnFollow);
+Router.route("/didIFollow/:userId").get(JWT, controller.DidIFollow);
 Router.route("/discover").get(JWT, controller.Discover);
 Router.route("/artists").get(JWT, controller.Artists);
 Router.route("/playlist").get(JWT, controller.PlaylistOfWeek);

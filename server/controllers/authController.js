@@ -47,7 +47,7 @@ const Follow = async (req, res) => {
     await mysql.query("call Follow(?,?)", [_Id, userId]);
     res.status(200).send("Following Done");
   } catch (error) {
-    res.status(400).send("Something Wrong Happen");
+    res.status(400).send("Something Wrong Happen" + error);
   }
 };
 
@@ -60,7 +60,7 @@ const UnFollow = async (req, res) => {
     await mysql.query("call UnFollow(?,?)", [_Id, userId]);
     res.status(200).send("UnFollowing Done");
   } catch (error) {
-    res.status(400).send("Something Wrong Happen");
+    res.status(400).send("Something Wrong Happen" + error);
   }
 };
 
@@ -161,6 +161,10 @@ const GetSong = async (req, res) => {
 const DidIFollow = async (req, res) => {
   const { userId } = req.params;
   const { _Id } = req.user;
+
+  if (userId == _Id) {
+    return res.status(205).send("That's You");
+  }
 
   const sqlStatment =
     "select * from Followers where followerId = ? and beenFollowingId = ?";

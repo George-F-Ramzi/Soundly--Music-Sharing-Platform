@@ -1,7 +1,6 @@
 import React from "react";
 import { RiEditFill } from "react-icons/ri";
 import SongCard from "../elements/songCard";
-import SongInPlaylist from "../elements/songInPlaylist";
 
 const ProfilePage = () => {
   return (
@@ -45,41 +44,15 @@ const ProfilePage = () => {
       </div>
       <div className="section">
         <h3 className="section__title">Liked Songs</h3>
-        <div className="playist">
-          <table>
-            <thead>
-              <tr>
-                <th>:</th>
-                <th>
-                  <div className="playlist__div">
-                    <div className="playlist__img"></div>
-                    Song Name
-                  </div>
-                </th>
-                <th className="artist-field">Artist Name</th>
-                <th className="likes-field">Likes</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-              <SongInPlaylist />
-            </tbody>
-          </table>
-        </div>
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
+        <SongCard />
       </div>
     </div>
   );

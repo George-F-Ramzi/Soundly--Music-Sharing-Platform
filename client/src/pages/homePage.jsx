@@ -1,7 +1,6 @@
 import React from "react";
 import SongCard from "../elements/songCard";
 import ArtistCard from "../elements/artistCard";
-import SongInPlaylist from "../elements/songInPlaylist";
 import { Link, useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
@@ -33,32 +32,6 @@ const HomePage = () => {
           {data.Artists.map((artist, index) => (
             <ArtistCard key={index} data={artist} />
           ))}
-        </div>
-      </div>
-      <div className="section">
-        <h3 className="section__title">Playlist Of The Week</h3>
-        <div className="playist">
-          <table>
-            <thead>
-              <tr>
-                <th>:</th>
-                <th>
-                  <div className="playlist__div">
-                    <div className="playlist__img"></div>
-                    Song Name
-                  </div>
-                </th>
-                <th className="artist-field">Artist Name</th>
-                <th className="likes-field">Likes</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.Week.map((song, index) => (
-                <SongInPlaylist key={index} data={song} />
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

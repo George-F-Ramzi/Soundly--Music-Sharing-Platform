@@ -59,6 +59,6 @@ export const Follow = async (userId) => {
 
 export const UnFollow = async (userId) => {
   const token = localStorage.getItem("token");
-  const unFollow = `http://localhost:3999/unFollow/${userId}`;
+  const unFollow = `http://localhost:3999/unfollow/${userId}`;
   return await axios.post(unFollow, {}, { headers: { "x-auth-token": token } });
 };

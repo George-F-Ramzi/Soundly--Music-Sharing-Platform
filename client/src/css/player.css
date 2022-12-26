@@ -6,17 +6,18 @@
   z-index: 100;
   bottom: 0;
   left: 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 10px;
 }
 
 .Song-info {
   display: flex;
   align-items: center;
-  margin-right: 44px;
+  margin-right: 8px;
+  width: 400px;
+  max-width: 400px;
 }
 
 .player__img {
@@ -24,6 +25,10 @@
   height: 80px;
   border-radius: 4px;
   margin-right: 12px;
+}
+.title-like {
+  display: flex;
+  align-items: center;
 }
 
 .info__title {
@@ -34,18 +39,49 @@
 
 .info__subtitle {
   font-size: var(--body1);
-  color: var(--neutral-4);
-}
-
-.controller {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  color: var(--neutral-2);
 }
 
 .con-icon {
-  font-size: 32px;
+  font-size: 24px;
   color: white;
-  margin: 0 16px;
+  margin-left: 12px;
+}
+
+.rhap_container {
+  background-color: var(--dark-7) !important;
+  box-shadow: none !important;
+}
+
+.rhap_repeat-button {
+  color: white !important;
+}
+
+.rhap_play-pause-button {
+  color: white !important;
+}
+
+.rhap_time {
+  color: white !important;
+}
+
+@media screen and (max-width: 720px) {
+  .player {
+    height: 120px;
+  }
+
+  .Song-info {
+    position: absolute;
+    left: 2%;
+    top: -20%;
+    align-items: flex-end;
+  }
+
+  .player__img {
+    border: 1px solid var(--neutral-1);
+  }
+
+  .rhap_container {
+    margin-top: 36px !important;
+  }
 }

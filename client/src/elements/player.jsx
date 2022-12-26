@@ -2,6 +2,8 @@ import { RiHeart2Line } from "react-icons/ri";
 import lodash from "lodash";
 import React, { useState } from "react";
 import { GetCurrentSong } from "../api/authApi";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 export let SetSong;
 
@@ -23,14 +25,19 @@ const Player = () => {
           <div className="Song-info">
             <img className="player__img" src={currentSong.coverUrl} />
             <div>
-              <h5 className="info__title">{currentSong.songName}</h5>
+              <div className="title-like">
+                <h5 className="info__title">{currentSong.songName}</h5>
+                <RiHeart2Line className="con-icon" />
+              </div>
               <p className="info__subtitle">{currentSong.username}</p>
             </div>
           </div>
-          <div className="controller">
-            <audio controls src={currentSong.songUrl} />
-          </div>
-          <RiHeart2Line className="con-icon" />
+          <AudioPlayer
+            layout="horizontal"
+            autoPlay
+            src={currentSong.songUrl}
+            showJumpControls={false}
+          />
         </div>
       )}
     </React.Fragment>

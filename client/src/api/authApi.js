@@ -53,3 +53,48 @@ export const UnFollow = async (userId) => {
   const unFollow = `http://localhost:3999/unfollow/${userId}`;
   return await axios.post(unFollow, {}, { headers: { "x-auth-token": token } });
 };
+
+export const DidILike = async (songId) => {
+  const token = localStorage.getItem("token");
+  const didIFollow = `http://localhost:3999/didILike/${songId}`;
+  return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
+};
+
+export const Like = async (songId) => {
+  const token = localStorage.getItem("token");
+  const like = `http://localhost:3999/like/${songId}`;
+  return await axios.post(like, {}, { headers: { "x-auth-token": token } });
+};
+
+export const DisLike = async (songId) => {
+  const token = localStorage.getItem("token");
+  const DisLike = `http://localhost:3999/dislike/${songId}`;
+  return await axios.delete(DisLike, { headers: { "x-auth-token": token } });
+};
+
+export const GetProfile = async (userId) => {
+  const token = localStorage.getItem("token");
+  const Profile = `http://localhost:3999/getProfile/${userId}`;
+  const { data } = await axios.get(Profile, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};
+
+export const GetUploaded = async (userId) => {
+  const token = localStorage.getItem("token");
+  const uploaded = `http://localhost:3999/uploaded/${userId}`;
+  const { data } = await axios.get(uploaded, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};
+
+export const GetLiked = async (userId) => {
+  const token = localStorage.getItem("token");
+  const Liked = `http://localhost:3999/likedSongs/${userId}`;
+  const { data } = await axios.get(Liked, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};

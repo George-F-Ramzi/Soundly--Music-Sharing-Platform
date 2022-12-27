@@ -82,46 +82,6 @@ const Artists = async (req, res) => {
   }
 };
 
-const GetProfile = async (req, res) => {
-  const { userId } = req.params;
-
-  const findSql =
-    " select id,email,username,followers,following,songs,photoUrlfrom Users where id = ? ";
-  try {
-    const profile = await mysql.query(findSql, [userId]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-    res.status(200).json(profile[0][0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
-
-const DoComment = async (req, res) => {
-  const { songId } = req.params;
-  const { _Id } = req.user;
-  const { details } = req.body;
-
-  const schema = joi.object({
-    details: joi.string().required(),
-  });
-
-  const { error } = schema.validate({ details });
-
-  if (error) {
-    return res.status(400).send(error.message);
-  }
-
-  const insertSql = "insert into Comments values (default,?,?,?)";
-  try {
-    await mysql.query(insertSql, [_Id, songId, details]);
-    res.status(200).send("Commenting Done");
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen" + error);
-  }
-};
-
 const NavBar = async (req, res) => {
   const { _Id } = req.user;
   const findSql = "select id,photoUrl from Users where id = ?";
@@ -170,15 +130,95 @@ const DidIFollow = async (req, res) => {
   }
 };
 
+const DidILike = async (req, res) => {
+  const { songId } = req.params;
+  const { _Id } = req.user;
+
+  const sqlStatment = "select * from Likes where userId = ? and songId = ?";
+  try {
+    const song = await mysql.query(sqlStatment, [_Id, songId]);
+    if (lodash.isEmpty(song[0][0])) {
+      return res.status(204).send("You Don't Liked This Song");
+    }
+    res.status(200).send("You Liked This User");
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen");
+  }
+};
+
+const Like = async (req, res) => {
+  const { songId } = req.params;
+  const { _Id } = req.user;
+
+  try {
+    await mysql.query(" Call like_song(?,?)", [_Id, songId]);
+    res.status(200).send("Song Liked Successfully");
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const DisLike = async (req, res) => {
+  const { songId } = req.params;
+  const { _Id } = req.user;
+
+  try {
+    await mysql.query(" Call dislike_song(?,?)", [_Id, songId]);
+    res.status(200).send("Song Disliked Successfully");
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const LikedSongs = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const result = await mysql.query(" Call liked_songs(?)", [userId]);
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const UploadedSongs = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const result = await mysql.query(" Call uploaded_songs(?)", [userId]);
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const GetProfile = async (req, res) => {
+  const { userId } = req.params;
+
+  const sqlStatment =
+    "select username, photoUrl, songs,followers,following from Users where id = ?";
+
+  try {
+    const result = await mysql.query(sqlStatment, [userId]);
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
   UnFollow,
   Discover,
-  GetProfile,
-  DoComment,
   Artists,
   NavBar,
   GetSong,
   DidIFollow,
+  DidILike,
+  Like,
+  DisLike,
+  LikedSongs,
+  UploadedSongs,
+  GetProfile,
 };

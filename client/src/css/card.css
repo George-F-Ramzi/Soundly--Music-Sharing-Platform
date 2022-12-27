@@ -54,8 +54,41 @@
   background: var(--gradient-1);
   font-size: var(--body2);
   font-weight: bold;
+  cursor: pointer;
 }
 
 .un--follow {
   background: var(--neutral-3);
+}
+
+.card__follow-loading {
+  height: 24px;
+  padding: 0 20px;
+  margin-top: 8px;
+  border-radius: 100px;
+  border: none;
+  font-size: var(--body2);
+  font-weight: bold;
+  animation: loading 9s infinite linear;
+}
+
+@keyframes loading {
+  0% {
+    background: #33cccc;
+  }
+  20% {
+    background: #33cc36;
+  }
+  40% {
+    background: #b8cc33;
+  }
+  60% {
+    background: #fcca00;
+  }
+  80% {
+    background: #33cc36;
+  }
+  100% {
+    background: #33cccc;
+  }
 }

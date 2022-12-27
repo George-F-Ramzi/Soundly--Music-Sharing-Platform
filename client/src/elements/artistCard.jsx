@@ -4,6 +4,8 @@ import { DidIFollow, Follow, UnFollow } from "../api/authApi";
 
 const ArtistCard = ({ data }) => {
   const [iFollow, setIFollow] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     trackState();
   }, [data]);
@@ -14,7 +16,10 @@ const ArtistCard = ({ data }) => {
       setIFollow(0);
     } else if (status == 204) {
       setIFollow(1);
-    } else setIFollow(2);
+    } else {
+      setIFollow(2);
+    }
+    setLoading(false);
   };
 
   return (
@@ -23,14 +28,18 @@ const ArtistCard = ({ data }) => {
       <div className="card__info">
         <h5 className="card__title">{data.username}</h5>
         <p className="card__subtitle body2">{data.followers}:Follower</p>
-
-        {iFollow === 0 ? (
+        {loading ? (
+          <button className="card__follow-loading">Loading...</button>
+        ) : iFollow === 0 ? (
           <button
             onClick={async () => {
               try {
+                setLoading(true);
                 await UnFollow(data.id);
                 setIFollow(1);
+                setLoading(false);
               } catch (error) {
+                setLoading(false);
                 console.log(error);
               }
             }}
@@ -42,9 +51,12 @@ const ArtistCard = ({ data }) => {
           <button
             onClick={async () => {
               try {
+                setLoading(true);
                 await Follow(data.id);
                 setIFollow(0);
+                setLoading(false);
               } catch (error) {
+                setLoading(false);
                 console.log(error);
               }
             }}

@@ -21,6 +21,7 @@ import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
 import "./css/player.css";
+import { GetProfile } from "./api/authApi";
 
 function App() {
   const AppLayout = () => (
@@ -39,7 +40,13 @@ function App() {
       </Route>,
       <Route element={<AppLayout />}>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile/:userId"
+          element={<ProfilePage />}
+          loader={async ({ params: { userId } }) => {
+            return await GetProfile(userId);
+          }}
+        />
         <Route path="/song" element={<SongPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/inbox" element={<InboxPage />} />

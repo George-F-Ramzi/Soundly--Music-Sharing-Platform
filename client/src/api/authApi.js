@@ -98,3 +98,18 @@ export const GetLiked = async (userId) => {
   });
   return data;
 };
+
+export const UpdateImage = async (image) => {
+  const token = localStorage.getItem("token");
+  const form = new FormData();
+  form.append("photo", image);
+
+  const edit = `http://localhost:3999/editProfile`;
+
+  await axios({
+    method: "put",
+    url: edit,
+    data: form,
+    headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
+  });
+};

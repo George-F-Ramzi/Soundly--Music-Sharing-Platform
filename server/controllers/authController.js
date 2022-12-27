@@ -200,7 +200,25 @@ const GetProfile = async (req, res) => {
 
   try {
     const result = await mysql.query(sqlStatment, [userId]);
+    if (lodash.isEmpty(result[0][0])) {
+      throw Error("Profile Did Not Exist");
+    }
     res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const EditProfileImage = async (req, res) => {
+  const { path, filename } = req.file;
+  const { _Id } = req.user;
+
+  const sqlstatment =
+    "update Users set photoUrl = ? , photoId = ? where id = ?";
+
+  try {
+    await mysql.query(sqlstatment, [path, filename, _Id]);
+    res.status(200).send("Updated Successfully");
   } catch (error) {
     res.status(400).send("Something Wrong Happen" + error);
   }
@@ -221,4 +239,5 @@ module.exports = {
   LikedSongs,
   UploadedSongs,
   GetProfile,
+  EditProfileImage,
 };

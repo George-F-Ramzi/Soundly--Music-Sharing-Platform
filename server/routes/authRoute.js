@@ -27,5 +27,10 @@ Router.route("/dislike/:songId").delete(JWT, controller.DisLike);
 Router.route("/likedSongs/:userId").get(JWT, controller.LikedSongs);
 Router.route("/uploaded/:userId").get(JWT, controller.UploadedSongs);
 Router.route("/getProfile/:userId").get(JWT, controller.GetProfile);
+Router.route("/editProfile").put(
+  JWT,
+  upload.single("photo"),
+  controller.EditProfileImage
+);
 
 module.exports = Router;

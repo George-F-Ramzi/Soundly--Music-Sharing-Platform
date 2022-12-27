@@ -38,13 +38,17 @@ const NavBar = () => {
             <RiInboxArchiveLine size={"24px"} />
           </button>
         </Link>
-        <Link className="nav__img" to={"/profile"}>
-          {lodash.isEmpty(data) ? (
-            ""
-          ) : (
-            <img className="the-img" src={data.photoUrl} />
-          )}
-        </Link>
+        {lodash.isEmpty(data) ? (
+          ""
+        ) : (
+          <Link className="nav__img" to={`/profile/${data.id}`}>
+            {lodash.isEmpty(data) ? (
+              ""
+            ) : (
+              <img className="the-img" src={data.photoUrl} />
+            )}
+          </Link>
+        )}
       </div>
       <button className="show nav__btn-icon ">
         <RiMenu5Fill size={"24px"} />

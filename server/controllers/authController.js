@@ -275,6 +275,17 @@ const GetComments = async (req, res) => {
   }
 };
 
+const GetInbox = async (req, res) => {
+  const { _Id } = req.user;
+
+  try {
+    const data = await mysql.query("call Inbox(?)", [_Id]);
+    res.status(200).json(data[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -294,4 +305,5 @@ module.exports = {
   GetSongData,
   Comment,
   GetComments,
+  GetInbox,
 };

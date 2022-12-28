@@ -35,5 +35,6 @@ Router.route("/editProfile").put(
 Router.route("/songData/:songId").get(JWT, controller.GetSongData);
 Router.route("/comment/:songId/:userId").post(JWT, controller.Comment);
 Router.route("/getComments/:songId").get(JWT, controller.GetComments);
+Router.route("/inbox").get(JWT, controller.GetInbox);
 
 module.exports = Router;

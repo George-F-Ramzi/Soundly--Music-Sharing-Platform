@@ -16,6 +16,8 @@ const ProfilePage = () => {
   const [Liked, setLiked] = useState();
   const [iFollow, setIFollow] = useState(2);
   const [loading, setLoading] = useState(true);
+  const [loadingS1, setLoadingS1] = useState(true);
+  const [loadingS2, setLoadingS2] = useState(true);
 
   useEffect(() => {
     trackState();
@@ -35,10 +37,14 @@ const ProfilePage = () => {
   };
 
   const trackSection = async () => {
+    setLoadingS1(true);
     const data1 = await GetUploaded(userId);
     setUploaded(data1);
+    setLoadingS1(false);
+    setLoadingS2(true);
     const data2 = await GetLiked(userId);
     setLiked(data2);
+    setLoadingS2(false);
   };
 
   const handleUpdate = async (e) => {
@@ -123,13 +129,19 @@ const ProfilePage = () => {
           Songs
         </div>
       </div>
-      {lodash.isEmpty(uploaded) ? (
+
+      {loadingS1 ? (
         <SectionPlacholder />
+      ) : lodash.isEmpty(uploaded) ? (
+        <h5>There's Nothing To Show Here</h5>
       ) : (
         <SongsSection data={uploaded} name={"Uploaded Songs"} />
       )}
-      {lodash.isEmpty(Liked) ? (
+
+      {loadingS2 ? (
         <SectionPlacholder />
+      ) : lodash.isEmpty(uploaded) ? (
+        <h5>There's Nothing To Show Here</h5>
       ) : (
         <SongsSection data={Liked} name={"Liked Songs"} />
       )}

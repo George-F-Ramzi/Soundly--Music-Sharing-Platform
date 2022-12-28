@@ -7,9 +7,18 @@ const SongCard = ({ data }) => {
   const navigate = useNavigate();
   return (
     <div className="card">
-      <img src={data.coverUrl} className="card__img" />
+      <img
+        onClick={() => navigate(`/song/${data.id}`)}
+        src={data.coverUrl}
+        className="card__img"
+      />
       <div className="card__info">
-        <h5 className="card__title">{data.songName}</h5>
+        <h5
+          onClick={() => navigate(`/song/${data.id}`)}
+          className="card__title"
+        >
+          {data.songName}
+        </h5>
         <p
           onClick={() => navigate(`/profile/${data.userId}`)}
           className="card__subtitle body2"

@@ -143,3 +143,12 @@ export const GetComments = async (songId) => {
   });
   return data;
 };
+
+export const InboxData = async () => {
+  const token = localStorage.getItem("token");
+  const Inbox = `http://localhost:3999/inbox`;
+  const { data } = await axios.get(Inbox, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};

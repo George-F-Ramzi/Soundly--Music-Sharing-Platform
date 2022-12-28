@@ -6,6 +6,7 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
+import { GetProfile, GetSongData, InboxData } from "./api/authApi";
 import LandingPage from "./pages/landingPage";
 import Register, { RegisterAction } from "./elements/register";
 import Login, { loginAction } from "./elements/login";
@@ -21,7 +22,6 @@ import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
 import "./css/player.css";
-import { GetProfile, GetSongData, InboxData } from "./api/authApi";
 
 function App() {
   const AppLayout = () => (

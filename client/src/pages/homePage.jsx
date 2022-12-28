@@ -27,8 +27,8 @@ const HomePage = () => {
         <h3 className="ad__title">
           You can now share music with your followers
         </h3>
-        <Link to={"/upload"}>
-          <button className="ad__btn">Start Uploading Now</button>
+        <Link className="ad__btn" to={"/upload"}>
+          Start Uploading Now
         </Link>
         <div className="ad__img"></div>
       </div>

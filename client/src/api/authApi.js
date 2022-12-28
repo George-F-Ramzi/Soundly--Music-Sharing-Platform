@@ -152,3 +152,15 @@ export const InboxData = async () => {
   });
   return data;
 };
+
+export const Upload = async (form) => {
+  const token = localStorage.getItem("token");
+  const Upload = `http://localhost:3999/upload`;
+  await axios.post(
+    Upload,
+    { form },
+    {
+      headers: { "x-auth-token": token },
+    }
+  );
+};

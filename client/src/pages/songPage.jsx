@@ -137,7 +137,7 @@ const SongPage = () => {
         {loading ? (
           <SectionPlacholder />
         ) : lodash.isEmpty(comments) ? (
-          <h1>There's nothing to Show Here</h1>
+          ""
         ) : (
           comments.map((comment, index) => (
             <Comment key={index} data={comment} />

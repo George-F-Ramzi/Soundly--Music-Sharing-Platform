@@ -133,7 +133,7 @@ const ProfilePage = () => {
       {loadingS1 ? (
         <SectionPlacholder />
       ) : lodash.isEmpty(uploaded) ? (
-        <h5>There's Nothing To Show Here</h5>
+        ""
       ) : (
         <SongsSection data={uploaded} name={"Uploaded Songs"} />
       )}
@@ -141,7 +141,7 @@ const ProfilePage = () => {
       {loadingS2 ? (
         <SectionPlacholder />
       ) : lodash.isEmpty(uploaded) ? (
-        <h5>There's Nothing To Show Here</h5>
+        ""
       ) : (
         <SongsSection data={Liked} name={"Liked Songs"} />
       )}

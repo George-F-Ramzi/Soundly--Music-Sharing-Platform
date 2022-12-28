@@ -40,10 +40,23 @@ const Player = () => {
       ) : (
         <div className="player">
           <div className="Song-info">
-            <img className="player__img" src={currentSong.coverUrl} />
+            <img
+              onClick={() => {
+                navigate(`/song/${currentSong.id}`);
+              }}
+              className="player__img"
+              src={currentSong.coverUrl}
+            />
             <div>
               <div className="title-like">
-                <h5 className="info__title">{currentSong.songName}</h5>
+                <h5
+                  onClick={() => {
+                    navigate(`/song/${currentSong.id}`);
+                  }}
+                  className="info__title"
+                >
+                  {currentSong.songName}
+                </h5>
                 {liked ? (
                   <RiHeart2Fill
                     onClick={async () => {

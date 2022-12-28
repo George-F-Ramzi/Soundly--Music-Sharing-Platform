@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import { GetCurrentSong, DidILike, Like, DisLike } from "../api/authApi";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
+import { useNavigate } from "react-router-dom";
 
 export let SetSong;
 
 const Player = () => {
   const [currentSong, setCurrentSong] = useState();
   const [liked, setLiked] = useState(false);
+  const navigate = useNavigate();
 
   SetSong = async (songId, userId) => {
     const data = await GetCurrentSong(songId, userId);
@@ -70,7 +72,14 @@ const Player = () => {
                   />
                 )}
               </div>
-              <p className="info__subtitle">{currentSong.username}</p>
+              <p
+                onClick={() => {
+                  navigate(`/profile/${currentSong.userId}`);
+                }}
+                className="info__subtitle"
+              >
+                {currentSong.username}
+              </p>
             </div>
           </div>
           <AudioPlayer

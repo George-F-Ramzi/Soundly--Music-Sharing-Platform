@@ -1,14 +1,21 @@
 import "../css/card.css";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { SetSong } from "./player";
+import { useNavigate } from "react-router-dom";
 
 const SongCard = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <div className="card">
       <img src={data.coverUrl} className="card__img" />
       <div className="card__info">
         <h5 className="card__title">{data.songName}</h5>
-        <p className="card__subtitle body2">{data.username}</p>
+        <p
+          onClick={() => navigate(`/profile/${data.userId}`)}
+          className="card__subtitle body2"
+        >
+          {data.username}
+        </p>
         <div className="card__play">
           <RiPlayCircleFill
             onClick={() => SetSong(data.id, data.userId)}

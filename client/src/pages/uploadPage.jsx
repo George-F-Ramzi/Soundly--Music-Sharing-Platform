@@ -6,7 +6,7 @@ const UploadPage = () => {
   return (
     <div className="uploadPage">
       <div className="upload">
-        <Form action="/upload" className="upload-form">
+        <Form className="upload-form">
           <input
             type="text"
             placeholder="Enter Song Name"

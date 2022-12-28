@@ -32,5 +32,8 @@ Router.route("/editProfile").put(
   upload.single("photo"),
   controller.EditProfileImage
 );
+Router.route("/songData/:songId").get(JWT, controller.GetSongData);
+Router.route("/comment/:songId/:userId").post(JWT, controller.Comment);
+Router.route("/getComments/:songId").get(JWT, controller.GetComments);
 
 module.exports = Router;

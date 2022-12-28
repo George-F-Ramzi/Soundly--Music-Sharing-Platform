@@ -224,6 +224,57 @@ const EditProfileImage = async (req, res) => {
   }
 };
 
+const GetSongData = async (req, res) => {
+  const { songId } = req.params;
+
+  const sqlStatment =
+    "select id,coverUrl,likes,songName,userId from Songs where id = ?";
+
+  try {
+    const result = await mysql.query(sqlStatment, [songId]);
+    if (lodash.isEmpty(result[0][0])) {
+      throw Error("Song Did Not Exist");
+    }
+    res.status(200).json(result[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const Comment = async (req, res) => {
+  const { songId, userId } = req.params;
+  const { _Id } = req.user;
+  const { details } = req.body;
+
+  const schema = joi.object({
+    details: joi.string().required(),
+  });
+
+  const { error } = schema.validate({ details });
+
+  if (error) {
+    return res.status(400).json(error.message);
+  }
+
+  try {
+    await mysql.query("call Comment(?,?,?,?)", [_Id, songId, userId, details]);
+    res.status(200).send("Commenting Done");
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const GetComments = async (req, res) => {
+  const { songId } = req.params;
+
+  try {
+    const data = await mysql.query("call GetCommentsData(?)", [songId]);
+    res.status(200).json(data[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -240,4 +291,7 @@ module.exports = {
   UploadedSongs,
   GetProfile,
   EditProfileImage,
+  GetSongData,
+  Comment,
+  GetComments,
 };

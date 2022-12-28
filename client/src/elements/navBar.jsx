@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { NavBarData } from "../api/authApi";
 import lodash from "lodash";
 
+export let Photo;
+
 const NavBar = () => {
   const [data, setData] = useState();
   useEffect(() => {
@@ -14,6 +16,7 @@ const NavBar = () => {
   const Profile = async () => {
     const id = await NavBarData();
     setData(id);
+    Photo = id.photoUrl;
   };
   return (
     <div className="nav-bar">

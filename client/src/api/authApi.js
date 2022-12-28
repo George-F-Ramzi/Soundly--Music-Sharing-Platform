@@ -113,3 +113,33 @@ export const UpdateImage = async (image) => {
     headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
   });
 };
+
+export const GetSongData = async (songId) => {
+  const token = localStorage.getItem("token");
+  const song = `http://localhost:3999/songData/${songId}`;
+  const { data } = await axios.get(song, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};
+
+export const DoComment = async (songId, userId, details) => {
+  const token = localStorage.getItem("token");
+  const comment = `http://localhost:3999/comment/${songId}/${userId}`;
+  await axios.post(
+    comment,
+    { details },
+    {
+      headers: { "x-auth-token": token },
+    }
+  );
+};
+
+export const GetComments = async (songId) => {
+  const token = localStorage.getItem("token");
+  const comments = `http://localhost:3999/getComments/${songId}`;
+  const { data } = await axios.get(comments, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};

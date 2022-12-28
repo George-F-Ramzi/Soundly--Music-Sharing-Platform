@@ -1,5 +1,6 @@
 .comment {
   display: flex;
+  margin: 24px 0;
 }
 
 .comment__img {

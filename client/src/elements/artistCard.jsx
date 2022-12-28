@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../css/card.css";
 import { DidIFollow, Follow, UnFollow } from "../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 const ArtistCard = ({ data }) => {
   const [iFollow, setIFollow] = useState(0);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     trackState();
@@ -24,9 +26,18 @@ const ArtistCard = ({ data }) => {
 
   return (
     <div className="card">
-      <img src={data.photoURl} className="card__img" />
+      <img
+        onClick={() => navigate(`/profile/${data.id}`)}
+        src={data.photoURl}
+        className="card__img"
+      />
       <div className="card__info">
-        <h5 className="card__title">{data.username}</h5>
+        <h5
+          onClick={() => navigate(`/profile/${data.id}`)}
+          className="card__title"
+        >
+          {data.username}
+        </h5>
         <p className="card__subtitle body2">{data.followers}:Follower</p>
         {loading ? (
           <button className="card__follow-loading">Loading...</button>

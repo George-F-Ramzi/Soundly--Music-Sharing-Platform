@@ -8,6 +8,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Upload`(
 )
 BEGIN
 	declare follower int;
+    declare insertedId int;
     declare finished integer default 0;
     declare followers cursor for 
 		select followerId from Followers
@@ -22,14 +23,15 @@ BEGIN
     start transaction;
 		insert into Songs (songName,songUrl,songUrlId,coverUrl,coverId,userId)
 			values (local_songName,local_songUrl,local_songUrlId,local_coverUrl,local_coverId,local_userId);
+        SELECT LAST_INSERT_ID() into insertedId;  
 		update Users set songs = songs + 1  where id = local_userId;
 		open followers;
         notifiy_followers:loop
 			fetch followers into follower;
 			if finished = 1 then leave notifiy_followers;
 			end if;
-            insert into Notifications (triggerId,notifierId,messageId)
-            values (local_userId,follower,1);
+            insert into Notifications (triggerId,notifierId,messageId,songId)
+            values (local_userId,follower,1,insertedId);
         end loop notifiy_followers;
 	commit;
 END

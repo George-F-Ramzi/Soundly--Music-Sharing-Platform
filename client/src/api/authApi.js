@@ -156,11 +156,10 @@ export const InboxData = async () => {
 export const Upload = async (form) => {
   const token = localStorage.getItem("token");
   const Upload = `http://localhost:3999/upload`;
-  await axios.post(
-    Upload,
-    { form },
-    {
-      headers: { "x-auth-token": token },
-    }
-  );
+  await axios({
+    method: "post",
+    url: Upload,
+    data: form,
+    headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
+  });
 };

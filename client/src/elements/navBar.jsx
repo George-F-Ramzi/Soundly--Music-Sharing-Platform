@@ -6,6 +6,7 @@ import { NavBarData } from "../api/authApi";
 import lodash from "lodash";
 
 export let Photo;
+export let Id;
 
 const NavBar = () => {
   const [data, setData] = useState();
@@ -17,6 +18,7 @@ const NavBar = () => {
     const id = await NavBarData();
     setData(id);
     Photo = id.photoUrl;
+    Id = id.id;
   };
   return (
     <div className="nav-bar">

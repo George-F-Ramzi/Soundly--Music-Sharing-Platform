@@ -47,3 +47,23 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+@media screen and (max-width: 472px) {
+  .see--btn {
+    height: 32px;
+    padding: 0 12px;
+  }
+  .inbox-details {
+    font-size: var(--body1);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .see--btn {
+    height: 32px;
+    padding: 0 8px;
+  }
+  .inbox-details {
+    font-size: var(--body2);
+  }
+}

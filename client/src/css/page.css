@@ -79,6 +79,9 @@
   .ad__btn {
     font-size: var(--body2);
   }
+  .landing-ad {
+    padding: 8px;
+  }
 }
 
 @media screen and (max-width: 990px) {

@@ -62,7 +62,8 @@ function App() {
             return await InboxData();
           }}
         />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search/users/:value" element={<SearchPage />} />
+        <Route path="/search/songs/:value" element={<SearchPage />} />
       </Route>,
     ])
   );

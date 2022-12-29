@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const Discover = async () => {
   const token = localStorage.getItem("token");
-  const Discover = "http://localhost:3999/discover";
+  const Discover = "https://soundly.onrender.com/discover";
   const { data } = await axios.get(Discover, {
     headers: { "x-auth-token": token },
   });
@@ -11,7 +11,7 @@ export const Discover = async () => {
 
 export const Artists = async () => {
   const token = localStorage.getItem("token");
-  const Artists = "http://localhost:3999/artists";
+  const Artists = "https://soundly.onrender.com/artists";
   const { data } = await axios.get(Artists, {
     headers: { "x-auth-token": token },
   });
@@ -20,7 +20,7 @@ export const Artists = async () => {
 
 export const NavBarData = async () => {
   const token = localStorage.getItem("token");
-  const navbar = "http://localhost:3999/navbar";
+  const navbar = "https://soundly.onrender.com/navbar";
   const { data } = await axios.get(navbar, {
     headers: { "x-auth-token": token },
   });
@@ -29,7 +29,7 @@ export const NavBarData = async () => {
 
 export const GetCurrentSong = async (songId, userId) => {
   const token = localStorage.getItem("token");
-  const song = `http://localhost:3999/song/${songId}/${userId}`;
+  const song = `https://soundly.onrender.com/song/${songId}/${userId}`;
   const { data } = await axios.get(song, {
     headers: { "x-auth-token": token },
   });
@@ -38,43 +38,43 @@ export const GetCurrentSong = async (songId, userId) => {
 
 export const DidIFollow = async (userId) => {
   const token = localStorage.getItem("token");
-  const didIFollow = `http://localhost:3999/didIFollow/${userId}`;
+  const didIFollow = `https://soundly.onrender.com/didIFollow/${userId}`;
   return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
 };
 
 export const Follow = async (userId) => {
   const token = localStorage.getItem("token");
-  const follow = `http://localhost:3999/follow/${userId}`;
+  const follow = `https://soundly.onrender.com/follow/${userId}`;
   return await axios.post(follow, {}, { headers: { "x-auth-token": token } });
 };
 
 export const UnFollow = async (userId) => {
   const token = localStorage.getItem("token");
-  const unFollow = `http://localhost:3999/unfollow/${userId}`;
+  const unFollow = `https://soundly.onrender.com/unfollow/${userId}`;
   return await axios.post(unFollow, {}, { headers: { "x-auth-token": token } });
 };
 
 export const DidILike = async (songId) => {
   const token = localStorage.getItem("token");
-  const didIFollow = `http://localhost:3999/didILike/${songId}`;
+  const didIFollow = `https://soundly.onrender.com/didILike/${songId}`;
   return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
 };
 
 export const Like = async (songId) => {
   const token = localStorage.getItem("token");
-  const like = `http://localhost:3999/like/${songId}`;
+  const like = `https://soundly.onrender.com/like/${songId}`;
   return await axios.post(like, {}, { headers: { "x-auth-token": token } });
 };
 
 export const DisLike = async (songId) => {
   const token = localStorage.getItem("token");
-  const DisLike = `http://localhost:3999/dislike/${songId}`;
+  const DisLike = `https://soundly.onrender.com/dislike/${songId}`;
   return await axios.delete(DisLike, { headers: { "x-auth-token": token } });
 };
 
 export const GetProfile = async (userId) => {
   const token = localStorage.getItem("token");
-  const Profile = `http://localhost:3999/getProfile/${userId}`;
+  const Profile = `https://soundly.onrender.com/getProfile/${userId}`;
   const { data } = await axios.get(Profile, {
     headers: { "x-auth-token": token },
   });
@@ -83,7 +83,7 @@ export const GetProfile = async (userId) => {
 
 export const GetUploaded = async (userId) => {
   const token = localStorage.getItem("token");
-  const uploaded = `http://localhost:3999/uploaded/${userId}`;
+  const uploaded = `https://soundly.onrender.com/uploaded/${userId}`;
   const { data } = await axios.get(uploaded, {
     headers: { "x-auth-token": token },
   });
@@ -92,7 +92,7 @@ export const GetUploaded = async (userId) => {
 
 export const GetLiked = async (userId) => {
   const token = localStorage.getItem("token");
-  const Liked = `http://localhost:3999/likedSongs/${userId}`;
+  const Liked = `https://soundly.onrender.com/likedSongs/${userId}`;
   const { data } = await axios.get(Liked, {
     headers: { "x-auth-token": token },
   });
@@ -104,7 +104,7 @@ export const UpdateImage = async (image) => {
   const form = new FormData();
   form.append("photo", image);
 
-  const edit = `http://localhost:3999/editProfile`;
+  const edit = `https://soundly.onrender.com/editProfile`;
 
   await axios({
     method: "put",
@@ -116,7 +116,7 @@ export const UpdateImage = async (image) => {
 
 export const GetSongData = async (songId) => {
   const token = localStorage.getItem("token");
-  const song = `http://localhost:3999/songData/${songId}`;
+  const song = `https://soundly.onrender.com/songData/${songId}`;
   const { data } = await axios.get(song, {
     headers: { "x-auth-token": token },
   });
@@ -125,7 +125,7 @@ export const GetSongData = async (songId) => {
 
 export const DoComment = async (songId, userId, details) => {
   const token = localStorage.getItem("token");
-  const comment = `http://localhost:3999/comment/${songId}/${userId}`;
+  const comment = `https://soundly.onrender.com/comment/${songId}/${userId}`;
   await axios.post(
     comment,
     { details },
@@ -137,7 +137,7 @@ export const DoComment = async (songId, userId, details) => {
 
 export const GetComments = async (songId) => {
   const token = localStorage.getItem("token");
-  const comments = `http://localhost:3999/getComments/${songId}`;
+  const comments = `https://soundly.onrender.com/getComments/${songId}`;
   const { data } = await axios.get(comments, {
     headers: { "x-auth-token": token },
   });
@@ -146,7 +146,7 @@ export const GetComments = async (songId) => {
 
 export const InboxData = async () => {
   const token = localStorage.getItem("token");
-  const Inbox = `http://localhost:3999/inbox`;
+  const Inbox = `https://soundly.onrender.com/inbox`;
   const { data } = await axios.get(Inbox, {
     headers: { "x-auth-token": token },
   });
@@ -155,7 +155,7 @@ export const InboxData = async () => {
 
 export const Upload = async (form) => {
   const token = localStorage.getItem("token");
-  const Upload = `http://localhost:3999/upload`;
+  const Upload = `https://soundly.onrender.com/upload`;
   await axios({
     method: "post",
     url: Upload,
@@ -166,7 +166,7 @@ export const Upload = async (form) => {
 
 export const SearchUsers = async (value) => {
   const token = localStorage.getItem("token");
-  const users = `http://localhost:3999/search/users/${value}`;
+  const users = `https://soundly.onrender.com/search/users/${value}`;
   const { data } = await axios.get(users, {
     headers: { "x-auth-token": token },
   });
@@ -175,7 +175,7 @@ export const SearchUsers = async (value) => {
 
 export const SearchSongs = async (value) => {
   const token = localStorage.getItem("token");
-  const songs = `http://localhost:3999/search/songs/${value}`;
+  const songs = `https://soundly.onrender.com/search/songs/${value}`;
   const { data } = await axios.get(songs, {
     headers: { "x-auth-token": token },
   });

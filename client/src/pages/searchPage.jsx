@@ -1,13 +1,21 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import "../css/search.css";
 import ArtistCard from "../elements/artistCard";
 import SongCard from "../elements/songCard";
+import lodash from "lodash";
 
 const SearchPage = () => {
   const path = useLocation();
   const navigate = useNavigate();
   const { value } = useParams();
+  const data = useLoaderData();
+
   return (
     <div>
       <div className="search-section">
@@ -34,7 +42,24 @@ const SearchPage = () => {
           </button>
         </div>
         <div className="result-section">
-          <h5>asd</h5>
+          {path.pathname.includes("songs") ? (
+            lodash.isEmpty(data) ? (
+              <h5>There's nothing to show here</h5>
+            ) : (
+              data.map((song, index) => <SongCard key={index} data={song} />)
+            )
+          ) : (
+            ""
+          )}
+          {path.pathname.includes("users") ? (
+            lodash.isEmpty(data) ? (
+              <h5>There's nothing to show here</h5>
+            ) : (
+              data.map((user, index) => <ArtistCard key={index} data={user} />)
+            )
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

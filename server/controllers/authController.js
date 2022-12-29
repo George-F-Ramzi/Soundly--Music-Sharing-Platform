@@ -286,6 +286,28 @@ const GetInbox = async (req, res) => {
   }
 };
 
+const SearchUsers = async (req, res) => {
+  const { value } = req.params;
+
+  try {
+    const data = await mysql.query("call search_users(?)", [value]);
+    res.status(200).json(data[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
+const SearchSongs = async (req, res) => {
+  const { value } = req.params;
+
+  try {
+    const data = await mysql.query("call search_songs(?)", [value]);
+    res.status(200).json(data[0][0]);
+  } catch (error) {
+    res.status(400).send("Something Wrong Happen" + error);
+  }
+};
+
 module.exports = {
   UploadSong,
   Follow,
@@ -306,4 +328,6 @@ module.exports = {
   Comment,
   GetComments,
   GetInbox,
+  SearchUsers,
+  SearchSongs,
 };

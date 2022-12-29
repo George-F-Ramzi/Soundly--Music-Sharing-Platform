@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../css/navBar.css";
 import { RiSearch2Line, RiInboxArchiveLine, RiMenu5Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "../api/authApi";
 import lodash from "lodash";
 
@@ -9,7 +9,9 @@ export let Photo;
 export let Id;
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState();
+  const [value, setValue] = useState();
   useEffect(() => {
     Profile();
   }, []);
@@ -20,18 +22,32 @@ const NavBar = () => {
     Photo = id.photoUrl;
     Id = id.id;
   };
+
   return (
     <div className="nav-bar">
       <Link to={"/home"}>
         <h5 className="logo">Soundly</h5>
       </Link>
       <div className="search-input">
-        <input
-          name="search"
-          type="text"
-          placeholder="Search"
-          className="field"
-        />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/search/users/${value}`);
+          }}
+        >
+          <input
+            name="search"
+            type="text"
+            placeholder="Search"
+            className="field"
+            value={value}
+            onChange={(e) => {
+              e.preventDefault();
+              setValue(e.target.value);
+            }}
+            required
+          />
+        </form>
         <RiSearch2Line size={"24px"} className="field-icon" />
       </div>
       <div className="nav__btns">

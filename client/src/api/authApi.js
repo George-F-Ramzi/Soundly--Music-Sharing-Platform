@@ -163,3 +163,21 @@ export const Upload = async (form) => {
     headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
   });
 };
+
+export const SearchUsers = async (value) => {
+  const token = localStorage.getItem("token");
+  const users = `http://localhost:3999/search/users/${value}`;
+  const { data } = await axios.get(users, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};
+
+export const SearchSongs = async (value) => {
+  const token = localStorage.getItem("token");
+  const songs = `http://localhost:3999/search/songs/${value}`;
+  const { data } = await axios.get(songs, {
+    headers: { "x-auth-token": token },
+  });
+  return data;
+};

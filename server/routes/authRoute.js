@@ -36,5 +36,7 @@ Router.route("/songData/:songId").get(JWT, controller.GetSongData);
 Router.route("/comment/:songId/:userId").post(JWT, controller.Comment);
 Router.route("/getComments/:songId").get(JWT, controller.GetComments);
 Router.route("/inbox").get(JWT, controller.GetInbox);
+Router.route("/search/users/:value").get(JWT, controller.SearchUsers);
+Router.route("/search/songs/:value").get(JWT, controller.SearchSongs);
 
 module.exports = Router;

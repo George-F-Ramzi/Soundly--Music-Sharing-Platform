@@ -6,7 +6,13 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import { GetProfile, GetSongData, InboxData } from "./api/authApi";
+import {
+  GetProfile,
+  GetSongData,
+  InboxData,
+  SearchSongs,
+  SearchUsers,
+} from "./api/authApi";
 import LandingPage from "./pages/landingPage";
 import Register, { RegisterAction } from "./elements/register";
 import Login, { loginAction } from "./elements/login";
@@ -62,8 +68,20 @@ function App() {
             return await InboxData();
           }}
         />
-        <Route path="/search/users/:value" element={<SearchPage />} />
-        <Route path="/search/songs/:value" element={<SearchPage />} />
+        <Route
+          path="/search/users/:value"
+          element={<SearchPage />}
+          loader={async ({ params: { value } }) => {
+            return await SearchUsers(value);
+          }}
+        />
+        <Route
+          path="/search/songs/:value"
+          element={<SearchPage />}
+          loader={async ({ params: { value } }) => {
+            return await SearchSongs(value);
+          }}
+        />
       </Route>,
     ])
   );

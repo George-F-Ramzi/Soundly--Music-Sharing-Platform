@@ -28,7 +28,7 @@ const ArtistCard = ({ data }) => {
     <div className="card">
       <img
         onClick={() => navigate(`/profile/${data.id}`)}
-        src={data.photoURl}
+        src={data.photoUrl}
         className="card__img"
       />
       <div className="card__info">

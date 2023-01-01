@@ -159,7 +159,7 @@ const Discover = async (req, res) => {
 };
 
 const Artists = async (req, res) => {
-  const sqlStatment = `select id,userName,photoUrl,followers
+  const sqlStatment = `select id,username,photoUrl,followers
   from Users order by followers desc limit 0,9`;
 
   try {

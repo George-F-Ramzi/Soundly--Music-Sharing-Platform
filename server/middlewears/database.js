@@ -6,6 +6,7 @@ const db = mysql
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_DATABASE,
+    ssl: { rejectUnauthorized: true },
   })
   .promise();
 

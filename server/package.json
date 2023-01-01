@@ -1,5 +1,5 @@
 {
-  "name": "Soundly--music-sharing-platform",
+  "name": "soundly--music-sharing-platform",
   "version": "1.0.0",
   "description": "express server for music sharing platform",
   "main": "index.js",

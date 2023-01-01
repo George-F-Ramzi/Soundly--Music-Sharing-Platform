@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "express server for music sharing platform",
   "main": "index.js",
+  "engines": {
+    "node": "19.3.0"
+  },
   "scripts": {
     "build": "echo \"No build specified\" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1",

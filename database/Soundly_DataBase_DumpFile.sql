@@ -37,7 +37,6 @@ CREATE TABLE `Comments` (
 
 LOCK TABLES `Comments` WRITE;
 /*!40000 ALTER TABLE `Comments` DISABLE KEYS */;
-INSERT INTO `Comments` VALUES (8,21,11,'hellow world'),(9,20,10,'Testing Comments'),(10,20,10,'Testing Comments'),(11,20,11,'Testing Comments ON Other Route'),(12,20,10,'G'),(13,20,10,'sadasd'),(14,20,11,'Test Notifications'),(15,20,11,'HI');
 /*!40000 ALTER TABLE `Comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +60,6 @@ CREATE TABLE `Followers` (
 
 LOCK TABLES `Followers` WRITE;
 /*!40000 ALTER TABLE `Followers` DISABLE KEYS */;
-INSERT INTO `Followers` VALUES (12,43),(12,432),(20,21),(20,22),(20,23),(20,25),(20,27);
 /*!40000 ALTER TABLE `Followers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +83,7 @@ CREATE TABLE `Likes` (
 
 LOCK TABLES `Likes` WRITE;
 /*!40000 ALTER TABLE `Likes` DISABLE KEYS */;
-INSERT INTO `Likes` VALUES (20,10),(20,11),(20,12),(20,13),(20,14),(20,16),(20,21);
+INSERT INTO `Likes` VALUES (29,45);
 /*!40000 ALTER TABLE `Likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +125,7 @@ CREATE TABLE `Notifications` (
   `messageId` int NOT NULL,
   `songId` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +134,6 @@ CREATE TABLE `Notifications` (
 
 LOCK TABLES `Notifications` WRITE;
 /*!40000 ALTER TABLE `Notifications` DISABLE KEYS */;
-INSERT INTO `Notifications` VALUES (86,21,20,4,10),(87,23,20,2,NULL),(88,23,20,1,15),(89,26,23,2,NULL),(90,20,23,3,15),(91,20,21,3,11),(92,20,22,2,NULL),(93,20,22,2,NULL),(94,20,21,4,11),(95,20,23,2,NULL),(96,20,23,2,NULL),(97,20,24,2,NULL),(98,20,24,2,NULL),(99,20,23,2,NULL);
 /*!40000 ALTER TABLE `Notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +155,7 @@ CREATE TABLE `Songs` (
   `coverUrl` varchar(455) NOT NULL,
   `coverId` varchar(455) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +164,7 @@ CREATE TABLE `Songs` (
 
 LOCK TABLES `Songs` WRITE;
 /*!40000 ALTER TABLE `Songs` DISABLE KEYS */;
-INSERT INTO `Songs` VALUES (10,20,'hello world','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671874483/lkncnjyfkjbevyzo4erg.ogg','lkncnjyfkjbevyzo4erg',23,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671874480/ife3drnzcynhw5hrqj8e.png','ife3drnzcynhw5hrqj8e'),(11,21,'Sad Ambient','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671875364/lk9zrpfj8dpdxapge5vt.mp3','lk9zrpfj8dpdxapge5vt',978,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671875360/vdlluazqlljvw6t9rq67.webp','vdlluazqlljvw6t9rq67'),(12,22,'Caty Song','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671875540/azm3sdqqaqb3yjjinypn.mp3','azm3sdqqaqb3yjjinypn',45,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671875539/zmxromkkjvbpagf4edq8.jpg','zmxromkkjvbpagf4edq8'),(13,22,'Lonely','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671875648/iuetdkjrn29jykmxafll.mp3','iuetdkjrn29jykmxafll',634,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671875646/t6c1so0pa3sf1s3l7jbz.webp','t6c1so0pa3sf1s3l7jbz'),(14,23,'Red Skies','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671875833/q2binrqurdoi8lup6q17.mp3','q2binrqurdoi8lup6q17',885,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671875833/yvwujixe0n6bwhxbllr7.webp','yvwujixe0n6bwhxbllr7'),(15,23,'Xms','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671875930/pkrpo57qxigb8wf43rdx.mp3','pkrpo57qxigb8wf43rdx',24,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671875928/zjvvozkjaoar30oe7evr.webp','zjvvozkjaoar30oe7evr'),(16,26,'Epic','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671876051/gu1twplmgc6bfnuqtgvl.mp3','gu1twplmgc6bfnuqtgvl',679,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671876050/mu6h3cbxqup1nq2n9hzd.webp','mu6h3cbxqup1nq2n9hzd'),(17,26,'In The Forest','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671876167/wnv5pbqazkcfxqf7agau.mp3','wnv5pbqazkcfxqf7agau',12,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671876166/hqw5jqgh0mlx6sdttwqg.webp','hqw5jqgh0mlx6sdttwqg'),(18,26,'Back Home','https://res.cloudinary.com/dwnvkwrox/video/upload/v1671876252/gchix4kw7k2t8a6uojbl.mp3','gchix4kw7k2t8a6uojbl',53,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671876252/xvjvok4twpyfsdyf5qzs.webp','xvjvok4twpyfsdyf5qzs'),(21,20,'Learning','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672307792/wns3toubquibtzneuhsz.mp3','wns3toubquibtzneuhsz',1,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672307765/rera4ejcpe2mvowtgwy5.webp','rera4ejcpe2mvowtgwy5');
+INSERT INTO `Songs` VALUES (40,29,'Jon doe','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672556302/inungzzevvoqtgxnxrrd.mp3','inungzzevvoqtgxnxrrd',677,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672556300/zwxqmhdiu5j1ciuccrwv.webp','zwxqmhdiu5j1ciuccrwv'),(41,30,'MarlBoro','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672556410/cmdxqkow3ezp7jdrrhtl.mp3','cmdxqkow3ezp7jdrrhtl',353,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672556407/rpsxpquc1sasxrm79lek.webp','rpsxpquc1sasxrm79lek'),(42,31,'Vintage','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672556681/qokprfzljofubm4b0hne.mp3','qokprfzljofubm4b0hne',123,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672556680/qxqmzowwnbxwhkrwcanu.webp','qxqmzowwnbxwhkrwcanu'),(43,32,'Lorem','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672556833/zqw2unbxbauludtwvvbx.mp3','zqw2unbxbauludtwvvbx',76,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672556830/fn5mqdxlfqs3uau0uxcu.webp','fn5mqdxlfqs3uau0uxcu'),(44,33,'Hello','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672556957/ptf7yloeids5apikmpne.mp3','ptf7yloeids5apikmpne',23,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672556957/pa5zqhgcxv5eabyconv6.jpg','pa5zqhgcxv5eabyconv6'),(45,34,'DemoWorld','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672557134/tjps0z6gumzfs9rtkhst.mp3','tjps0z6gumzfs9rtkhst',65,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672557132/fwcpeksszvrvo81fj3el.jpg','fwcpeksszvrvo81fj3el'),(46,35,'~_~','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672557268/rjn3shp52opvydbygv0f.mp3','rjn3shp52opvydbygv0f',111,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672557263/upxjgxuugzrlbicogdvt.jpg','upxjgxuugzrlbicogdvt'),(47,36,'Phantom','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672557345/pfnafckj0quxknt0a4jz.mp3','pfnafckj0quxknt0a4jz',88,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672557342/xqtqifpgnmzp8qxabbkr.webp','xqtqifpgnmzp8qxabbkr'),(48,37,'Dracula','https://res.cloudinary.com/dwnvkwrox/video/upload/v1672557483/hwe78qwthojs0kbiojnw.mp3','hwe78qwthojs0kbiojnw',43,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672557483/q6uyhvvr3jyyy695xjs4.webp','q6uyhvvr3jyyy695xjs4');
 /*!40000 ALTER TABLE `Songs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +187,7 @@ CREATE TABLE `Users` (
   `photoId` varchar(455) NOT NULL DEFAULT '123456789',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +196,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (19,'Test','test@test.com','$2b$10$GQEfMYwwp1Bf35GX3..07.6O/WldfBvp4D.TlZiLt3eTe6rLyPXxW',2440,123,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(20,'Zack','1@1.com','$2b$10$3gTCLTThRQdsORZnwvzOm.1C61B9yfE/nrqnEqqjSaHY1sJQhd9xe',672,529,2,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1672144611/xokrayxsg59bwfdsikwb.webp','xokrayxsg59bwfdsikwb'),(21,'Jack','2@2.com','$2b$10$Am6A7./QieH0cyDJNq1b..kCJPoJ/T2ZGKy0hiEBlQD3pgEU5VdSq',23418,768,2,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(22,'George','3@3.com','$2b$10$xzduHNFnpRSxhZU71okp7ue/NSTg4gTBpx38bwZD1lNyN0stcFl1a',96764,4,2,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(23,'Sara','5@5.com','$2b$10$TCrxw3ktmfzMed0hVJm0Y.dbEPNUpj6lKO23Nc/Bnin1w3g.Bzpe2',67851,235,2,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(24,'Trex','7@6.com','$2b$10$umL4Anhr3aZ1y8DPIEqlw.HpJY4I4O7OiPcdET6kQDksrba5AENd.',34338,234,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(25,'Trader','t@t.com','$2b$10$0Kamj/unBwUSpfw3IiDzPO0AXm62ILBV0CwgNgF8gcfnloA0Cjrn2',980882,420,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(26,'Lil x-2','9@9.com','$2b$10$5G9jT..JrjyYef6VmAOA8.EtoNXzGjmYIA/R7anRRbzgzTPOLm3kW',230,234,3,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(27,'Lil x-y','9@4.com','$2b$10$5F4F5WvfOrIzw8b/.HpmFeRnUhLrXcRPzwJG1OT5JVTCRv77Acyf.',5459,2,0,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789');
+INSERT INTO `Users` VALUES (29,'George','1@1.com','$2b$10$/ujAgG30oG0jsCZLCBUbUebLpvuV3mqldhBaZtL5uMN1kCLrXtYq.',77,4,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(30,'Trader','2@2.com','$2b$10$IAFwZRX2PjSvB2PnGV4hZOLA7O.7I6pZ8.Jko6hfxlP5rKxiZ0cyi',45,243,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(31,'Sara','3@3.com','$2b$10$XzBN6QJt0wl87Bd.MBRf7.7Qf.cHC4hhr8zzexe6I8vY8NyYazp9.',244,546,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(32,'Lil X_X','4@4.com','$2b$10$LXE/EWKkHWe4uehSnEg90eNDgRUCAlUO7G3Ueslr2BsYij3KzJ7Hi',77,56,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(33,'Lily','5@5.com','$2b$10$lHk.kOPJAl86P3pxBOSg4.ZZezAgLm1Lba8Qmbq.YsRYeZWChpNDW',121,33,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(34,'Jack','6@6.com','$2b$10$MU3JV3Vy5CN.deWkQRGJxeO14tSwXVHRpZCQr7xfLPnlkeYSMD5Wm',654,55,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(35,'Zack','7@7.com','$2b$10$IUzdF2tNBkf/ktC4hxSmbeF.P1gaymRpzmoXomhc2U4z0wOQwA.UC',88,33,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(36,'CArlos','8@8.com','$2b$10$0HsAQckShFGn19QvfyEslewbdMxD2e7/2Yq5tHPqzWRy0vFNgaiIq',33,24,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789'),(37,'Sergi','9@9.com','$2b$10$BSUX/18PgrykK3NuJ0F82en7xGQKLOllNWxCLZn.M/O0u1eicf0pq',22,66,1,'https://res.cloudinary.com/dwnvkwrox/image/upload/v1671018225/123456789.png','123456789');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -212,4 +209,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-29 17:16:07
+-- Dump completed on 2023-01-01 10:57:07

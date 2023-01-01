@@ -29,7 +29,7 @@ const Login = async (req, res) => {
       res.status(400).send("Invalid email");
     }
   } catch (error) {
-    res.status(500).send("Something Wrong Happen");
+    res.status(500).send("Something Wrong Happen" + error);
   }
 };
 

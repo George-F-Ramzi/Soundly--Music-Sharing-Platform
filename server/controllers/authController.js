@@ -159,14 +159,14 @@ const Discover = async (req, res) => {
 };
 
 const Artists = async (req, res) => {
-  const sqlStatment = `select id,username,photoUrl,followers
+  const sqlStatment = `select id,photoUrl,username,followers
   from Users order by followers desc limit 0,9`;
 
   try {
     const result = await mysql.query(sqlStatment);
     res.status(200).json(result[0]);
   } catch (error) {
-    res.status(400).send("Something Wrong Happen" + error);
+    res.status(400).send("Something Wrong Happen");
   }
 };
 

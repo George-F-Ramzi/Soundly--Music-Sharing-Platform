@@ -36,7 +36,7 @@ const ArtistCard = ({ data }) => {
           onClick={() => navigate(`/profile/${data.id}`)}
           className="card__title"
         >
-          {data.username}
+          {data.userName}
         </h5>
         <p className="card__subtitle body2">{data.followers}:Follower</p>
         {loading ? (

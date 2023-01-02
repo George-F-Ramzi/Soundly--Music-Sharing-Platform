@@ -11,7 +11,7 @@ const NotFound = () => {
         sorry the content you were trying to reach was not found
       </h5>
       <button
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("../", { replace: true })}
         className="btn btn--small body1"
       >
         Return

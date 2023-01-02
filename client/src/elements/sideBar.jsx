@@ -14,6 +14,7 @@ const SideBar = ({ close }) => {
       <button
         onClick={() => {
           navigate(`/profile/${Id}`);
+          close(false);
         }}
         className="sidebar-btn"
       >
@@ -21,7 +22,17 @@ const SideBar = ({ close }) => {
       </button>
       <button
         onClick={() => {
+          navigate(`/inbox`);
+          close(false);
+        }}
+        className="sidebar-btn"
+      >
+        Inbox
+      </button>
+      <button
+        onClick={() => {
           navigate(`/upload`);
+          close(false);
         }}
         className="sidebar-btn"
       >

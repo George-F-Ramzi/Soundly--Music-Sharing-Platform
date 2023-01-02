@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { RiEditFill } from "react-icons/ri";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { GetLiked, GetUploaded } from "../api/authApi";
-import lodash from "lodash";
 import SongsSection from "../elements/songsSection";
 import SectionPlacholder from "../elements/sectionPlacholder";
 import { DidIFollow, Follow, UnFollow, UpdateImage } from "../api/authApi";
@@ -143,16 +142,12 @@ const ProfilePage = () => {
 
       {loadingS1 ? (
         <SectionPlacholder />
-      ) : lodash.isEmpty(uploaded) ? (
-        ""
       ) : (
         <SongsSection data={uploaded} name={"Uploaded Songs"} />
       )}
 
       {loadingS2 ? (
         <SectionPlacholder />
-      ) : lodash.isEmpty(uploaded) ? (
-        ""
       ) : (
         <SongsSection data={Liked} name={"Liked Songs"} />
       )}

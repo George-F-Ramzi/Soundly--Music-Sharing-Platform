@@ -42,6 +42,7 @@ const UploadPage = () => {
     const theData = { ...data };
     theData[e.target.name] = e.target.files[0];
     setData(theData);
+    toast(`You Selected A ${e.target.name}`);
   };
 
   const handleSubmit = async (e) => {

@@ -43,6 +43,16 @@
   text-align: center;
 }
 
+.mobile-search {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .mobile-search {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 580px) {
   .result-section {
     grid-template-columns: 1fr;

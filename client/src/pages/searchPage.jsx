@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useLoaderData,
   useLocation,
@@ -15,10 +15,22 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const { value } = useParams();
   const data = useLoaderData();
+  const [searchValue, setSearchValue] = useState("");
 
   return (
     <div>
       <div className="search-section">
+        <form className="mobile-search">
+          <input
+            className="input input--big"
+            placeholder="What Are You Looking For?"
+            value={searchValue}
+            onChange={(e) => {
+              e.preventDefault();
+              setSearchValue(e.currentTarget.value);
+            }}
+          />
+        </form>
         <div className="filter-btns">
           <button
             onClick={() => {

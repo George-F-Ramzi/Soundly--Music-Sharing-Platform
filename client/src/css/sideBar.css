@@ -7,7 +7,6 @@
   z-index: 1000;
   background-color: var(--dark-6);
   padding: 16px;
-  transition: all 0.5s;
 }
 
 .close-btn {

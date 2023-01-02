@@ -94,8 +94,8 @@ const SongPage = () => {
           <RiHeart2Fill
             onClick={async () => {
               try {
-                await DisLike(songId);
                 setLiked(false);
+                await DisLike(songId);
               } catch (error) {
                 setLiked(true);
                 toast("Something Wrong Happen", { type: "error" });
@@ -107,8 +107,8 @@ const SongPage = () => {
           <RiHeart2Line
             onClick={async () => {
               try {
-                await Like(songId);
                 setLiked(true);
+                await Like(songId);
               } catch (error) {
                 setLiked(false);
                 toast("Something Wrong Happen", { type: "error" });

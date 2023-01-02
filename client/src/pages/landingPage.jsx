@@ -21,7 +21,7 @@ const LandingPage = () => {
       setLoading(true);
       await AllowJoin();
       setLoading(false);
-      return navigate("/home", { replace: true });
+      return navigate("../home", { replace: true });
     } catch (error) {
       setLoading(false);
       return toast("Login Session Expired", { type: "error" });

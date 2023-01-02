@@ -65,4 +65,19 @@ const Register = async (req, res) => {
   }
 };
 
-module.exports = { Register, Login };
+const AllowJoin = async (req, res) => {
+  const { _Id } = req.user;
+  try {
+    const profile = await mysql.query("select id from Users where id = ?", [
+      _Id,
+    ]);
+    if (lodash.isEmpty(profile[0][0])) {
+      throw Error("Profile Did Not Exist");
+    }
+    res.status(200).send("Can Join");
+  } catch (error) {
+    res.status(400).send("Can't Join");
+  }
+};
+
+module.exports = { Register, Login, AllowJoin };

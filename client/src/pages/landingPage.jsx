@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/landingPage.css";
 import { Outlet, useNavigate } from "react-router-dom";
+import { AllowJoin } from "../api/userAuth";
+import { toast } from "react-toastify";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfSWQiOjQ2LCJpYXQiOjE2NzI2NTU5NjN9.L3--b-OvkWmEPbkUS3TlinjFay_y0s6aDIcAqxEu5nA";
+
+  useEffect(() => {
+    autoLogin();
+  }, []);
+
+  const autoLogin = async () => {
+    if (!localStorage.getItem("token")) return;
+    try {
+      await AllowJoin();
+      return navigate("/home");
+    } catch (error) {
+      return toast("Login Session Expired", { type: "error" });
+    }
+  };
 
   return (
     <div className="landing-page">

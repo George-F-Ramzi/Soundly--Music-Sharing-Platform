@@ -16,12 +16,12 @@ const LandingPage = () => {
   }, []);
 
   const autoLogin = async () => {
-    if (!localStorage.getItem("token")) return;
+    if (!localStorage.getItem("token")) return setLoading(false);
     try {
       setLoading(true);
       await AllowJoin();
       setLoading(false);
-      return navigate("/home");
+      return navigate("/home", { replace: true });
     } catch (error) {
       setLoading(false);
       return toast("Login Session Expired", { type: "error" });

@@ -44,7 +44,9 @@ const SearchPage = () => {
         <div className="result-section">
           {path.pathname.includes("songs") ? (
             lodash.isEmpty(data) ? (
-              <h5>There's nothing to show here</h5>
+              <h5 className="empty__placeholder">
+                There's nothing to show here
+              </h5>
             ) : (
               data.map((song, index) => <SongCard key={index} data={song} />)
             )
@@ -53,7 +55,9 @@ const SearchPage = () => {
           )}
           {path.pathname.includes("users") ? (
             lodash.isEmpty(data) ? (
-              <h5>There's nothing to show here</h5>
+              <h5 className="empty__placeholder">
+                There's nothing to show here
+              </h5>
             ) : (
               data.map((user, index) => <ArtistCard key={index} data={user} />)
             )

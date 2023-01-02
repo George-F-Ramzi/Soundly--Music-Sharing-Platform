@@ -35,8 +35,19 @@
   gap: 16px;
 }
 
+.empty__placeholder {
+  width: 200%;
+  margin-top: 32px;
+  color: white;
+  font-size: 32px;
+  text-align: center;
+}
+
 @media screen and (max-width: 580px) {
   .result-section {
     grid-template-columns: 1fr;
+  }
+  .empty__placeholder {
+    width: 100%;
   }
 }

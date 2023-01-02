@@ -328,7 +328,7 @@ const LikedSongs = async (req, res) => {
 
   const LikedSongs = `select Songs.id,songName,Songs.userId,coverUrl,likes,Users.username
     from Songs join Likes on Songs.id = Likes.songId and Likes.userId = ? 
-    join Users on Users.id = ?`;
+    join Users on Users.id = Songs.userId`;
 
   try {
     const profile = await mysql.query(findProfile, [userId]);

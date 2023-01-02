@@ -5,6 +5,7 @@ import { GetCurrentSong, DidILike, Like, DisLike } from "../api/authApi";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export let SetSong;
 
@@ -14,8 +15,12 @@ const Player = () => {
   const navigate = useNavigate();
 
   SetSong = async (songId, userId) => {
-    const data = await GetCurrentSong(songId, userId);
-    setCurrentSong(data);
+    try {
+      const data = await GetCurrentSong(songId, userId);
+      setCurrentSong(data);
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
+    }
   };
 
   useEffect(() => {
@@ -25,11 +30,15 @@ const Player = () => {
   }, [currentSong]);
 
   const trackSong = async () => {
-    const { status } = await DidILike(currentSong.id);
-    if (status == 200) {
-      setLiked(true);
-    } else if (status == 204) {
-      setLiked(false);
+    try {
+      const { status } = await DidILike(currentSong.id);
+      if (status == 200) {
+        setLiked(true);
+      } else if (status == 204) {
+        setLiked(false);
+      }
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 
@@ -65,7 +74,7 @@ const Player = () => {
                         setLiked(false);
                       } catch (error) {
                         setLiked(true);
-                        console.log(error);
+                        toast("Something Wrong Happen", { type: "error" });
                       }
                     }}
                     className="con-icon"
@@ -78,7 +87,7 @@ const Player = () => {
                         setLiked(true);
                       } catch (error) {
                         setLiked(false);
-                        console.log(error);
+                        toast("Something Wrong Happen", { type: "error" });
                       }
                     }}
                     className="con-icon"

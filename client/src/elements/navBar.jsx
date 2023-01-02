@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "../api/authApi";
 import lodash from "lodash";
 import SideBar from "./sideBar";
+import { toast } from "react-toastify";
 
 export let Photo;
 export let Id;
@@ -20,10 +21,14 @@ const NavBar = () => {
   }, []);
 
   const Profile = async () => {
-    const id = await NavBarData();
-    setData(id);
-    Photo = id.photoUrl;
-    Id = id.id;
+    try {
+      const id = await NavBarData();
+      setData(id);
+      Photo = id.photoUrl;
+      Id = id.id;
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
+    }
   };
 
   return (

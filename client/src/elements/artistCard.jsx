@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/card.css";
 import { DidIFollow, Follow, UnFollow } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ArtistCard = ({ data }) => {
   const [iFollow, setIFollow] = useState(0);
@@ -13,15 +14,19 @@ const ArtistCard = ({ data }) => {
   }, [data]);
 
   const trackState = async () => {
-    const { status } = await DidIFollow(data.id);
-    if (status == 200) {
-      setIFollow(0);
-    } else if (status == 204) {
-      setIFollow(1);
-    } else {
-      setIFollow(2);
+    try {
+      const { status } = await DidIFollow(data.id);
+      if (status == 200) {
+        setIFollow(0);
+      } else if (status == 204) {
+        setIFollow(1);
+      } else {
+        setIFollow(2);
+      }
+      setLoading(false);
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
     }
-    setLoading(false);
   };
 
   return (
@@ -51,7 +56,7 @@ const ArtistCard = ({ data }) => {
                 setLoading(false);
               } catch (error) {
                 setLoading(false);
-                console.log(error);
+                toast("Something Wrong Happen", { type: "error" });
               }
             }}
             className="card__follow un--follow"
@@ -68,7 +73,7 @@ const ArtistCard = ({ data }) => {
                 setLoading(false);
               } catch (error) {
                 setLoading(false);
-                console.log(error);
+                toast("Something Wrong Happen", { type: "error" });
               }
             }}
             className="card__follow"

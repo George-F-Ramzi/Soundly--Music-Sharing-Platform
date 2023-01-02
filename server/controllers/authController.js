@@ -326,16 +326,15 @@ const LikedSongs = async (req, res) => {
 
   const findProfile = `select id from Users where id = ?`;
 
-  const LikedSongs = `select Songs.id,songName,Songs.userId,coverUrl,likes,Users.username
-    from Songs join Likes on Songs.id = Likes.songId and Likes.userId = ?
-    join Users on Users.id = ?`;
+  const LikedSongs = `select Songs.id,songName,Songs.userId,coverUrl,likes,Users.username from Songs join Likes 
+    on Songs.id = Likes.songId and Likes.userId = ? and Songs.userId = ?`;
 
   try {
     const profile = await mysql.query(findProfile, [userId]);
     if (lodash.isEmpty(profile[0][0])) {
       throw Error("Profile Did Not Exist");
     }
-    const result = await mysql.query(LikedSongs, [userId, userId]);
+    const result = await mysql.query(LikedSongs, [userId, userId, userId]);
     res.status(200).json(result[0]);
   } catch (error) {
     res.status(400).send("Something Wrong Happen" + error);

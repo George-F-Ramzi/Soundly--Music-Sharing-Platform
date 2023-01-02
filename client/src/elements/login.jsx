@@ -36,6 +36,7 @@ const Login = () => {
         type="email"
         placeholder="Email"
         className="input input--big"
+        required
       />
       {error && error.includes("email") && (
         <p className="error__text">{error}</p>
@@ -46,6 +47,7 @@ const Login = () => {
         type="password"
         placeholder="Password"
         className="input input--big"
+        required
       />
       {error && error.includes("password") && (
         <p className="error__text">{error}</p>

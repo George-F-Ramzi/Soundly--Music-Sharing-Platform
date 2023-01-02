@@ -37,6 +37,7 @@ const Register = () => {
         type="text"
         placeholder="Username"
         className="input input--big"
+        required
       />
       {error && error.includes("username") && (
         <p className="error__text">{error}</p>
@@ -46,6 +47,7 @@ const Register = () => {
         type="email"
         placeholder="Email"
         className="input input--big "
+        required
       />
       {error && error.includes("email") && (
         <p className="error__text">{error}</p>
@@ -55,6 +57,7 @@ const Register = () => {
         type="password"
         placeholder="Password"
         className="input input--big"
+        required
       />
       {error && error.includes("password") && (
         <p className="error__text">{error}</p>

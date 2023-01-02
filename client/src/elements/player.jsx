@@ -70,8 +70,8 @@ const Player = () => {
                   <RiHeart2Fill
                     onClick={async () => {
                       try {
-                        await DisLike(currentSong.id);
                         setLiked(false);
+                        await DisLike(currentSong.id);
                       } catch (error) {
                         setLiked(true);
                         toast("Something Wrong Happen", { type: "error" });
@@ -83,8 +83,8 @@ const Player = () => {
                   <RiHeart2Line
                     onClick={async () => {
                       try {
-                        await Like(currentSong.id);
                         setLiked(true);
+                        await Like(currentSong.id);
                       } catch (error) {
                         setLiked(false);
                         toast("Something Wrong Happen", { type: "error" });

@@ -41,6 +41,7 @@ function App() {
 
   const Router = createBrowserRouter(
     createRoutesFromElements([
+      <Route path="*" element={<NotFound />} />,
       <Route path="/" element={<LandingPage />}>
         <Route path="/" element={<Register />} action={RegisterAction} />
         <Route path="/login" element={<Login />} action={loginAction} />
@@ -84,7 +85,6 @@ function App() {
           }}
         />
       </Route>,
-      <Route path="*" element={<NotFound />} />,
     ])
   );
 

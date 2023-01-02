@@ -24,6 +24,7 @@ import InboxPage from "./pages/inboxPage";
 import SearchPage from "./pages/searchPage";
 import NavBar from "./elements/navBar";
 import Player from "./elements/player";
+import NotFound from "./pages/notFound";
 import "./css/profile.css";
 import "./css/song.css";
 import "./css/page.css";
@@ -83,6 +84,7 @@ function App() {
           }}
         />
       </Route>,
+      <Route path="*" element={<NotFound />} />,
     ])
   );
 

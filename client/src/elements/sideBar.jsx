@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/sideBar.css";
 import { Id } from "./navBar";
 
 const SideBar = ({ close }) => {
   const navigate = useNavigate();
-  const [value, setValue] = useState();
   return (
     <div className="sidebar">
       <button onClick={() => close(false)} className="close-btn">
@@ -38,26 +37,15 @@ const SideBar = ({ close }) => {
       >
         Upload
       </button>
-      <form
-        className="sidebar__form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          navigate(`/search/users/${value}`);
+      <button
+        onClick={() => {
+          navigate(`/search/users/""`);
+          close(false);
         }}
+        className="sidebar-btn"
       >
-        <input
-          name="search"
-          type="text"
-          placeholder="Search"
-          className="sidebar-field"
-          value={value}
-          onChange={(e) => {
-            e.preventDefault();
-            setValue(e.target.value);
-          }}
-          required
-        />
-      </form>
+        Search
+      </button>
     </div>
   );
 };

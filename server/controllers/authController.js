@@ -84,6 +84,10 @@ const Follow = async (req, res) => {
 
   const FollowInc = `update Users set followers = followers + 1 where id = ?`;
 
+  const Notifiy = `insert into Notifications
+  (triggerId,notifierId,messageId)
+  values (?,?,?)`;
+
   try {
     if (_Id === userId) throw Error("You Can't Follow Your Self");
     const profile = await mysql.query(findProfile, [_Id]);
@@ -100,6 +104,7 @@ const Follow = async (req, res) => {
     await mysql.query(Follow, [_Id, userId]);
     await mysql.query(FollowingInc, [_Id]);
     await mysql.query(FollowInc, [userId]);
+    await mysql.query(Notifiy, [_Id, userId, 2]);
 
     await mysql.query("COMMIT");
     res.status(200).send("Following Done");

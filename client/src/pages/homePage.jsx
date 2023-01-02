@@ -5,6 +5,7 @@ import SongsSection from "../elements/songsSection";
 import { Discover, Artists } from "../api/authApi";
 import lodash from "lodash";
 import SectionPlacholder from "../elements/sectionPlacholder";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [discover, setDiscover] = useState();
@@ -15,10 +16,14 @@ const HomePage = () => {
   }, []);
 
   const trackSection = async () => {
-    const data1 = await Discover();
-    setDiscover(data1);
-    const data2 = await Artists();
-    setArtists(data2);
+    try {
+      const data1 = await Discover();
+      setDiscover(data1);
+      const data2 = await Artists();
+      setArtists(data2);
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
+    }
   };
 
   return (

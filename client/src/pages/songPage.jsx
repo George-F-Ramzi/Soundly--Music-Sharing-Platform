@@ -3,6 +3,7 @@ import { RiPlayCircleFill, RiHeart2Line, RiHeart2Fill } from "react-icons/ri";
 import { useLoaderData, useParams } from "react-router-dom";
 import Comment from "../elements/comment";
 import { SetSong } from "../elements/player";
+import { toast } from "react-toastify";
 import {
   DidILike,
   DoComment,
@@ -31,11 +32,15 @@ const SongPage = () => {
   }, [songId]);
 
   const trackSong = async () => {
-    const { status } = await DidILike(songId);
-    if (status == 200) {
-      setLiked(true);
-    } else if (status == 204) {
-      setLiked(false);
+    try {
+      const { status } = await DidILike(songId);
+      if (status == 200) {
+        setLiked(true);
+      } else if (status == 204) {
+        setLiked(false);
+      }
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 
@@ -47,6 +52,7 @@ const SongPage = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 
@@ -60,7 +66,7 @@ const SongPage = () => {
       setDisable(false);
       GetCommentsData();
     } catch (error) {
-      console.log(error);
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 
@@ -92,7 +98,7 @@ const SongPage = () => {
                 setLiked(false);
               } catch (error) {
                 setLiked(true);
-                console.log(error);
+                toast("Something Wrong Happen", { type: "error" });
               }
             }}
             className="like-btn"
@@ -105,7 +111,7 @@ const SongPage = () => {
                 setLiked(true);
               } catch (error) {
                 setLiked(false);
-                console.log(error);
+                toast("Something Wrong Happen", { type: "error" });
               }
             }}
             className="like-btn"

@@ -6,6 +6,7 @@ import lodash from "lodash";
 import SongsSection from "../elements/songsSection";
 import SectionPlacholder from "../elements/sectionPlacholder";
 import { DidIFollow, Follow, UnFollow, UpdateImage } from "../api/authApi";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const profile = useLoaderData();
@@ -25,26 +26,34 @@ const ProfilePage = () => {
   }, [userId]);
 
   const trackState = async () => {
-    const { status } = await DidIFollow(userId);
-    if (status == 200) {
-      setIFollow(0);
-    } else if (status == 204) {
-      setIFollow(1);
-    } else {
-      setIFollow(2);
+    try {
+      const { status } = await DidIFollow(userId);
+      if (status == 200) {
+        setIFollow(0);
+      } else if (status == 204) {
+        setIFollow(1);
+      } else {
+        setIFollow(2);
+      }
+      setLoading(false);
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
     }
-    setLoading(false);
   };
 
   const trackSection = async () => {
-    setLoadingS1(true);
-    const data1 = await GetUploaded(userId);
-    setUploaded(data1);
-    setLoadingS1(false);
-    setLoadingS2(true);
-    const data2 = await GetLiked(userId);
-    setLiked(data2);
-    setLoadingS2(false);
+    try {
+      setLoadingS1(true);
+      const data1 = await GetUploaded(userId);
+      setUploaded(data1);
+      setLoadingS1(false);
+      setLoadingS2(true);
+      const data2 = await GetLiked(userId);
+      setLiked(data2);
+      setLoadingS2(false);
+    } catch (error) {
+      toast("Something Wrong Happen", { type: "error" });
+    }
   };
 
   const handleUpdate = async (e) => {
@@ -53,7 +62,7 @@ const ProfilePage = () => {
       await UpdateImage(e.target.files[0]);
       navigate(`/profile/${userId}`);
     } catch (error) {
-      console.log(error);
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 
@@ -88,6 +97,7 @@ const ProfilePage = () => {
                   setLoading(false);
                 } catch (error) {
                   setLoading(false);
+                  toast("Something Wrong Happen", { type: "error" });
                 }
               }}
               className="card__follow un--follow"
@@ -104,6 +114,7 @@ const ProfilePage = () => {
                   setLoading(false);
                 } catch (error) {
                   setLoading(false);
+                  toast("Something Wrong Happen", { type: "error" });
                 }
               }}
               className="card__follow"

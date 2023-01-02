@@ -5,6 +5,7 @@ import joi from "joi";
 import { Upload } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { Id } from "../elements/navBar";
+import { toast } from "react-toastify";
 
 const UploadPage = () => {
   const [data, setData] = useState({});
@@ -58,7 +59,7 @@ const UploadPage = () => {
     } catch (error) {
       setLoading(false);
       setAllow(true);
-      return console.log(error);
+      toast("Something Wrong Happen", { type: "error" });
     }
   };
 

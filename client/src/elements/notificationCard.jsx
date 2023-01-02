@@ -5,9 +5,18 @@ const NotificationCard = ({ data }) => {
   const navigate = useNavigate();
   return (
     <div className="inbox-card">
-      <img src={data.photoUrl} className="inbox-card__img" />
+      <img
+        onClick={() => navigate(`/profile/${data.triggerId}`)}
+        src={data.photoUrl}
+        className="inbox-card__img"
+      />
       <div className="inbox-user__info">
-        <p className="body1 inbox-p">{data.username}</p>
+        <p
+          onClick={() => navigate(`/profile/${data.triggerId}`)}
+          className="body1 inbox-p"
+        >
+          {data.username}
+        </p>
         {data.messageId === 1 && (
           <h5 className="inbox-details">Upload A New Song</h5>
         )}

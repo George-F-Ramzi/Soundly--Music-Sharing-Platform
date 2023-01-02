@@ -20,6 +20,7 @@
   min-width: 48px;
   height: 48px;
   border-radius: 100px;
+  cursor: pointer;
 }
 
 .inbox-user__info {
@@ -30,6 +31,7 @@
 .inbox-p {
   color: var(--neutral-3);
   font-size: var(--body1);
+  cursor: pointer;
 }
 
 .inbox-details {

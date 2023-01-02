@@ -42,12 +42,12 @@ const ProfilePage = () => {
   };
 
   const trackSection = async () => {
+    setLoadingS1(true);
+    setLoadingS2(true);
     try {
-      setLoadingS1(true);
       const data1 = await GetUploaded(userId);
       setUploaded(data1);
       setLoadingS1(false);
-      setLoadingS2(true);
       const data2 = await GetLiked(userId);
       setLiked(data2);
       setLoadingS2(false);

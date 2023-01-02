@@ -46,14 +46,7 @@ const NotificationCard = ({ data }) => {
           See
         </button>
       )}
-      {data.messageId === 3 && (
-        <button
-          onClick={() => navigate(`/song/${data.songId}`)}
-          className="see--btn"
-        >
-          See
-        </button>
-      )}
+
       {data.messageId === 4 && (
         <button
           onClick={() => navigate(`/song/${data.songId}`)}

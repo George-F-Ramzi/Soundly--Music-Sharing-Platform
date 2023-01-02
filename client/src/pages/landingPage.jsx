@@ -24,6 +24,7 @@ const LandingPage = () => {
       return navigate("../home", { replace: true });
     } catch (error) {
       setLoading(false);
+      localStorage.removeItem("token");
       return toast("Login Session Expired", { type: "error" });
     }
   };

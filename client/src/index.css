@@ -26,6 +26,12 @@ body {
   padding: 0 32px 100px 32px;
 }
 
+@media screen and (max-width: 470px) {
+  #root {
+    padding: 0 16px 100px 16px;
+  }
+}
+
 :root {
   /* primary Colors */
   --primary-2: #e5ffea;

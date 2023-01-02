@@ -17,10 +17,24 @@ const SearchPage = () => {
   const data = useLoaderData();
   const [searchValue, setSearchValue] = useState("");
 
+  const Search = () => {
+    if (path.pathname.includes("users")) {
+      navigate(`/search/users/${searchValue}`);
+    } else {
+      navigate(`/search/songs/${searchValue}`);
+    }
+  };
+
   return (
     <div>
       <div className="search-section">
-        <form className="mobile-search">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            Search();
+          }}
+          className="mobile-search"
+        >
           <input
             className="input input--big"
             placeholder="What Are You Looking For?"

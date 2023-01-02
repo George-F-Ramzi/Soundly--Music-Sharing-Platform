@@ -13,7 +13,7 @@ export let Id;
 const NavBar = () => {
   const navigate = useNavigate();
   const [data, setData] = useState();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

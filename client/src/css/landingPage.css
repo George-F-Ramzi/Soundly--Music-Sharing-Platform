@@ -15,6 +15,12 @@
   max-width: 691px;
 }
 
+.demo {
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
+}
+
 @media screen and (max-width: 432px) {
   .landing__title {
     font-size: var(--h3);

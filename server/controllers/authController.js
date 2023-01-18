@@ -27,8 +27,6 @@ const UploadSong = async (req, res) => {
 
   const insertValues = [name, _Id, songUrl, songId, photoUrl, photoId];
 
-  const findProfile = `select id from Users where id = ?`;
-
   const findFollowers = `select followerId from Followers 
   where beenFollowingId = ?`;
 
@@ -39,10 +37,6 @@ const UploadSong = async (req, res) => {
   values (?,?,?,?)`;
 
   try {
-    const profile = await mysql.query(findProfile, [_Id]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
     const followers = await mysql.query(findFollowers, [_Id]);
     await mysql.query("START TRANSACTION");
 
@@ -74,8 +68,6 @@ const Follow = async (req, res) => {
   const { _Id } = req.user;
   const { userId } = req.params;
 
-  const findProfile = `select id from Users where id = ?`;
-
   const Follow = `insert into Followers 
   (followerId,beenFollowingId)
   values (?,?)`;
@@ -90,14 +82,6 @@ const Follow = async (req, res) => {
 
   try {
     if (_Id === userId) throw Error("You Can't Follow Your Self");
-    const profile = await mysql.query(findProfile, [_Id]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-    const profile2 = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile2[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
 
     await mysql.query("START TRANSACTION");
 
@@ -125,18 +109,8 @@ const UnFollow = async (req, res) => {
 
   const FollowDec = `update Users set followers = followers - 1 where id = ?`;
 
-  const findProfile = `select id from Users where id = ?`;
-
   try {
     if (_Id === userId) throw Error("You Can't UnFollow Your Self");
-    const profile = await mysql.query(findProfile, [_Id]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-    const profile2 = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile2[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
 
     await mysql.query("START TRANSACTION");
 
@@ -195,21 +169,7 @@ const GetSong = async (req, res) => {
   const sqlStatment = `select Songs.id,userId,songName,songUrl,coverUrl,Users.username 
     from Songs join Users on Songs.id = ? and Users.id = ? and Songs.userId = ? ;`;
 
-  const findProfile = `select id from Users where id = ?`;
-
-  const findSong = `select id from Songs where id = ?`;
-
   try {
-    const profile = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-
-    const song = await mysql.query(findSong, [songId]);
-    if (lodash.isEmpty(song[0][0])) {
-      throw Error("Song Did Not Exist");
-    }
-
     const data = await mysql.query(sqlStatment, [songId, userId, userId]);
     if (lodash.isEmpty(data[0][0])) {
       throw Error("Song Did Not Exist");
@@ -262,8 +222,6 @@ const Like = async (req, res) => {
   const { songId } = req.params;
   const { _Id } = req.user;
 
-  const findProfile = `select id from Users where id = ?`;
-
   const findSong = `select id,userId from Songs where id = ?`;
 
   const likeSong = `insert into Likes (userId,songId) values (?,?)`;
@@ -275,11 +233,6 @@ const Like = async (req, res) => {
   const likeInc = `update Songs set likes = likes + 1 where id = ?`;
 
   try {
-    const profile = await mysql.query(findProfile, [_Id]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-
     const song = await mysql.query(findSong, [songId]);
     if (lodash.isEmpty(song[0][0])) {
       throw Error("Song Did Not Exist");
@@ -329,17 +282,11 @@ const DisLike = async (req, res) => {
 const LikedSongs = async (req, res) => {
   const { userId } = req.params;
 
-  const findProfile = `select id from Users where id = ?`;
-
   const LikedSongs = `select Songs.id,songName,Songs.userId,coverUrl,likes,Users.username
     from Songs join Likes on Songs.id = Likes.songId and Likes.userId = ? 
     join Users on Users.id = Songs.userId`;
 
   try {
-    const profile = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
     const result = await mysql.query(LikedSongs, [userId, userId]);
     res.status(200).json(result[0]);
   } catch (error) {
@@ -350,17 +297,10 @@ const LikedSongs = async (req, res) => {
 const UploadedSongs = async (req, res) => {
   const { userId } = req.params;
 
-  const findProfile = `select id from Users where id = ?`;
-
   const UploadedSongs = `select Songs.id as id,coverUrl,likes,songName,Users.id as userId,Users.username
     from Songs join Users where Users.id = ? and userId = ?`;
 
   try {
-    const profile = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-
     const result = await mysql.query(UploadedSongs, [userId, userId]);
     res.status(200).json(result[0]);
   } catch (error) {
@@ -432,10 +372,6 @@ const Comment = async (req, res) => {
     return res.status(400).json(error.message);
   }
 
-  const findProfile = `select id from Users where id = ?`;
-
-  const findSong = `select id,userId from Songs where id = ?`;
-
   const comment = `insert into Comments (userId,songId,details) values (?,?,?)`;
 
   const Notifiy = `insert into Notifications
@@ -443,21 +379,6 @@ const Comment = async (req, res) => {
   values (?,?,?,?)`;
 
   try {
-    const profile = await mysql.query(findProfile, [_Id]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-
-    const profile2 = await mysql.query(findProfile, [userId]);
-    if (lodash.isEmpty(profile2[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-
-    const song = await mysql.query(findSong, [songId]);
-    if (lodash.isEmpty(song[0][0])) {
-      throw Error("Song Did Not Exist");
-    }
-
     await mysql.query("START TRANSACTION");
 
     await mysql.query(comment, [_Id, songId, details]);
@@ -474,17 +395,10 @@ const Comment = async (req, res) => {
 const GetComments = async (req, res) => {
   const { songId } = req.params;
 
-  const findSong = `select id,userId from Songs where id = ?`;
-
   const GetData = `select details,Comments.userId,Users.username,Users.photoUrl
     from Comments join Users on Comments.userId = Users.id and Comments.songId = ?`;
 
   try {
-    const song = await mysql.query(findSong, [songId]);
-    if (lodash.isEmpty(song[0][0])) {
-      throw Error("Song Did Not Exist");
-    }
-
     const data = await mysql.query(GetData, [songId]);
     res.status(200).json(data[0]);
   } catch (error) {

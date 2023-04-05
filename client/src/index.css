@@ -1,4 +1,7 @@
 @import url("https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;

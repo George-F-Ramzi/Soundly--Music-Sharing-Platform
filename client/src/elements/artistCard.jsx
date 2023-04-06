@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../css/card.css";
 import { DidIFollow, Follow, UnFollow } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const ArtistCard = ({ data }) => {
   const [iFollow, setIFollow] = useState(0);

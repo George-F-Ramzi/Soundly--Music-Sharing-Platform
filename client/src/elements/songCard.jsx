@@ -1,4 +1,3 @@
-import "../css/card.css";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { SetSong } from "./player";
 import { useNavigate } from "react-router-dom";

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,8 +13,6 @@ import {
   SearchUsers,
 } from "./api/authApi";
 import LandingPage from "./pages/landingPage";
-import Register, { RegisterAction } from "./elements/register";
-import Login, { loginAction } from "./elements/login";
 import HomePage from "./pages/homePage";
 import ProfilePage from "./pages/profilePage";
 import SongPage from "./pages/songPage";
@@ -25,10 +22,6 @@ import SearchPage from "./pages/searchPage";
 import NavBar from "./elements/navBar";
 import Player from "./elements/player";
 import NotFound from "./pages/notFound";
-import "./css/profile.css";
-import "./css/song.css";
-import "./css/page.css";
-import "./css/player.css";
 
 function App() {
   const AppLayout = () => (
@@ -42,10 +35,7 @@ function App() {
   const Router = createBrowserRouter(
     createRoutesFromElements([
       <Route path="*" element={<NotFound />} />,
-      <Route errorElement={<NotFound />} path="/" element={<LandingPage />}>
-        <Route path="/" element={<Register />} action={RegisterAction} />
-        <Route path="/login" element={<Login />} action={loginAction} />
-      </Route>,
+      <Route errorElement={<NotFound />} path="/" element={<LandingPage />} />,
       <Route errorElement={<NotFound />} element={<AppLayout />}>
         <Route path="/home" element={<HomePage />} />
         <Route

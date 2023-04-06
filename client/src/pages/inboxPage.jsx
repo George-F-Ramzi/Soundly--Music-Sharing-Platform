@@ -1,6 +1,5 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import "../css/inbox.css";
 import NotificationCard from "../elements/notificationCard";
 
 const InboxPage = () => {

@@ -5,7 +5,6 @@ import { GetCurrentSong, DidILike, Like, DisLike } from "../api/authApi";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 export let SetSong;
 

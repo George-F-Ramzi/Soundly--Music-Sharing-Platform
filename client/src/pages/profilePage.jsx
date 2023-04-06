@@ -5,7 +5,6 @@ import { GetLiked, GetUploaded } from "../api/authApi";
 import SongsSection from "../elements/songsSection";
 import SectionPlacholder from "../elements/sectionPlacholder";
 import { DidIFollow, Follow, UnFollow, UpdateImage } from "../api/authApi";
-import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const profile = useLoaderData();

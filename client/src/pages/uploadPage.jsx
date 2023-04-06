@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../css/upload.css";
 import lodash from "lodash";
 import joi from "joi";
 import { Upload } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { Id } from "../elements/navBar";
-import { toast } from "react-toastify";
 
 const UploadPage = () => {
   const [data, setData] = useState({});

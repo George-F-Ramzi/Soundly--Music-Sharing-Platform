@@ -5,7 +5,6 @@ import SongsSection from "../elements/songsSection";
 import { Discover, Artists } from "../api/authApi";
 import lodash from "lodash";
 import SectionPlacholder from "../elements/sectionPlacholder";
-import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [discover, setDiscover] = useState();
@@ -35,7 +34,7 @@ const HomePage = () => {
         <Link className="ad__btn" to={"/upload"}>
           Start Uploading Now
         </Link>
-        <div className="ad__img"></div>
+        <img src="https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784794/Landing_Image_q59zvq.png" />
       </div>
       {lodash.isEmpty(discover) ? (
         <SectionPlacholder />

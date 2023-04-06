@@ -5,7 +5,6 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import "../css/search.css";
 import ArtistCard from "../elements/artistCard";
 import SongCard from "../elements/songCard";
 import lodash from "lodash";

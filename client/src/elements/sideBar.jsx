@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/sideBar.css";
 import { Id } from "./navBar";
 
 const SideBar = ({ close }) => {

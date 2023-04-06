@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "../css/navBar.css";
 import { RiSearch2Line, RiInboxArchiveLine, RiMenu5Fill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "../api/authApi";
 import lodash from "lodash";
 import SideBar from "./sideBar";
-import { toast } from "react-toastify";
 
 export let Photo;
 export let Id;

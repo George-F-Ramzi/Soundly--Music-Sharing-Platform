@@ -1,10 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  createRoutesFromElements,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import {
   GetProfile,
   GetSongData,
@@ -27,56 +21,21 @@ function App() {
   const AppLayout = () => (
     <>
       <NavBar />
-      <Player />
       <Outlet />
     </>
   );
 
-  const Router = createBrowserRouter(
-    createRoutesFromElements([
-      <Route path="*" element={<NotFound />} />,
-      <Route errorElement={<NotFound />} path="/" element={<LandingPage />} />,
-      <Route errorElement={<NotFound />} element={<AppLayout />}>
-        <Route path="/home" element={<HomePage />} />
-        <Route
-          path="/profile/:userId"
-          element={<ProfilePage />}
-          loader={async ({ params: { userId } }) => {
-            return await GetProfile(userId);
-          }}
-        />
-        <Route
-          path="/song/:songId"
-          element={<SongPage />}
-          loader={async ({ params: { songId } }) => {
-            return await GetSongData(songId);
-          }}
-        />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route
-          path="/inbox"
-          element={<InboxPage />}
-          loader={async () => {
-            return await InboxData();
-          }}
-        />
-        <Route
-          path="/search/users/:value"
-          element={<SearchPage />}
-          loader={async ({ params: { value } }) => {
-            return await SearchUsers(value);
-          }}
-        />
-        <Route
-          path="/search/songs/:value"
-          element={<SearchPage />}
-          loader={async ({ params: { value } }) => {
-            return await SearchSongs(value);
-          }}
-        />
-      </Route>,
-    ])
-  );
+  const Router = createBrowserRouter([
+    { path: "*", element: <NotFound /> },
+    { path: "/", element: <LandingPage /> },
+    {
+      element: <AppLayout />,
+      children: [
+        { path: "/home", element: <HomePage /> },
+        { path: "/inbox", element: <InboxPage /> },
+      ],
+    },
+  ]);
 
   return <RouterProvider router={Router} />;
 }

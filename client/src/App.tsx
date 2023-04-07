@@ -11,7 +11,7 @@ import {
   InboxData,
   SearchSongs,
   SearchUsers,
-} from "./api/authApi";
+} from "./api/authorization";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
 import ProfilePage from "./pages/profilePage";

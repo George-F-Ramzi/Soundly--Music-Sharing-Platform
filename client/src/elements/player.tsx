@@ -1,7 +1,6 @@
 import { RiHeart2Line, RiHeart2Fill } from "react-icons/ri";
-import lodash from "lodash";
 import React, { useState, useEffect } from "react";
-import { GetCurrentSong, DidILike, Like, DisLike } from "../api/authApi";
+import { GetCurrentSong, DidILike, Like, DisLike } from "../api/authorization";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useNavigate } from "react-router-dom";

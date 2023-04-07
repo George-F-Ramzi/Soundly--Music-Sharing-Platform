@@ -62,6 +62,11 @@ export default {
         gray3: "#CBD5E1",
         secondary5: "#34FDCD",
       },
+      screens: {
+        desktop: { max: "1160px" },
+        tablet: { max: "744" },
+        phone: { max: "430px" },
+      },
     },
   },
   plugins: [],

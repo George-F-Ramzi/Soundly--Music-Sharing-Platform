@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { RiEditFill } from "react-icons/ri";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { GetLiked, GetUploaded } from "../api/authApi";
+import { GetLiked, GetUploaded } from "../api/authorization";
 import SongsSection from "../elements/songsSection";
 import SectionPlacholder from "../elements/sectionPlacholder";
-import { DidIFollow, Follow, UnFollow, UpdateImage } from "../api/authApi";
+import {
+  DidIFollow,
+  Follow,
+  UnFollow,
+  UpdateImage,
+} from "../api/authorization";
 
 const ProfilePage = () => {
   const profile = useLoaderData();

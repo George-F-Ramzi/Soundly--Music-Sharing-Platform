@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import lodash from "lodash";
-import joi from "joi";
-import { Upload } from "../api/authApi";
+import { Upload } from "../api/authorization";
 import { useNavigate } from "react-router-dom";
 import { Id } from "../elements/navBar";
 

@@ -9,10 +9,8 @@ import {
   GetComments,
   Like,
   DisLike,
-} from "../api/authApi";
-import joi from "joi";
+} from "../api/authorization";
 import SectionPlacholder from "../elements/sectionPlacholder";
-import lodash from "lodash";
 import { Photo } from "../elements/navBar";
 
 const SongPage = () => {

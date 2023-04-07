@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import ArtistCard from "../elements/artistCard";
 import SongCard from "../elements/songCard";
-import lodash from "lodash";
 
 const SearchPage = () => {
   const path = useLocation();

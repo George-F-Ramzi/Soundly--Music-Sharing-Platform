@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ArtistsSection from "../elements/artistsSection";
 import SongsSection from "../elements/songsSection";
-import { Discover, Artists } from "../api/authApi";
-import lodash from "lodash";
+import { Discover, Artists } from "../api/authorization";
 import SectionPlacholder from "../elements/sectionPlacholder";
 
 const HomePage = () => {

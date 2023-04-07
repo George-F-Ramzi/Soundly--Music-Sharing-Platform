@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DidIFollow, Follow, UnFollow } from "../api/authApi";
+import { DidIFollow, Follow, UnFollow } from "../api/authorization";
 import { useNavigate } from "react-router-dom";
 
 const ArtistCard = ({ data }) => {

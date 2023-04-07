@@ -2,14 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginPoint } from "../api/authentication";
 import { FastLogin } from "../lib/global.def";
-import { JoinForm, LoginForm } from "../lib/types.def";
+import { LoginForm } from "../lib/types.def";
 import FormError from "./formError";
 
-interface Props {
-  hide: (check: boolean) => void;
-}
-
-const Login = ({ hide }: Props) => {
+const Login = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
@@ -26,7 +22,7 @@ const Login = ({ hide }: Props) => {
   };
 
   return (
-    <div className="w-full h-full p-6 tablet:p-0 flex items-center justify-center">
+    <div className="w-full h-full p-6 tablet:p-4 flex items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -36,9 +32,9 @@ const Login = ({ hide }: Props) => {
         className="max-w-[384px] w-[384px]"
       >
         <h5 className="font-bold text-xl text-white mb-8">
-          Hi There!
+          Welcome Back!
           <br />
-          Create A New Account
+          Login To Your Account
         </h5>
         <button
           onClick={(e) => {
@@ -75,7 +71,10 @@ const Login = ({ hide }: Props) => {
         </button>
         <p className="mt-[48px] text-center text-white">
           You don't have account?{" "}
-          <span onClick={() => hide(true)} className="text-secondary5">
+          <span
+            onClick={() => hide(true)}
+            className="text-secondary5 cursor-pointer"
+          >
             Join
           </span>
         </p>

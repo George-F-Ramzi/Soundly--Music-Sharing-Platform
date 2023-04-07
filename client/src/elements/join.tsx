@@ -5,11 +5,7 @@ import { FastLogin } from "../lib/global.def";
 import { JoinForm } from "../lib/types.def";
 import FormError from "./formError";
 
-interface Props {
-  hide: (check: boolean) => void;
-}
-
-const Join = ({ hide }: Props) => {
+const Join = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
@@ -27,7 +23,7 @@ const Join = ({ hide }: Props) => {
   };
 
   return (
-    <div className="w-full h-full p-6 tablet:p-0 flex items-center justify-center">
+    <div className="w-full h-full p-6 tablet:p-4 flex items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -85,7 +81,10 @@ const Join = ({ hide }: Props) => {
         </button>
         <p className="mt-[48px] text-center text-white">
           You already have account?{" "}
-          <span onClick={() => hide(false)} className="text-secondary5">
+          <span
+            onClick={() => hide(false)}
+            className="text-secondary5 cursor-pointer"
+          >
             Login
           </span>
         </p>

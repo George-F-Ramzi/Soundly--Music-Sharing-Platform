@@ -15,7 +15,7 @@ const LandingPage = () => {
 
   return (
     <div className="grid grid-cols-2 h-screen p-8 desktop:grid-cols-1 tablet:p-4 phone:p-0 ">
-      <h5 className=" absolute top-8 left-8  text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#06ff3d] to-[#2bffcc] font-bold">
+      <h5 className=" absolute top-8 left-8 tablet:top-4 tablet:left-4  text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#06ff3d] to-[#2bffcc] font-bold">
         Soundly
       </h5>
       {showJoin ? <Join hide={setShowJoin} /> : <Login hide={setShowJoin} />}

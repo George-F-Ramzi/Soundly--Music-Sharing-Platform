@@ -1,3 +1,7 @@
+let server = "https://soundly-nodejs.vercel.app";
+
+let token = localStorage.getItem("token");
+
 export const Discover = async () => {
   const token = localStorage.getItem("token");
   const Discover = "https://soundly-nodejs.vercel.app/discover";

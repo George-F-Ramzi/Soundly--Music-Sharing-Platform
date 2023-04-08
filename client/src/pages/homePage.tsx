@@ -1,50 +1,30 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import ArtistsSection from "../elements/artistsSection";
+import { Link, useLoaderData } from "react-router-dom";
+import { HomePageType } from "../lib/types.def";
 import SongsSection from "../elements/songsSection";
-import { Discover, Artists } from "../api/authorization";
-import SectionPlacholder from "../elements/sectionPlacholder";
+import ArtistsSection from "../elements/artistsSection";
 
 const HomePage = () => {
-  const [discover, setDiscover] = useState();
-  const [artists, setArtists] = useState();
-
-  useEffect(() => {
-    trackSection();
-  }, []);
-
-  const trackSection = async () => {
-    try {
-      const data1 = await Discover();
-      setDiscover(data1);
-      const data2 = await Artists();
-      setArtists(data2);
-    } catch (error) {
-      toast("Something Wrong Happen", { type: "error" });
-    }
-  };
+  const data = useLoaderData() as HomePageType;
 
   return (
-    <div className="home-page">
-      <div className="landing-ad">
-        <h3 className="ad__title">
+    <div className="mt-20 pb-36">
+      <div className="h-[320px] phone:p-2 p-8 bg-gray-800 rounded-[16px] flex justify-center flex-col tablet:items-center relative">
+        <h3 className="text-white tablet:text-center phone:text-3xl font-bold text-[32px] max-w-[416px] leading-[150%] ">
           You can now share music with your followers
         </h3>
-        <Link className="ad__btn" to={"/upload"}>
+        <Link
+          className="h-12 w-fit mt-7 rounded-full font-bold px-7 flex items-center justify-center bg-gradient1"
+          to={"/upload"}
+        >
           Start Uploading Now
         </Link>
-        <img src="https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784794/Landing_Image_q59zvq.png" />
+        <img
+          className="absolute right-8 bottom-0 tablet:hidden"
+          src="https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784794/Landing_Image_q59zvq.png"
+        />
       </div>
-      {lodash.isEmpty(discover) ? (
-        <SectionPlacholder />
-      ) : (
-        <SongsSection data={discover} name={"Discover"} />
-      )}
-      {lodash.isEmpty(artists) ? (
-        <SectionPlacholder />
-      ) : (
-        <ArtistsSection data={artists} name={"Popular Artists"} />
-      )}
+      <SongsSection title={"Discover"} data={data.discover} />
+      <ArtistsSection title={"Popular Artists"} data={data.artists} />
     </div>
   );
 };

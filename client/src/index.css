@@ -8,3 +8,22 @@ body {
   font-family: Inter, Arial, Helvetica, sans-serif, "Times New Roman", Times,
     serif;
 }
+
+/* Player */
+
+.rhap_container {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.rhap_repeat-button {
+  color: white !important;
+}
+
+.rhap_play-pause-button {
+  color: white !important;
+}
+
+.rhap_time {
+  color: white !important;
+}

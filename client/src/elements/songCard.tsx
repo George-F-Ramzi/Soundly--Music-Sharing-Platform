@@ -1,40 +1,21 @@
-import { RiPlayCircleFill } from "react-icons/ri";
-import { SetSong } from "./player";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ContextPlayerType, Song } from "../lib/types.def";
+import PlayerContext from "../microElements/playerContext";
 
-const SongCard = ({ data }) => {
-  const navigate = useNavigate();
+function SongCard({ data }: { data: Song }) {
+  const { setSong }: ContextPlayerType = useContext(PlayerContext);
   return (
-    <div className="card">
-      <img
-        onClick={() => navigate(`/song/${data.id}`)}
-        src={data.coverUrl}
-        className="card__img"
-      />
-      <div className="card__info">
-        <h5
-          onClick={() => navigate(`/song/${data.id}`)}
-          className="card__title"
-        >
-          {data.songName}
-        </h5>
-        <p
-          onClick={() => navigate(`/profile/${data.userId}`)}
-          className="card__subtitle body2"
-        >
-          {data.username}
-        </p>
-        <div className="card__play">
-          <RiPlayCircleFill
-            onClick={() => SetSong(data.id, data.userId)}
-            className="play__icon"
-            size={"28px"}
-          />
-          <p className="play__text">{data.likes}:Likes</p>
-        </div>
+    <div
+      onClick={() => setSong && setSong(data)}
+      className="w-full cursor-pointer p-[10px] flex  h-[100px] bg-gray-800 text-white rounded-[4px]"
+    >
+      <img src={data.coverUrl} className="min-w-[80px] h-full rounded" />
+      <div className="ml-4">
+        <h5 className="font-bold mb-2">{data.songName}</h5>
+        <p className="text-gray-300">{data.username}</p>
       </div>
     </div>
   );
-};
+}
 
 export default SongCard;

@@ -2,11 +2,7 @@ const mysql = require("mysql2");
 
 const db = mysql
   .createPool({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASS,
-    database: process.env.DATABASE_DATABASE,
-    ssl: { rejectUnauthorized: true },
+    uri: process.env.DATABASE_URL,
   })
   .promise();
 

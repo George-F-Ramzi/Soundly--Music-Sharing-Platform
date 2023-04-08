@@ -41,9 +41,9 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           onClick={(e) => {
             e.preventDefault();
             FastLogin();
-            navigate("/home", { replace: true });
+            navigate("./home");
           }}
-          className="w-full h-12 rounded-[4px] border border-gray3 text-gray3 font-bold mb-12"
+          className="w-full h-12 rounded-[4px] border border-gray-500 text-gray-300 font-bold mb-12"
         >
           Login As A Demo
         </button>
@@ -53,7 +53,7 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           name="username"
           type={"text"}
           placeholder="Enter Username"
-          className="w-full valid:border-green-500  h-12 rounded-[4px] border border-gray3 text-gray3 mb-4 bg-transparent p-4"
+          className="w-full valid:border-green-500  h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-4 bg-transparent p-4"
         />
         {error.includes("username") ? <FormError text={error} /> : ""}
         <input
@@ -61,7 +61,7 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           type={"email"}
           required
           placeholder="Enter Email"
-          className="w-full  valid:border-green-500  h-12 rounded-[4px] border border-gray3 text-gray3 mb-4 bg-transparent p-4"
+          className="w-full  valid:border-green-500  h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-4 bg-transparent p-4"
         />
         {error.includes("email") ? <FormError text={error} /> : ""}
         <input
@@ -70,7 +70,7 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           type={"password"}
           required
           placeholder="Enter Passsword"
-          className="w-full  valid:border-green-500 h-12 rounded-[4px] border border-gray3 text-gray3 mb-12 bg-transparent p-4"
+          className="w-full  valid:border-green-500 h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-12 bg-transparent p-4"
         />
         {error.includes("password") ? <FormError text={error} /> : ""}
         <button
@@ -83,7 +83,7 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           You already have account?{" "}
           <span
             onClick={() => hide(false)}
-            className="text-secondary5 cursor-pointer"
+            className="text-emerald-400 cursor-pointer"
           >
             Login
           </span>

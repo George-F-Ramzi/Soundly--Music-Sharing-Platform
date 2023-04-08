@@ -2,6 +2,7 @@ const joi = require("joi");
 const lodash = require("lodash");
 const mysql = require("../middlewears/database");
 const cloudinary = require("../middlewears/cloudinary");
+const lib = require("./lib");
 
 const UploadSong = async (req, res) => {
   const { name } = req.body;
@@ -125,27 +126,16 @@ const UnFollow = async (req, res) => {
   }
 };
 
-const Discover = async (req, res) => {
-  const sqlStatment = `select Songs.id,Songs.userId,songName,songUrl,likes,coverUrl,Users.username 
-    from Songs join Users on Songs.userId = Users.id order by likes desc limit 0,9;`;
+const HomePage = async (req, res) => {
+  const { _Id } = req.user;
 
   try {
-    const result = await mysql.query(sqlStatment);
-    res.status(200).json(result[0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
+    const discover = await lib.Discover(_Id);
+    const artists = await lib.Artists(_Id);
 
-const Artists = async (req, res) => {
-  const sqlStatment = `select id,photoUrl,username,followers
-  from Users order by followers desc limit 0,9`;
-
-  try {
-    const result = await mysql.query(sqlStatment);
-    res.status(200).json(result[0]);
+    res.status(200).json({ discover, artists });
   } catch (error) {
-    res.status(400).send("Something Wrong Happen");
+    res.status(400).send(error);
   }
 };
 
@@ -452,8 +442,7 @@ module.exports = {
   UploadSong,
   Follow,
   UnFollow,
-  Discover,
-  Artists,
+  HomePage,
   NavBar,
   GetSong,
   DidIFollow,

@@ -1,17 +1,22 @@
-import React from "react";
-import ArtistCard from "../elements/artistCard";
+import { Artist } from "../lib/types.def";
+import ArtistCard from "./artistCard";
 
-const ArtistsSection = ({ data, name }) => {
+interface Prop {
+  title: String;
+  data: Artist[];
+}
+function ArtistsSection({ title, data }: Prop) {
   return (
-    <div className="section">
-      <h3 className="section__title">{name}</h3>
-      <div className="section__grid">
-        {data.map((artist, index) => (
-          <ArtistCard key={index} data={artist} />
-        ))}
+    <div className="mt-10">
+      <h5 className="text-white font-bold text-3xl mb-8">{title}</h5>
+      <div className="grid gap-8 grid-cols-cards ">
+        {Array(data) &&
+          data.map((song) => {
+            return <ArtistCard data={song} />;
+          })}
       </div>
     </div>
   );
-};
+}
 
 export default ArtistsSection;

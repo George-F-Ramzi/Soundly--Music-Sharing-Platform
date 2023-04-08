@@ -1,89 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { DidIFollow, Follow, UnFollow } from "../api/authorization";
-import { useNavigate } from "react-router-dom";
+import { Artist } from "../lib/types.def";
+import FollowBtn from "../microElements/followBtn";
+import UnFollowBtn from "../microElements/unFollowBtn";
 
-const ArtistCard = ({ data }) => {
-  const [iFollow, setIFollow] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    trackState();
-  }, [data]);
-
-  const trackState = async () => {
-    try {
-      const { status } = await DidIFollow(data.id);
-      if (status == 200) {
-        setIFollow(0);
-      } else if (status == 204) {
-        setIFollow(1);
-      } else {
-        setIFollow(2);
-      }
-      setLoading(false);
-    } catch (error) {
-      toast("Something Wrong Happen", { type: "error" });
-    }
-  };
-
+function ArtistCard({ data }: { data: Artist }) {
   return (
-    <div className="card">
-      <img
-        onClick={() => navigate(`/profile/${data.id}`)}
-        src={data.photoUrl}
-        className="card__img"
-      />
-      <div className="card__info">
-        <h5
-          onClick={() => navigate(`/profile/${data.id}`)}
-          className="card__title"
-        >
-          {data.username}
-        </h5>
-        <p className="card__subtitle body2">{data.followers}:Follower</p>
-        {loading ? (
-          <button className="card__follow-loading">Loading...</button>
-        ) : iFollow === 0 ? (
-          <button
-            onClick={async () => {
-              try {
-                setLoading(true);
-                await UnFollow(data.id);
-                setIFollow(1);
-                setLoading(false);
-              } catch (error) {
-                setLoading(false);
-                toast("Something Wrong Happen", { type: "error" });
-              }
-            }}
-            className="card__follow un--follow"
-          >
-            UnFollow
-          </button>
-        ) : iFollow === 1 ? (
-          <button
-            onClick={async () => {
-              try {
-                setLoading(true);
-                await Follow(data.id);
-                setIFollow(0);
-                setLoading(false);
-              } catch (error) {
-                setLoading(false);
-                toast("Something Wrong Happen", { type: "error" });
-              }
-            }}
-            className="card__follow"
-          >
-            Follow
-          </button>
-        ) : (
-          ""
-        )}
+    <div className="w-full p-[10px] flex  h-[100px] bg-gray-800 text-white rounded-[4px]">
+      <img src={data.photoUrl} className="min-w-[80px] h-full rounded" />
+      <div className="ml-4">
+        <h5 className="font-bold mb-1">{data.username}</h5>
+        <p className="text-gray-300">{data.followers}:Followers</p>
+        {data.following ? <UnFollowBtn /> : <FollowBtn />}
       </div>
     </div>
   );
-};
+}
 
 export default ArtistCard;

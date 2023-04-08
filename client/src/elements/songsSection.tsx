@@ -1,17 +1,22 @@
-import React from "react";
-import SongCard from "../elements/songCard";
+import { Song } from "../lib/types.def";
+import SongCard from "./songCard";
 
-const SongsSection = ({ data, name }) => {
+interface Prop {
+  title: String;
+  data: Song[];
+}
+function SongsSection({ title, data }: Prop) {
   return (
-    <div className="section">
-      <h3 className="section__title">{name}</h3>
-      <div className="section__grid">
-        {data.map((song, index) => (
-          <SongCard key={index} data={song} />
-        ))}
+    <div className="mt-10">
+      <h5 className="text-white font-bold text-3xl mb-8">{title}</h5>
+      <div className="grid gap-8 grid-cols-cards ">
+        {Array(data) &&
+          data.map((song) => {
+            return <SongCard data={song} />;
+          })}
       </div>
     </div>
   );
-};
+}
 
 export default SongsSection;

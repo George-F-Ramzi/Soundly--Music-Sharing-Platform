@@ -1,89 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { RiSearch2Line, RiInboxArchiveLine, RiMenu5Fill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { RiSearch2Line, RiInboxArchiveLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import { NavBarData } from "../api/authorization";
-import SideBar from "./sideBar";
+import { NavBarType } from "../lib/types.def";
 
-export let Photo;
-export let Id;
-
-const NavBar = () => {
-  const navigate = useNavigate();
-  const [data, setData] = useState();
-  const [value, setValue] = useState("");
-  const [open, setOpen] = useState(false);
-
+function NavBar() {
+  const [data, setData] = useState<NavBarType>();
   useEffect(() => {
-    Profile();
+    const GetInfo = async () => {
+      let response: NavBarType = await NavBarData();
+      setData(response);
+    };
+    GetInfo();
   }, []);
 
-  const Profile = async () => {
-    try {
-      const id = await NavBarData();
-      setData(id);
-      Photo = id.photoUrl;
-      Id = id.id;
-    } catch (error) {
-      toast("Something Wrong Happen", { type: "error" });
-    }
-  };
-
   return (
-    <React.Fragment>
-      {open ? <SideBar close={setOpen} /> : ""}
-      <div className="nav-bar">
-        <Link to={"/home"}>
-          <h5 className="logo">Soundly</h5>
-        </Link>
-        <div className="search-input">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              navigate(`/search/users/${value}`);
-            }}
-          >
-            <input
-              name="search"
-              type="text"
-              placeholder="Search"
-              className="field"
-              value={value}
-              onChange={(e) => {
-                e.preventDefault();
-                setValue(e.target.value);
-              }}
-              required
-            />
-          </form>
-          <RiSearch2Line size={"24px"} className="field-icon" />
-        </div>
-        <div className="nav__btns">
-          <Link to={"/upload"}>
-            <button className="nav__btn ">Upload</button>
-          </Link>
-          <Link to={"/inbox"}>
-            <button className="nav__btn-icon ">
-              <RiInboxArchiveLine size={"24px"} />
-            </button>
-          </Link>
-          {lodash.isEmpty(data) ? (
-            ""
-          ) : (
-            <Link className="nav__img" to={`/profile/${data.id}`}>
-              {lodash.isEmpty(data) ? (
-                ""
-              ) : (
-                <img className="the-img" src={data.photoUrl} />
-              )}
-            </Link>
-          )}
-        </div>
-        <button className="show nav__btn-icon ">
-          <RiMenu5Fill onClick={() => setOpen(true)} size={"24px"} />
-        </button>
+    <div className="h-12 flex items-center justify-between">
+      <h5 className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#06ff3d] to-[#2bffcc] font-bold">
+        Soundly
+      </h5>
+      <div className="w-[300px] h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
+        <input
+          placeholder="Search"
+          className="w-full h-full rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
+        />
+        <RiSearch2Line
+          size={"24px"}
+          className="absolute right-4 top-[10px] text-gray-300 "
+        />
       </div>
-    </React.Fragment>
+      <div className="flex tablet:hidden">
+        <Link
+          to={"/upload"}
+          className="h-12 rounded-full font-bold px-7 flex items-center justify-center bg-gradient1"
+        >
+          Upload
+        </Link>
+        <Link
+          className="h-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
+          to={"/inbox"}
+        >
+          <RiInboxArchiveLine size={"26px"} />
+        </Link>
+        <Link to={`/profile/${data?.id}`}>
+          <img src={data?.photoUrl} className="h-12 w-12 rounded-full ml-4 " />
+        </Link>
+      </div>
+    </div>
   );
-};
+}
 
 export default NavBar;

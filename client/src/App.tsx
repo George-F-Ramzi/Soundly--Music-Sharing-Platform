@@ -6,6 +6,7 @@ import NavBar from "./elements/navBar";
 import NotFound from "./pages/notFound";
 import { HomePageType } from "./lib/types.def";
 import Player from "./elements/player";
+import ErrorPage from "./pages/errorPage";
 
 function App() {
   const AppLayout = () => (
@@ -17,9 +18,10 @@ function App() {
 
   const Router = createBrowserRouter([
     { path: "*", element: <NotFound /> },
-    { path: "/", element: <LandingPage /> },
+    { path: "/", errorElement: <ErrorPage />, element: <LandingPage /> },
     {
       element: <AppLayout />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/home",

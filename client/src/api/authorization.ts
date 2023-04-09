@@ -1,4 +1,4 @@
-import { HomePageType, NavBarType } from "../lib/types.def";
+import { HomePageType, InboxCard, NavBarType } from "../lib/types.def";
 
 let server = "https://soundly-nodejs.vercel.app";
 
@@ -36,6 +36,15 @@ export const UnFollow = async (userId: number): Promise<void> => {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
+};
+
+export const InboxData = async (): Promise<InboxCard[]> => {
+  let response: Response = await fetch(`${server}/inbox`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<InboxCard[]> = await response.json();
+  return data;
 };
 
 // export const Like = async (songId) => {
@@ -117,15 +126,6 @@ export const UnFollow = async (userId: number): Promise<void> => {
 //   const token = localStorage.getItem("token");
 //   const comments = `https://soundly-nodejs.vercel.app/getComments/${songId}`;
 //   const { data } = await axios.get(comments, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
-
-// export const InboxData = async () => {
-//   const token = localStorage.getItem("token");
-//   const Inbox = `https://soundly-nodejs.vercel.app/inbox`;
-//   const { data } = await axios.get(Inbox, {
 //     headers: { "x-auth-token": token },
 //   });
 //   return data;

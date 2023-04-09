@@ -38,3 +38,11 @@ export interface NavBarType {
 export interface ContextPlayerType {
   setSong?: (song: Song) => void;
 }
+
+export interface InboxCardType {
+  triggerId: number;
+  messageId: number;
+  photoUrl: string;
+  songId: number;
+  username: string;
+}

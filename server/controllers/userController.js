@@ -26,7 +26,7 @@ const Login = async (req, res) => {
         res.status(400).send("Invalid password");
       }
     } else {
-      res.status(400).send("Invalid email");
+      res.status(400).send("Email Dosn't Exist");
     }
   } catch (error) {
     res.status(500).send("Something Wrong Happen" + error);
@@ -58,26 +58,11 @@ const Register = async (req, res) => {
         .header({ "x-auth-token": token })
         .send("Registering Done");
     } else {
-      res.status(400).send("email Already Registerd");
+      res.status(400).send("Email Already Registerd");
     }
   } catch (error) {
     res.status(500).send("Something Wrong Happen");
   }
 };
 
-const AllowJoin = async (req, res) => {
-  const { _Id } = req.user;
-  try {
-    const profile = await mysql.query("select id from Users where id = ?", [
-      _Id,
-    ]);
-    if (lodash.isEmpty(profile[0][0])) {
-      throw Error("Profile Did Not Exist");
-    }
-    res.status(200).send("Can Join");
-  } catch (error) {
-    res.status(400).send("Can't Join");
-  }
-};
-
-module.exports = { Register, Login, AllowJoin };
+module.exports = { Register, Login };

@@ -1,27 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { JoinPoint } from "../api/authentication";
 import { FastLogin } from "../lib/global.def";
-import { JoinForm } from "../lib/types.def";
-import FormError from "./formError";
+import FormError from "../microElements/formError";
 import Input from "../microElements/input";
+import HandleJoin from "../lib/HandleJoin";
 
 const Join = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
-
-  const handleSubmit = async (form: FormData) => {
-    let username: FormDataEntryValue = form.get("username")!;
-    let email: FormDataEntryValue = form.get("email")!;
-    let password: FormDataEntryValue = form.get("password")!;
-
-    if (username != null && email != null && password != null) {
-      let data: JoinForm = { username, email, password };
-      let message: string = await JoinPoint(data);
-      if (message === "Done") navigate("/home", { replace: true });
-      else setError(message);
-    }
-  };
 
   return (
     <div className="w-full h-full p-6 tablet:p-4 flex items-center justify-center">
@@ -29,7 +15,7 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
         onSubmit={(e) => {
           e.preventDefault();
           let form: FormData = new FormData(e.currentTarget);
-          handleSubmit(form);
+          HandleJoin({ form, setError, navigate });
         }}
         className="max-w-[384px] w-[384px]"
       >

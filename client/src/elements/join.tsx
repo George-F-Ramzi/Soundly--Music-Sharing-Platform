@@ -4,6 +4,7 @@ import { JoinPoint } from "../api/authentication";
 import { FastLogin } from "../lib/global.def";
 import { JoinForm } from "../lib/types.def";
 import FormError from "./formError";
+import Input from "../microElements/input";
 
 const Join = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
@@ -41,41 +42,34 @@ const Join = ({ hide }: { hide: (check: boolean) => void }) => {
           onClick={(e) => {
             e.preventDefault();
             FastLogin();
-            navigate("./home");
           }}
           className="w-full h-12 rounded-[4px] border border-gray-500 text-gray-300 font-bold mb-12"
         >
           Login As A Demo
         </button>
-        <input
-          required
-          minLength={8}
-          name="username"
-          type={"text"}
-          placeholder="Enter Username"
-          className="w-full valid:border-green-500  h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-4 bg-transparent p-4"
-        />
+
+        <Input name="username" placeholder="Enter Username" type="text" />
         {error.includes("username") ? <FormError text={error} /> : ""}
-        <input
+
+        <Input
           name="email"
-          type={"email"}
-          required
           placeholder="Enter Email"
-          className="w-full  valid:border-green-500  h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-4 bg-transparent p-4"
+          type="email"
+          margin="mt-4"
         />
         {error.includes("email") ? <FormError text={error} /> : ""}
-        <input
+
+        <Input
           name="password"
-          minLength={8}
-          type={"password"}
-          required
-          placeholder="Enter Passsword"
-          className="w-full  valid:border-green-500 h-12 rounded-[4px] border border-gray-500 text-gray-300 mb-12 bg-transparent p-4"
+          placeholder="Enter Password"
+          type="password"
+          margin="mt-4"
         />
         {error.includes("password") ? <FormError text={error} /> : ""}
+
         <button
           type="submit"
-          className="bg-gradient1 w-full h-[48px] font-bold drop-shadow-md rounded-[4px]"
+          className="bg-gradient1 mt-[48px] w-full h-[48px] font-bold drop-shadow-md rounded-[4px]"
         >
           Join
         </button>

@@ -129,11 +129,14 @@ const UnFollow = async (req, res) => {
 const HomePage = async (req, res) => {
   const { _Id } = req.user;
 
+  const discover = `select Songs.id,Songs.userId,songName,songUrl,coverUrl,Users.username 
+    from Songs join Users on Songs.userId = Users.id order by likes desc limit 0,9;`;
+
   try {
-    const discover = await lib.Discover(_Id);
+    const result1 = await mysql.query(discover);
     const artists = await lib.Artists(_Id);
 
-    res.status(200).json({ discover, artists });
+    res.status(200).json({ discover: result1[0], artists });
   } catch (error) {
     res.status(400).send(error);
   }

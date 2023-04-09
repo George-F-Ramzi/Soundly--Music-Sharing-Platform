@@ -16,8 +16,6 @@ export interface Song {
   songUrl: string;
   coverUrl: string;
   username: string;
-  likes: number;
-  liked?: boolean;
 }
 
 export interface Artist {

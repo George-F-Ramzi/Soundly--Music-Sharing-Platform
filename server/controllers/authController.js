@@ -2,7 +2,6 @@ const joi = require("joi");
 const lodash = require("lodash");
 const mysql = require("../middlewears/database");
 const cloudinary = require("../middlewears/cloudinary");
-const lib = require("./lib");
 
 const UploadSong = async (req, res) => {
   const { name } = req.body;
@@ -127,16 +126,17 @@ const UnFollow = async (req, res) => {
 };
 
 const HomePage = async (req, res) => {
-  const { _Id } = req.user;
-
   const discover = `select Songs.id,Songs.userId,songName,songUrl,coverUrl,Users.username 
     from Songs join Users on Songs.userId = Users.id order by likes desc limit 0,9;`;
 
+  const artists = `select id,photoUrl,username,followers
+  from Users order by followers desc limit 0,9`;
+
   try {
     const result1 = await mysql.query(discover);
-    const artists = await lib.Artists(_Id);
+    const result2 = await mysql.query(artists);
 
-    res.status(200).json({ discover: result1[0], artists });
+    res.status(200).json({ discover: result1[0], artists: result2[0] });
   } catch (error) {
     res.status(400).send(error);
   }

@@ -28,7 +28,6 @@ export const Follow = async (userId: number): Promise<void> => {
   await fetch(`${server}/follow/${userId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
-    body: JSON.stringify({}),
   });
 };
 
@@ -36,7 +35,6 @@ export const UnFollow = async (userId: number): Promise<void> => {
   await fetch(`${server}/unfollow/${userId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
-    body: JSON.stringify({}),
   });
 };
 

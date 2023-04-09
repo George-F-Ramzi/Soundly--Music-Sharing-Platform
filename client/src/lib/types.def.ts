@@ -23,7 +23,6 @@ export interface Artist {
   photoUrl: string;
   followers: number;
   username: string;
-  following?: boolean;
 }
 
 export interface HomePageType {

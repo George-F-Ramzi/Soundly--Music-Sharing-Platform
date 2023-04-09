@@ -11,7 +11,7 @@ export default function PlayerBody({ song }: { song: Song }) {
           src={song?.coverUrl}
           alt="song-thumbnail"
         />
-        <div className="text-white tablet:absolute tablet:left-[120px] tablet:top-[4px]  min-w-fit flex-col justify-center flex font-bold ml-4 text-2xl">
+        <div className="text-white mr-8 tablet:absolute tablet:left-[120px] tablet:top-[4px]  min-w-fit flex-col justify-center flex font-bold ml-4 text-2xl">
           <h5 className="text-xl">{song?.songName}</h5>
           <p className="text-[14px] text-gray-300">{song?.username}</p>
         </div>

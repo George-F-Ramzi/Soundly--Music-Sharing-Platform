@@ -24,38 +24,21 @@ export const NavBarData = async (): Promise<NavBarType> => {
   return data;
 };
 
-// export const GetCurrentSong = async (songId, userId) => {
-//   const token = localStorage.getItem("token");
-//   const song = `https://soundly-nodejs.vercel.app/song/${songId}/${userId}`;
-//   const { data } = await axios.get(song, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
+export const Follow = async (userId: number): Promise<void> => {
+  await fetch(`${server}/follow/${userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+    body: JSON.stringify({}),
+  });
+};
 
-// export const DidIFollow = async (userId) => {
-//   const token = localStorage.getItem("token");
-//   const didIFollow = `https://soundly-nodejs.vercel.app/didIFollow/${userId}`;
-//   return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
-// };
-
-// export const Follow = async (userId) => {
-//   const token = localStorage.getItem("token");
-//   const follow = `https://soundly-nodejs.vercel.app/follow/${userId}`;
-//   return await axios.post(follow, {}, { headers: { "x-auth-token": token } });
-// };
-
-// export const UnFollow = async (userId) => {
-//   const token = localStorage.getItem("token");
-//   const unFollow = `https://soundly-nodejs.vercel.app/unfollow/${userId}`;
-//   return await axios.post(unFollow, {}, { headers: { "x-auth-token": token } });
-// };
-
-// export const DidILike = async (songId) => {
-//   const token = localStorage.getItem("token");
-//   const didIFollow = `https://soundly-nodejs.vercel.app/didILike/${songId}`;
-//   return await axios.get(didIFollow, { headers: { "x-auth-token": token } });
-// };
+export const UnFollow = async (userId: number): Promise<void> => {
+  await fetch(`${server}/unfollow/${userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+    body: JSON.stringify({}),
+  });
+};
 
 // export const Like = async (songId) => {
 //   const token = localStorage.getItem("token");

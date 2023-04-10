@@ -1,10 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
 import { HomePageData, InboxData } from "./api/authorization";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
 import NavBar from "./elements/navBar";
 import NotFound from "./pages/notFound";
-import { HomePageType, InboxCardType } from "./lib/types.def";
 import Player from "./elements/player";
 import ErrorPage from "./pages/errorPage";
 import Inbox from "./pages/inbox";
@@ -28,15 +27,15 @@ function App() {
         {
           path: "/home",
           element: <HomePage />,
-          loader: async (): Promise<HomePageType> => {
-            return await HomePageData();
+          loader: async () => {
+            return defer({ data: HomePageData() });
           },
         },
         {
           path: "/inbox",
           element: <Inbox />,
-          loader: async (): Promise<InboxCardType[]> => {
-            return await InboxData();
+          loader: async () => {
+            return defer({ data: InboxData() });
           },
         },
         {

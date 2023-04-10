@@ -10,7 +10,7 @@ function SongsSection({ title, data }: Prop) {
     <div className="mt-10">
       <h5 className="text-white font-bold text-3xl mb-8">{title}</h5>
       <div className="grid gap-8 grid-cols-cards ">
-        {Array(data) &&
+        {Array.isArray(data) &&
           data.map((song, index) => {
             return <SongCard key={index} data={song} />;
           })}

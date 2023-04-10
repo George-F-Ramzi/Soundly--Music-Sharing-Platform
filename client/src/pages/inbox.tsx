@@ -1,17 +1,30 @@
-import { useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
 import { InboxCardType } from "../lib/types.def";
 import InboxCard from "../elements/inboxCard";
+import { Suspense } from "react";
+import Loading from "../microElements/loading";
+
+interface ReturnDefer {
+  data: () => Promise<InboxCardType[]>;
+}
 
 function Inbox() {
-  const data = useLoaderData() as InboxCardType[];
+  const { data } = useLoaderData() as ReturnDefer;
   return (
     <div className="h-full max-w-[544px] scrollbar-hide overflow-y-scroll m-auto">
       <h5 className="text-white mt-12 mb-8 font-bold text-xl">Notifications</h5>
-
-      {Array(data) &&
-        data.map((c) => {
-          return <InboxCard data={c} />;
-        })}
+      <Suspense fallback={<Loading />}>
+        <Await resolve={data}>
+          {(all: InboxCardType[]) => (
+            <>
+              {Array.isArray(all) &&
+                all.map((el, index) => {
+                  return <InboxCard data={el} key={index} />;
+                })}
+            </>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 }

@@ -1,10 +1,16 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import { HomePageType } from "../lib/types.def";
 import SongsSection from "../elements/songsSection";
 import ArtistsSection from "../elements/artistsSection";
+import { Suspense } from "react";
+import Loading from "../microElements/loading";
+
+interface ReturnDefer {
+  data: () => Promise<HomePageType>;
+}
 
 const HomePage = () => {
-  const data = useLoaderData() as HomePageType;
+  const { data } = useLoaderData() as ReturnDefer;
 
   return (
     <div className="mt-20 pb-36">
@@ -23,8 +29,16 @@ const HomePage = () => {
           src="https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784794/Landing_Image_q59zvq.png"
         />
       </div>
-      <SongsSection title={"Discover"} data={data.discover} />
-      <ArtistsSection title={"Popular Artists"} data={data.artists} />
+      <Suspense fallback={<Loading />}>
+        <Await resolve={data}>
+          {(data: HomePageType) => (
+            <>
+              <SongsSection title={"Discover"} data={data.discover} />
+              <ArtistsSection title={"Popular Artists"} data={data.artists} />
+            </>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };

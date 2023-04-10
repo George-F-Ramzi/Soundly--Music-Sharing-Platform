@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import HandleFileUpload from "../lib/handleFileUpload";
 import Input from "../microElements/input";
+import { useState } from "react";
+import { RiLoader2Fill } from "react-icons/ri";
 
 function UploadPage() {
+  const navigate = useNavigate();
+  const [Loading, setLoading] = useState(false);
   return (
     <div className="grid phone:bg-transparent  tablet:grid-cols-1 tablet:mt-8 grid-cols-2 mx-auto mt-[100px] max-w-[800px] rounded-xl h-[500px] bg-gray-800">
       <div className="py-[40px]  phone:px-3 relative text-white px-8">
@@ -10,9 +15,10 @@ function UploadPage() {
           encType="multipart/form-data"
           onSubmit={async (e) => {
             e.preventDefault();
+            setLoading(true);
             let form: FormData = new FormData(e.currentTarget);
             await HandleFileUpload({ form });
-            console.log("done");
+            navigate("/home");
           }}
         >
           <Input
@@ -41,11 +47,20 @@ function UploadPage() {
             />
             Click Here To Choose Thumbnail File
           </div>
-          <div className="w-full phone:p-3 p-8 -translate-x-1/2 rounded -translate-y-1/2  bottom-10 left-1/2 h-12  absolute ">
-            <button className=" bg-gradient1 w-full rounded text-black font-bold h-12">
-              Upload
-            </button>
-          </div>
+          {!Loading ? (
+            <div className="w-full phone:p-3 p-8 -translate-x-1/2 rounded -translate-y-1/2  bottom-10 left-1/2 h-12  absolute ">
+              <button className=" bg-gradient1 w-full rounded text-black font-bold h-12">
+                Upload
+              </button>
+            </div>
+          ) : (
+            <div className="w-full phone:p-3 p-8 -translate-x-1/2 rounded -translate-y-1/2  bottom-10 left-1/2 h-12  absolute ">
+              <div className=" bg-gradient1 text-xl flex items-center justify-center w-full rounded text-black font-bold h-12">
+                <RiLoader2Fill className="mr-3 animate-spin" size={"24px"} />
+                Uploading...
+              </div>
+            </div>
+          )}
         </form>
       </div>
       <div className="bg-upload p-7 tablet:hidden flex items-center text-white text-[40px]  leading-[150%] font-bold">

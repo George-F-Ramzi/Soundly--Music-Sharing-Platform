@@ -10,6 +10,7 @@ function NavBar() {
     const GetInfo = async () => {
       let response: NavBarType = await NavBarData();
       setData(response);
+      localStorage.setItem("myId", String(response.id));
     };
     GetInfo();
   }, []);

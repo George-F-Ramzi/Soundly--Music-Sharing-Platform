@@ -46,3 +46,17 @@ export interface InboxCardType {
   songId: number;
   username: string;
 }
+
+export interface ProfilePageType {
+  profile: {
+    id: number;
+    username: string;
+    Followed: number | null;
+    photoUrl: string;
+    songs: number;
+    followers: number;
+    following: number;
+  };
+  likedSongs: Song[];
+  uploadedSongs: Song[];
+}

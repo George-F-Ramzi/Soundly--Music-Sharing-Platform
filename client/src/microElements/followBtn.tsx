@@ -12,7 +12,7 @@ function FollowBtn({ setFollowing, id }: Prop) {
         setFollowing(true);
         await Follow(id);
       }}
-      className="bg-gradient1 mr-1 outline-none rounded w-fit text-gray-900 font-bold text-sm px-4"
+      className="bg-gradient1 mt-14 w-full h-[48px] outline-none rounded font-bold text-gray-900  text-lg "
     >
       Follow
     </button>

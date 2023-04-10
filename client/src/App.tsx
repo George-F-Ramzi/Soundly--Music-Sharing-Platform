@@ -1,5 +1,5 @@
 import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
-import { HomePageData, InboxData } from "./api/authorization";
+import { GetProfileData, HomePageData, InboxData } from "./api/authorization";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
 import NavBar from "./elements/navBar";
@@ -8,6 +8,7 @@ import Player from "./elements/player";
 import ErrorPage from "./pages/errorPage";
 import Inbox from "./pages/inbox";
 import UploadPage from "./pages/uploadPage";
+import ProfilePage from "./pages/profilePage";
 
 function App() {
   const AppLayout = () => (
@@ -41,6 +42,13 @@ function App() {
         {
           path: "/upload",
           element: <UploadPage />,
+        },
+        {
+          path: "/profile/:id",
+          element: <ProfilePage />,
+          loader: async ({ params }) => {
+            return defer({ data: GetProfileData(params.id!) });
+          },
         },
       ],
     },

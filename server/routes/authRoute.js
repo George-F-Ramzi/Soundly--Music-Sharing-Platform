@@ -17,21 +17,11 @@ Router.route("/upload").post(
 
 Router.route("/follow/:userId").post(JWT, Sql, controller.Follow);
 Router.route("/unfollow/:userId").post(JWT, Sql, controller.UnFollow);
-Router.route("/didIFollow/:userId").get(JWT, Sql, controller.DidIFollow);
-Router.route("/didILike/:songId").get(JWT, Sql, controller.DidILike);
 Router.route("/homepage").get(JWT, controller.HomePage);
 Router.route("/navbar").get(JWT, controller.NavBar);
-Router.route("/song/:songId/:userId").get(JWT, Sql, controller.GetSong);
 Router.route("/like/:songId").post(JWT, Sql, controller.Like);
 Router.route("/dislike/:songId").delete(JWT, Sql, controller.DisLike);
-Router.route("/likedSongs/:userId").get(JWT, Sql, controller.LikedSongs);
-Router.route("/uploaded/:userId").get(JWT, Sql, controller.UploadedSongs);
 Router.route("/getProfile/:userId").get(JWT, Sql, controller.GetProfile);
-Router.route("/editProfile").put(
-  JWT,
-  upload.single("photo"),
-  controller.EditProfileImage
-);
 Router.route("/songData/:songId").get(JWT, Sql, controller.GetSongData);
 Router.route("/comment/:songId/:userId").post(JWT, Sql, controller.Comment);
 Router.route("/getComments/:songId").get(JWT, Sql, controller.GetComments);

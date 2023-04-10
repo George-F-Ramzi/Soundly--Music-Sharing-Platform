@@ -12,7 +12,7 @@ function UnFollowBtn({ setFollowing, id }: Prop) {
         setFollowing(false);
         await UnFollow(id);
       }}
-      className="text-sm font-bold text-gray-300 border-gray-500 px-4 rounded mr-1 border "
+      className="text-lg w-full h-12 mt-14 font-bold text-gray-300 border-gray-500  rounded  border "
     >
       UnFollow
     </button>

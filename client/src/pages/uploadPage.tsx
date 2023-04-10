@@ -7,6 +7,7 @@ import { RiLoader2Fill } from "react-icons/ri";
 function UploadPage() {
   const navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
+  let myId = localStorage.getItem("myId");
   return (
     <div className="grid phone:bg-transparent  tablet:grid-cols-1 tablet:mt-8 grid-cols-2 mx-auto mt-[100px] max-w-[800px] rounded-xl h-[500px] bg-gray-800">
       <div className="py-[40px]  phone:px-3 relative text-white px-8">
@@ -18,7 +19,7 @@ function UploadPage() {
             setLoading(true);
             let form: FormData = new FormData(e.currentTarget);
             await HandleFileUpload({ form });
-            navigate("/home");
+            navigate(`/profile/${myId}`);
           }}
         >
           <Input

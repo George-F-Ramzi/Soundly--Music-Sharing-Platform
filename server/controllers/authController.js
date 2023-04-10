@@ -156,61 +156,6 @@ const NavBar = async (req, res) => {
   }
 };
 
-const GetSong = async (req, res) => {
-  const { songId, userId } = req.params;
-
-  const sqlStatment = `select Songs.id,userId,songName,songUrl,coverUrl,Users.username 
-    from Songs join Users on Songs.id = ? and Users.id = ? and Songs.userId = ? ;`;
-
-  try {
-    const data = await mysql.query(sqlStatment, [songId, userId, userId]);
-    if (lodash.isEmpty(data[0][0])) {
-      throw Error("Song Did Not Exist");
-    }
-    res.status(200).json(data[0][0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
-
-const DidIFollow = async (req, res) => {
-  const { userId } = req.params;
-  const { _Id } = req.user;
-
-  if (userId == _Id) {
-    return res.status(205).send("That's You");
-  }
-
-  const sqlStatment =
-    "select * from Followers where followerId = ? and beenFollowingId = ?";
-
-  try {
-    const song = await mysql.query(sqlStatment, [_Id, userId]);
-    if (lodash.isEmpty(song[0][0])) {
-      return res.status(204).send("You Don't Follow This User");
-    }
-    res.status(200).send("You Follow This User");
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
-
-const DidILike = async (req, res) => {
-  const { songId } = req.params;
-  const { _Id } = req.user;
-
-  const sqlStatment = "select * from Likes where userId = ? and songId = ?";
-  try {
-    const song = await mysql.query(sqlStatment, [_Id, songId]);
-    if (lodash.isEmpty(song[0][0])) {
-      return res.status(204).send("You Don't Liked This Song");
-    }
-    res.status(200).send("You Liked This User");
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen");
-  }
-};
-
 const Like = async (req, res) => {
   const { songId } = req.params;
   const { _Id } = req.user;
@@ -272,62 +217,35 @@ const DisLike = async (req, res) => {
   }
 };
 
-const LikedSongs = async (req, res) => {
+const GetProfile = async (req, res) => {
   const { userId } = req.params;
+  const { _Id } = req.user;
 
-  const LikedSongs = `select Songs.id,songName,Songs.userId,coverUrl,likes,Users.username
+  const profileSql = `select  id ,username,f.beenFollowingId as Followed, photoUrl, songs,followers,following from Users 
+left join Followers as f on followerId = ? and beenFollowingId = ?  where id = ? `;
+
+  const LikedSongs = `select Songs.songUrl, Songs.id,songName,Songs.userId,coverUrl,Users.username
     from Songs join Likes on Songs.id = Likes.songId and Likes.userId = ? 
     join Users on Users.id = Songs.userId`;
 
-  try {
-    const result = await mysql.query(LikedSongs, [userId, userId]);
-    res.status(200).json(result[0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen" + error);
-  }
-};
-
-const UploadedSongs = async (req, res) => {
-  const { userId } = req.params;
-
-  const UploadedSongs = `select Songs.id as id,coverUrl,likes,songName,Users.id as userId,Users.username
+  const UploadedSongs = `select Songs.songUrl, Songs.id as id,coverUrl,songName,Users.id as userId,Users.username
     from Songs join Users where Users.id = ? and userId = ?`;
 
   try {
-    const result = await mysql.query(UploadedSongs, [userId, userId]);
-    res.status(200).json(result[0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen" + error);
-  }
-};
-
-const GetProfile = async (req, res) => {
-  const { userId } = req.params;
-
-  const sqlStatment =
-    "select username, photoUrl, songs,followers,following from Users where id = ?";
-
-  try {
-    const result = await mysql.query(sqlStatment, [userId]);
-    if (lodash.isEmpty(result[0][0])) {
+    const result1 = await mysql.query(profileSql, [_Id, userId, userId]);
+    if (lodash.isEmpty(result1[0][0])) {
       throw Error("Profile Did Not Exist");
     }
-    res.status(200).json(result[0][0]);
-  } catch (error) {
-    res.status(400).send("Something Wrong Happen" + error);
-  }
-};
+    const result2 = await mysql.query(LikedSongs, [userId]);
+    const result3 = await mysql.query(UploadedSongs, [userId, userId]);
 
-const EditProfileImage = async (req, res) => {
-  const { path, filename } = req.file;
-  const { _Id } = req.user;
+    let finalData = {
+      profile: result1[0][0],
+      likedSongs: result2[0],
+      uploadedSongs: result3[0],
+    };
 
-  const sqlstatment =
-    "update Users set photoUrl = ? , photoId = ? where id = ?";
-
-  try {
-    await mysql.query(sqlstatment, [path, filename, _Id]);
-    res.status(200).send("Updated Successfully");
+    res.status(200).json(finalData);
   } catch (error) {
     res.status(400).send("Something Wrong Happen" + error);
   }
@@ -447,15 +365,9 @@ module.exports = {
   UnFollow,
   HomePage,
   NavBar,
-  GetSong,
-  DidIFollow,
-  DidILike,
   Like,
   DisLike,
-  LikedSongs,
-  UploadedSongs,
   GetProfile,
-  EditProfileImage,
   GetSongData,
   Comment,
   GetComments,

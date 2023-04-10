@@ -1,4 +1,9 @@
-import { HomePageType, InboxCardType, NavBarType } from "../lib/types.def";
+import {
+  HomePageType,
+  InboxCardType,
+  NavBarType,
+  ProfilePageType,
+} from "../lib/types.def";
 
 let server = "https://soundly-nodejs.vercel.app";
 
@@ -55,6 +60,15 @@ export const UploadPoint = async (form: FormData) => {
     },
     body: form,
   });
+};
+
+export const GetProfileData = async (id: string) => {
+  let response: Response = await fetch(`${serverLocal}/getProfile/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<ProfilePageType> = await response.json();
+  return data;
 };
 
 // export const Like = async (songId) => {

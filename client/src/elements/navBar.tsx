@@ -16,9 +16,12 @@ function NavBar() {
 
   return (
     <div className="h-12 flex items-center justify-between">
-      <h5 className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#06ff3d] to-[#2bffcc] font-bold">
+      <Link
+        to={"/home"}
+        className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#06ff3d] to-[#2bffcc] font-bold"
+      >
         Soundly
-      </h5>
+      </Link>
       <div className="w-[300px] h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
         <input
           placeholder="Search"

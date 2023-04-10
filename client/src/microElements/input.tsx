@@ -9,7 +9,6 @@ function Input({ name, type, placeholder, margin }: Prop) {
   return (
     <input
       required
-      minLength={8}
       name={name}
       type={type}
       placeholder={placeholder}

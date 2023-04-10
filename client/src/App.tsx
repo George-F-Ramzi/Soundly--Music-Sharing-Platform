@@ -8,6 +8,7 @@ import { HomePageType, InboxCardType } from "./lib/types.def";
 import Player from "./elements/player";
 import ErrorPage from "./pages/errorPage";
 import Inbox from "./pages/inbox";
+import UploadPage from "./pages/uploadPage";
 
 function App() {
   const AppLayout = () => (
@@ -37,6 +38,10 @@ function App() {
           loader: async (): Promise<InboxCardType[]> => {
             return await InboxData();
           },
+        },
+        {
+          path: "/upload",
+          element: <UploadPage />,
         },
       ],
     },

@@ -1,4 +1,4 @@
-import { HomePageType, InboxCard, NavBarType } from "../lib/types.def";
+import { HomePageType, InboxCardType, NavBarType } from "../lib/types.def";
 
 let server = "https://soundly-nodejs.vercel.app";
 
@@ -38,13 +38,23 @@ export const UnFollow = async (userId: number): Promise<void> => {
   });
 };
 
-export const InboxData = async (): Promise<InboxCard[]> => {
+export const InboxData = async (): Promise<InboxCardType[]> => {
   let response: Response = await fetch(`${server}/inbox`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
-  let data: Promise<InboxCard[]> = await response.json();
+  let data: Promise<InboxCardType[]> = await response.json();
   return data;
+};
+
+export const UploadPoint = async (form: FormData) => {
+  await fetch(`${server}/upload`, {
+    method: "POST",
+    headers: {
+      "x-auth-token": token,
+    },
+    body: form,
+  });
 };
 
 // export const Like = async (songId) => {
@@ -129,17 +139,6 @@ export const InboxData = async (): Promise<InboxCard[]> => {
 //     headers: { "x-auth-token": token },
 //   });
 //   return data;
-// };
-
-// export const Upload = async (form) => {
-//   const token = localStorage.getItem("token");
-//   const Upload = `https://soundly-nodejs.vercel.app/upload`;
-//   await axios({
-//     method: "post",
-//     url: Upload,
-//     data: form,
-//     headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
-//   });
 // };
 
 // export const SearchUsers = async (value) => {

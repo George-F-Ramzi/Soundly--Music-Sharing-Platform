@@ -11,8 +11,8 @@ function ArtistsSection({ title, data }: Prop) {
       <h5 className="text-white font-bold text-3xl mb-8">{title}</h5>
       <div className="grid gap-8 grid-cols-cards ">
         {Array(data) &&
-          data.map((song) => {
-            return <ArtistCard data={song} />;
+          data.map((artist, index) => {
+            return <ArtistCard key={index} data={artist} />;
           })}
       </div>
     </div>

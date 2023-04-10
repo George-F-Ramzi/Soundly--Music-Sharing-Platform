@@ -5,8 +5,8 @@ export default {
     extend: {
       backgroundImage: {
         gradient1: "linear-gradient(to right,#06ff3d , #2bffcc)",
-        landingBG:
-          "url(https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784794/Side_Bar_xnrmai.png)",
+        upload:
+          "url(https://res.cloudinary.com/dwnvkwrox/image/upload/v1680784793/sideUpload_al8lws.png)",
       },
 
       screens: {

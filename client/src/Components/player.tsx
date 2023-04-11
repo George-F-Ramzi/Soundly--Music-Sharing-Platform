@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import PlayerContext from "../microElements/playerContext";
+import PlayerContext from "../ComponentHelper/playerContext";
 import { Song } from "../lib/types.def";
-import PlayerBody from "../microElements/PlayerBody";
+import PlayerBody from "../ComponentHelper/PlayerBody";
 
 function Player() {
   const [song, setSong] = useState<Song>();

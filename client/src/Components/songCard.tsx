@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ContextPlayerType, Song } from "../lib/types.def";
-import PlayerContext from "../microElements/playerContext";
+import PlayerContext from "../ComponentHelper/playerContext";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 

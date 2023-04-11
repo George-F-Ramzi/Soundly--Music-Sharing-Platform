@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FastLogin } from "../lib/global.def";
-import FormError from "../microElements/formError";
-import Input from "../microElements/input";
+import FormError from "../ComponentHelper/formError";
+import Input from "../ComponentHelper/input";
 import HandleLogin from "../lib/handleLogin";
 
 const Login = ({ hide }: { hide: (check: boolean) => void }) => {

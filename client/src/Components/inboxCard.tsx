@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { InboxCardType } from "../lib/types.def";
-import InboxMessage from "../microElements/inboxMessage";
-import InboxSeeBtn from "../microElements/inboxSeeBtn";
+import InboxMessage from "../ComponentHelper/inboxMessage";
+import InboxSeeBtn from "../ComponentHelper/inboxSeeBtn";
 
 interface Prop {
   data: InboxCardType;

@@ -1,9 +1,9 @@
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { HomePageType } from "../lib/types.def";
-import SongsSection from "../elements/songsSection";
-import ArtistsSection from "../elements/artistsSection";
+import SongsSection from "../Components/songsSection";
+import ArtistsSection from "../Components/artistsSection";
 import { Suspense } from "react";
-import Loading from "../microElements/loading";
+import Loading from "../ComponentHelper/loading";
 
 interface ReturnDefer {
   data: () => Promise<HomePageType>;

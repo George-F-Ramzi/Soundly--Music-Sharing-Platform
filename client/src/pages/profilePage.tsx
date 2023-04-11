@@ -1,11 +1,11 @@
 import { Await, useLoaderData } from "react-router-dom";
 import { ProfilePageType } from "../lib/types.def";
 import { Suspense } from "react";
-import Loading from "../microElements/loading";
-import ProfileBody from "../microElements/profileBody";
+import Loading from "../ComponentHelper/loading";
+import ProfileBody from "../ComponentHelper/profileBody";
 
 interface ReturnDefer {
-  data: () => Promise<ProfilePageType>;
+  data: (id: string) => Promise<ProfilePageType>;
 }
 
 function ProfilePage() {

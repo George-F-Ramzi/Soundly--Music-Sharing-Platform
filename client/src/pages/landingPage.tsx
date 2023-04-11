@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Join from "../elements/join";
-import Login from "../elements/login";
+import Join from "../Components/join";
+import Login from "../Components/login";
 
 const LandingPage = () => {
   const navigate = useNavigate();

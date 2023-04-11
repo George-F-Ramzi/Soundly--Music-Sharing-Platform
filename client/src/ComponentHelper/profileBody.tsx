@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SongsSection from "../elements/songsSection";
+import SongsSection from "../Components/songsSection";
 import { ProfilePageType } from "../lib/types.def";
 import FollowBtn from "./followBtn";
 import UnFollowBtn from "./unFollowBtn";
@@ -22,15 +22,17 @@ export default function ProfileBody({ data }: { data: ProfilePageType }) {
           className="min-w-[100px]  max-h-[100px] rounded mb-10"
           src={profile.photoUrl}
         />
-        <h1 className="font-bold text-5xl mb-7">{profile.username}</h1>
+        <h1 className="font-bold tablet:text-xl text-5xl mb-7">
+          {profile.username}
+        </h1>
         <div className="flex">
-          <p className="text-base mr-4 font-bold text-gray-300">
+          <p className="text-base tablet:text-sm mr-4 font-bold text-gray-300">
             {profile.followers}:Followers
           </p>
-          <p className="text-base mr-4 font-bold text-gray-300">
+          <p className="text-base tablet:text-sm mr-4 font-bold text-gray-300">
             {profile.following}:Following
           </p>
-          <p className="text-base font-bold text-gray-300">
+          <p className="text-base tablet:text-sm font-bold text-gray-300">
             {profile.songs}:Songs
           </p>
         </div>

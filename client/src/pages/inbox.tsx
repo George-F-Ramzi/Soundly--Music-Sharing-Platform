@@ -1,8 +1,8 @@
 import { Await, useLoaderData } from "react-router-dom";
 import { InboxCardType } from "../lib/types.def";
-import InboxCard from "../elements/inboxCard";
+import InboxCard from "../Components/inboxCard";
 import { Suspense } from "react";
-import Loading from "../microElements/loading";
+import Loading from "../ComponentHelper/loading";
 
 interface ReturnDefer {
   data: () => Promise<InboxCardType[]>;

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import HandleFileUpload from "../lib/handleFileUpload";
-import Input from "../microElements/input";
+import Input from "../ComponentHelper/input";
 import { useState } from "react";
 import { RiLoader2Fill } from "react-icons/ri";
 

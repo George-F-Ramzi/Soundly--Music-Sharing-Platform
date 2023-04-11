@@ -12,6 +12,7 @@ function NavBar() {
       let response: Artist = await NavBarData();
       setData(response);
       localStorage.setItem("myId", String(response.id));
+      localStorage.setItem("myProfile", JSON.stringify(response));
     };
     GetInfo();
   }, []);

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { RiSearch2Line, RiInboxArchiveLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "../api/authorization";
-import { NavBarType } from "../lib/types.def";
+import { Artist } from "../lib/types.def";
 
 function NavBar() {
-  const [data, setData] = useState<NavBarType>();
+  const [data, setData] = useState<Artist>();
+  const navigate = useNavigate();
   useEffect(() => {
     const GetInfo = async () => {
-      let response: NavBarType = await NavBarData();
+      let response: Artist = await NavBarData();
       setData(response);
       localStorage.setItem("myId", String(response.id));
     };
@@ -46,9 +47,16 @@ function NavBar() {
         >
           <RiInboxArchiveLine size={"26px"} />
         </Link>
-        <Link to={`/profile/${data?.id}`}>
-          <img src={data?.photoUrl} className="h-12 w-12 rounded-full ml-4 " />
-        </Link>
+        <div
+          onClick={() =>
+            navigate(`/profile/${data?.id}`, { state: { profile: data } })
+          }
+        >
+          <img
+            src={data?.photoUrl}
+            className="h-12 w-12 cursor-pointer rounded-full ml-4 "
+          />
+        </div>
       </div>
     </div>
   );

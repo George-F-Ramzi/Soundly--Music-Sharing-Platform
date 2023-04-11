@@ -1,7 +1,7 @@
 import {
+  Artist,
   HomePageType,
   InboxCardType,
-  NavBarType,
   ProfilePageType,
 } from "../lib/types.def";
 
@@ -20,12 +20,12 @@ export const HomePageData = async (): Promise<HomePageType> => {
   return data;
 };
 
-export const NavBarData = async (): Promise<NavBarType> => {
+export const NavBarData = async (): Promise<Artist> => {
   let response: Response = await fetch(`${serverLocal}/navbar`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
-  let data: Promise<NavBarType> = await response.json();
+  let data: Promise<Artist> = await response.json();
   return data;
 };
 

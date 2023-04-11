@@ -14,7 +14,6 @@ const ErrorPage = () => {
       </h1>
       <button
         onClick={() => {
-          localStorage.removeItem("token");
           navigate("/");
         }}
         className="mt-[48px] text-black tablet:px-4 tablet:text-sm text-lg tablet:py-2 font-bold  px-[48px] py-[12px] bg-gradient1 rounded-full"

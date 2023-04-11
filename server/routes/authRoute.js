@@ -22,7 +22,6 @@ Router.route("/navbar").get(JWT, controller.NavBar);
 Router.route("/like/:songId").post(JWT, Sql, controller.Like);
 Router.route("/dislike/:songId").delete(JWT, Sql, controller.DisLike);
 Router.route("/getProfile/:userId").get(JWT, Sql, controller.GetProfile);
-Router.route("/songData/:songId").get(JWT, Sql, controller.GetSongData);
 Router.route("/comment/:songId/:userId").post(JWT, Sql, controller.Comment);
 Router.route("/getComments/:songId").get(JWT, Sql, controller.GetComments);
 Router.route("/inbox").get(JWT, controller.GetInbox);

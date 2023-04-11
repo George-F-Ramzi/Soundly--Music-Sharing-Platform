@@ -16,6 +16,8 @@ export interface Song {
   songUrl: string;
   coverUrl: string;
   username: string;
+  likes: number;
+  liked: number | null;
 }
 
 export interface Artist {
@@ -23,16 +25,14 @@ export interface Artist {
   photoUrl: string;
   followers: number;
   username: string;
+  following: number;
+  songs: number;
+  followed: number | null;
 }
 
 export interface HomePageType {
   discover: Song[];
   artists: Artist[];
-}
-
-export interface NavBarType {
-  id: number;
-  photoUrl: string;
 }
 
 export interface ContextPlayerType {
@@ -48,15 +48,13 @@ export interface InboxCardType {
 }
 
 export interface ProfilePageType {
-  profile: {
-    id: number;
-    username: string;
-    Followed: number | null;
-    photoUrl: string;
-    songs: number;
-    followers: number;
-    following: number;
-  };
   likedSongs: Song[];
   uploadedSongs: Song[];
+}
+
+export interface Comment {
+  details: string;
+  userId: number;
+  username: string;
+  photoUrl: number;
 }

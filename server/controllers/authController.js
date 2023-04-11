@@ -128,9 +128,10 @@ const UnFollow = async (req, res) => {
 const HomePage = async (req, res) => {
   const { _Id } = req.user;
 
-  const discover = `select Songs.id,Songs.userId,songName,songUrl,coverUrl,Users.username,l.songId as liked,likes
-from Songs join Users on Songs.userId = Users.id
+  const discover = `select Songs.id,Songs.userId,songName,songUrl,coverUrl,u.username,l.songId as liked,likes,
+u.followers,u.following,u.photoUrl,u.songs,beenFollowingId as followed from Songs join Users as u on Songs.userId = u.id
 left join Likes as l on l.songId = Songs.id and l.userId = ?
+left join Followers as f on f.followerId = ? and f.beenFollowingId = u.id
 order by likes desc limit 0,9;`;
 
   const artists = `select id,photoUrl,username,followers,following,songs,f.beenFollowingId as followed
@@ -138,7 +139,7 @@ from Users left join Followers as f on f.followerId = ? and f.beenFollowingId = 
 order by followers desc limit 0,9;`;
 
   try {
-    const result1 = await mysql.query(discover, [_Id]);
+    const result1 = await mysql.query(discover, [_Id, _Id]);
     const result2 = await mysql.query(artists, [_Id]);
 
     res.status(200).json({ discover: result1[0], artists: result2[0] });

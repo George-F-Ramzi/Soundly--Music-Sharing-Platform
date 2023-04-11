@@ -9,17 +9,6 @@ export interface LoginForm {
   password: FormDataEntryValue;
 }
 
-export interface Song {
-  id: number;
-  userId: number;
-  songName: string;
-  songUrl: string;
-  coverUrl: string;
-  username: string;
-  likes: number;
-  liked: number | null;
-}
-
 export interface Artist {
   id: number;
   photoUrl: string;
@@ -28,6 +17,16 @@ export interface Artist {
   following: number;
   songs: number;
   followed: number | null;
+}
+
+export interface Song extends Artist {
+  id: number;
+  userId: number;
+  songName: string;
+  songUrl: string;
+  coverUrl: string;
+  likes: number;
+  liked: number | null;
 }
 
 export interface HomePageType {

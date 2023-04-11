@@ -1,12 +1,23 @@
 import { useContext } from "react";
-import { ContextPlayerType, Song } from "../lib/types.def";
+import { Artist, ContextPlayerType, Song } from "../lib/types.def";
 import PlayerContext from "../ComponentHelper/playerContext";
 import { RiPlayCircleFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SongCard({ data }: { data: Song }) {
   const { setSong }: ContextPlayerType = useContext(PlayerContext);
   const navigate = useNavigate();
+
+  let profile: Artist = {
+    followed: data.followed,
+    followers: data.followers,
+    following: data.following,
+    id: data.userId,
+    photoUrl: data.photoUrl,
+    songs: data.songs,
+    username: data.username,
+  };
+
   return (
     <div className="w-full items-center  p-[8px] flex  h-[80px] bg-gray-800 text-white rounded-[4px]">
       <div className="w-[64px] h-full relative">
@@ -27,9 +38,14 @@ function SongCard({ data }: { data: Song }) {
         >
           {data.songName}
         </h5>
-        <Link to={`/profile/${data.userId}`} className="text-gray-300">
+        <p
+          onClick={() =>
+            navigate(`/profile/${data.userId}`, { state: { profile } })
+          }
+          className="text-gray-300"
+        >
           {data.username}
-        </Link>
+        </p>
       </div>
     </div>
   );

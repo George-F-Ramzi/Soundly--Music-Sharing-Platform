@@ -7,6 +7,8 @@ import Follow from "../controllers/follow";
 import UnFollow from "../controllers/unfollow";
 import LikeSong from "../controllers/like_song";
 import DislikeSong from "../controllers/dislike_song";
+import Comment from "../controllers/comment";
+import GetComments from "../controllers/get_comments";
 
 let Handler: Router = express.Router();
 
@@ -24,5 +26,7 @@ Handler.route("/follow/:nottifier_id").post(JwtVerfiy, Follow);
 Handler.route("/unfollow/:nottifier_id").post(JwtVerfiy, UnFollow);
 Handler.route("/like/:song_id/:nottifier_id").post(JwtVerfiy, LikeSong);
 Handler.route("/dislike/:song_id").post(JwtVerfiy, DislikeSong);
+Handler.route("/comment/:song_id").post(JwtVerfiy, Comment);
+Handler.route("/comments/:song_id").get(JwtVerfiy, GetComments);
 
 export default Handler;

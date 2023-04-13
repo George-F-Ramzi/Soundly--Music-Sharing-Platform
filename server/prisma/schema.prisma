@@ -38,6 +38,7 @@ model Song {
   artist_id Int
   comment Comment[]
   like Like[]
+  notification Notification[]
 }
 
 model Follower {
@@ -59,8 +60,8 @@ model Comment {
 
 model Like {
   id    Int     @id @default(autoincrement())
-  artist Artist  @relation(fields: [artist_id], references: [id])
-  artist_id Int
+  fan Artist  @relation(fields: [fan_id], references: [id])
+  fan_id Int
   song Song  @relation(fields: [song_id], references: [id])
   song_id Int
 }
@@ -71,5 +72,7 @@ model Notification {
   trigger_id Int
   nottifer Artist  @relation("nottifer_id",fields: [nottifer_id], references: [id])
   nottifer_id Int
+  song Song?  @relation(fields: [song_id], references: [id])
+  song_id Int?
   message_detail String
 }

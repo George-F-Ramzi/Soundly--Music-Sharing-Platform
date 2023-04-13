@@ -1,5 +1,12 @@
 import express, { Router } from "express";
-import { Upload } from "../controllers/authorization_controller";
+import {
+  DislikeSong,
+  Follow,
+  HomePageData,
+  LikeSong,
+  UnFollow,
+  Upload,
+} from "../controllers/authorization_controller";
 import { JwtVerfiy } from "../lib/JWt";
 import file_handler from "../lib/multer";
 
@@ -13,5 +20,11 @@ Handler.route("/upload").post(
   ]),
   Upload
 );
+
+Handler.route("/home").get(JwtVerfiy, HomePageData);
+Handler.route("/follow/:nottifier_id").post(JwtVerfiy, Follow);
+Handler.route("/unfollow/:nottifier_id").post(JwtVerfiy, UnFollow);
+Handler.route("/like/:song_id/:nottifier_id").post(JwtVerfiy, LikeSong);
+Handler.route("/dislike/:song_id").post(JwtVerfiy, DislikeSong);
 
 export default Handler;

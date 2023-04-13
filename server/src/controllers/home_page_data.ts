@@ -1,4 +1,3 @@
-import { Artist } from "@prisma/client";
 import prisma_client from "../lib/database";
 import { Response, Request } from "express";
 
@@ -15,39 +14,16 @@ export default async function HomePageData(req: Request, res: Response) {
   }
 }
 
-interface IArtist extends Artist {
-  fan?: { artist_id: number };
-}
-
 async function ArtsitData(id: number) {
-  let artsits = (await prisma_client.artist.findMany({
+  let artsits = await prisma_client.artist.findMany({
     orderBy: { followers: "desc" },
-    select: {
-      id: true,
-      username: true,
-      followers: true,
-      following: true,
-      photo_url: true,
-      songs_uploaded_number: true,
-    },
+    include: { artist: { select: { artist_id: true }, where: { fan_id: id } } },
     take: 9,
-  })) as IArtist[];
-
-  let artsits_id = artsits.map((e) => {
-    return e.id;
   });
 
-  let fan_to_artist = await prisma_client.follower.findMany({
-    where: { artist_id: { in: artsits_id }, fan_id: id },
-    select: { artist_id: true },
-  });
-
-  artsits.forEach((a) => {
-    for (let index = 0; index < fan_to_artist.length; index++) {
-      if (a.id === fan_to_artist[index].artist_id) {
-        a.fan = fan_to_artist[index];
-      }
-    }
+  artsits.forEach((e) => {
+    e.password = "";
+    e.email = "";
   });
 
   return artsits;

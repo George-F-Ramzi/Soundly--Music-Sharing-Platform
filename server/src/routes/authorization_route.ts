@@ -1,14 +1,12 @@
 import express, { Router } from "express";
-import {
-  DislikeSong,
-  Follow,
-  HomePageData,
-  LikeSong,
-  UnFollow,
-  Upload,
-} from "../controllers/authorization_controller";
 import { JwtVerfiy } from "../lib/JWt";
 import file_handler from "../lib/multer";
+import Upload from "../controllers/upload";
+import HomePageData from "../controllers/home_page_data";
+import Follow from "../controllers/follow";
+import UnFollow from "../controllers/unfollow";
+import LikeSong from "../controllers/like_song";
+import DislikeSong from "../controllers/dislike_song";
 
 let Handler: Router = express.Router();
 

@@ -16,7 +16,7 @@ export default async function HomePageData(req: Request, res: Response) {
 }
 
 interface IArtist extends Artist {
-  fan?: number | null;
+  fan?: { artist_id: number };
 }
 
 async function ArtsitData(id: number) {
@@ -44,8 +44,9 @@ async function ArtsitData(id: number) {
 
   artsits.forEach((a) => {
     for (let index = 0; index < fan_to_artist.length; index++) {
-      if (a.id === fan_to_artist[index].artist_id)
-        a.fan = fan_to_artist[index].artist_id;
+      if (a.id === fan_to_artist[index].artist_id) {
+        a.fan = fan_to_artist[index];
+      }
     }
   });
 

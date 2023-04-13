@@ -9,8 +9,7 @@ export interface LoginForm {
   password: string;
 }
 
-export interface SongForm {
-  name: string;
-  cover_file: Buffer;
-  song_file: Buffer;
+export interface UploadedFiles {
+  cover_file: Express.Multer.File[];
+  song_file: Express.Multer.File[];
 }

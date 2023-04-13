@@ -1,24 +1,35 @@
 import prisma_client from "../lib/database";
 import Joi, { Schema } from "joi";
 import { Response, Request } from "express";
-import { SongForm } from "../lib/types.def";
+import { UploadedFiles } from "../lib/types.def";
+import cloudinary from "../lib/cloudinary";
+import { DeleteUploaded, Uploader } from "../lib/global";
 
 export async function Upload(req: Request, res: Response) {
+  const { name }: { name: string } = req.body;
+  let files = req.files as any as UploadedFiles;
+  let cover_url: string = files.cover_file[0].path;
+  let song_url: string = files.song_file[0].path;
+  let id: number = req.user!;
+  let cover_id: string = files.cover_file[0].filename;
+  let song_id: string = files.song_file[0].filename;
+
   const schema: Schema = Joi.object({
     name: Joi.string().required().label("Song Name"),
-    cover_file: Joi.binary().required(),
-    song_file: Joi.binary().required(),
   });
 
   const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.message);
 
-  const { song_file, name, cover_file }: SongForm = req.body;
-  let id = req.user;
+  if (error) {
+    DeleteUploaded({ song_id, cover_id });
+    return res.status(400).json(error.message);
+  }
 
   try {
-    res.json({ name, song_file, cover_file, id });
+    await Uploader({ id, song_url, name, cover_url });
+    res.status(200).send("Uploading Done");
   } catch (error) {
-    res.json(error);
+    DeleteUploaded({ song_id, cover_id });
+    return res.status(400).json("Something Wrong Happen");
   }
 }

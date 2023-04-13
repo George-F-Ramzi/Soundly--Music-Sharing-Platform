@@ -32,6 +32,8 @@ model Song {
   id    Int     @id @default(autoincrement())
   song_name String
   song_cover_url String
+  song_file_url String
+  likes Int? @default(0)
   artist Artist  @relation(fields: [artist_id], references: [id])
   artist_id Int
   comment Comment[]

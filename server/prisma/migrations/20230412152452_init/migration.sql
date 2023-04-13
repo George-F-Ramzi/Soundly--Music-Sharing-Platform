@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Song` MODIFY `likes` INTEGER NULL DEFAULT 0;

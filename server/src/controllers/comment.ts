@@ -4,7 +4,7 @@ import Joi, { Schema } from "joi";
 
 export default async function Comment(req: Request, res: Response) {
   let my_id: number = req.user!;
-  let song_id: string = req.params.user_id;
+  let song_id: number = Number(req.params.song_id);
   let { details }: { details: string } = req.body;
 
   const schema: Schema = Joi.object({
@@ -18,28 +18,28 @@ export default async function Comment(req: Request, res: Response) {
   }
 
   try {
-    let nottifer = await prisma_client.song.findUnique({
-      where: { id: Number(song_id) },
+    let song_row = await prisma_client.song.findUnique({
+      where: { id: song_id },
       select: { artist_id: true },
     });
 
-    if (nottifer === null)
-      return res.status(400).json("something wrong happen");
+    if (song_row === null)
+      return res.status(400).send("something wrong happen");
 
     await prisma_client.comment.create({
       data: {
         details,
-        artist_id: nottifer.artist_id,
-        song_id: Number(song_id),
+        artist_id: song_row.artist_id,
+        song_id,
       },
     });
 
     await prisma_client.notification.create({
       data: {
         message_detail: "Commented on your song",
-        nottifer_id: nottifer.artist_id,
+        nottifer_id: song_row.artist_id,
         trigger_id: my_id,
-        song_id: Number(song_id),
+        song_id,
       },
     });
     res.status(200).send("Commenting Done");

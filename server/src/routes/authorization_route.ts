@@ -22,9 +22,9 @@ Handler.route("/upload").post(
 );
 
 Handler.route("/home").get(JwtVerfiy, HomePageData);
-Handler.route("/follow/:nottifier_id").post(JwtVerfiy, Follow);
-Handler.route("/unfollow/:nottifier_id").post(JwtVerfiy, UnFollow);
-Handler.route("/like/:song_id/:nottifier_id").post(JwtVerfiy, LikeSong);
+Handler.route("/follow/:artist_id").post(JwtVerfiy, Follow);
+Handler.route("/unfollow/:artist_id").post(JwtVerfiy, UnFollow);
+Handler.route("/like/:song_id").post(JwtVerfiy, LikeSong);
 Handler.route("/dislike/:song_id").post(JwtVerfiy, DislikeSong);
 Handler.route("/comment/:song_id").post(JwtVerfiy, Comment);
 Handler.route("/comments/:song_id").get(JwtVerfiy, GetComments);

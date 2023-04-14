@@ -1,5 +1,6 @@
 import express, { Router } from "express";
-import { Join, Login } from "../controllers/authentication_controller";
+import Login from "../controllers/Login";
+import Join from "../controllers/Join";
 
 let Handler: Router = express.Router();
 

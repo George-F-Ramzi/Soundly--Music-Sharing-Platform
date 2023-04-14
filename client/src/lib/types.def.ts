@@ -11,31 +11,32 @@ export interface LoginForm {
 
 export interface Artist {
   id: number;
-  photoUrl: string;
   followers: number;
+  photo_url: string;
   username: string;
+  songs_uploaded_number: number;
   following: number;
-  songs: number;
-  followed: number | null;
 }
 
-export interface Song extends Artist {
+export interface SongCard {
   id: number;
-  userId: number;
-  songName: string;
-  songUrl: string;
-  coverUrl: string;
+  song_name: string;
+  song_cover_url: string;
+  song_file_url: string;
   likes: number;
-  liked: number | null;
+  artist_id: number;
+  artist: {
+    username: string;
+  };
 }
 
 export interface HomePageType {
-  discover: Song[];
+  discover: SongCard[];
   artists: Artist[];
 }
 
 export interface ContextPlayerType {
-  setSong?: (song: Song) => void;
+  setSong?: (song: SongCard) => void;
 }
 
 export interface InboxCardType {
@@ -44,16 +45,4 @@ export interface InboxCardType {
   photoUrl: string;
   songId: number;
   username: string;
-}
-
-export interface ProfilePageType {
-  likedSongs: Song[];
-  uploadedSongs: Song[];
-}
-
-export interface Comment {
-  details: string;
-  userId: number;
-  username: string;
-  photoUrl: number;
 }

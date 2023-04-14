@@ -1,9 +1,9 @@
 import { JoinForm, LoginForm } from "../lib/types.def";
 
-let server = "https://soundly-nodejs.vercel.app";
+let server = "http://localhost:3999";
 
 export const JoinPoint = async (data: JoinForm): Promise<string> => {
-  let response: Response = await fetch(`${server}/register`, {
+  let response: Response = await fetch(`${server}/join`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

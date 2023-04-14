@@ -3,11 +3,11 @@ import prisma_client from "../lib/database";
 
 export default async function UnFollow(req: Request, res: Response) {
   let my_id: number = req.user!;
-  let nottifier_id: string = req.params.user_id;
+  let artist_id: number = Number(req.params.artist_id);
 
   try {
     let follower_row = await prisma_client.follower.findFirst({
-      where: { fan_id: my_id, artist_id: Number(nottifier_id) },
+      where: { fan_id: my_id, artist_id },
       select: { id: true },
     });
 
@@ -22,11 +22,11 @@ export default async function UnFollow(req: Request, res: Response) {
     });
 
     await prisma_client.artist.update({
-      where: { id: Number(nottifier_id) },
+      where: { id: artist_id },
       data: { followers: { decrement: 1 } },
     });
 
-    res.status(200).send("Following Done");
+    res.status(200).send("UnFollowing Done");
   } catch (error) {
     return res.status(400).json("Something Wrong Happen");
   }

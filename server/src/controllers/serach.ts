@@ -1,11 +1,12 @@
+import { Request, Response } from "express";
 import prisma_client from "../lib/database";
-import { Response, Request } from "express";
 
-export default async function HomePageData(req: Request, res: Response) {
-  //
+export default async function Search(req: Request, res: Response) {
+  let query: string = req.params.query;
+
   try {
-    let artists = await prisma_client.artist.findMany({
-      orderBy: { followers: "desc" },
+    let artist = await prisma_client.artist.findMany({
+      where: { username: { search: `${query}*` } },
       select: {
         id: true,
         followers: true,
@@ -14,11 +15,10 @@ export default async function HomePageData(req: Request, res: Response) {
         songs_uploaded_number: true,
         following: true,
       },
-      take: 9,
     });
 
-    let discover = await prisma_client.song.findMany({
-      orderBy: { likes: "desc" },
+    let songs = await prisma_client.song.findMany({
+      where: { song_name: { search: `${query}*` } },
       include: {
         artist: {
           select: {
@@ -31,12 +31,12 @@ export default async function HomePageData(req: Request, res: Response) {
           },
         },
       },
-      take: 9,
     });
 
-    let result = { artists, discover };
-    res.status(200).json(result);
+    let result = { songs, artist };
+
+    return res.status(200).json(result);
   } catch (error) {
-    return res.status(400).json("Something Wrong Happen");
+    return res.status(400).json(error);
   }
 }

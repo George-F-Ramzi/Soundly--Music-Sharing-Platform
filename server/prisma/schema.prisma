@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -26,6 +27,7 @@ model Artist {
   nottifer Notification[] @relation("nottifer_id")
   comment Comment[]
   like Like[]
+  @@fulltext([username])
 }
 
 model Song {
@@ -39,6 +41,7 @@ model Song {
   comment Comment[]
   like Like[]
   notification Notification[]
+  @@fulltext([song_name])
 }
 
 model Follower {

@@ -1,33 +1,25 @@
 import { Await, useLoaderData, useLocation } from "react-router-dom";
-import { Artist, ProfilePageType } from "../lib/types.def";
-import { Suspense, useEffect, useState } from "react";
-import Loading from "../ComponentHelper/loading";
-import UnFollowBtn from "../ComponentHelper/unFollowBtn";
-import FollowBtn from "../ComponentHelper/followBtn";
+import { IArtist, ISongCard } from "../lib/types.def";
+import { Suspense } from "react";
 import SongsSection from "../Components/songsSection";
+import Loading from "../ComponentHelper/loading";
 
 interface ReturnDefer {
-  data: (id: string) => Promise<ProfilePageType>;
+  data: (id: string) => Promise<ISongCard[]>;
 }
 
 function ProfilePage() {
-  const [followed, setFollowed] = useState(false);
   const { data } = useLoaderData() as ReturnDefer;
   const location = useLocation();
-  let profile: Artist = location.state.profile;
-  let myId = localStorage.getItem("myId");
-
-  useEffect(() => {
-    if (profile.followed != null) setFollowed(true);
-    else setFollowed(false);
-  }, [profile]);
+  let profile: IArtist = location.state.profile;
+  let my_profile: IArtist = JSON.parse(localStorage.getItem("my_profile")!);
 
   return (
     <div className="mt-16 pb-36 text-white">
       <div className="flex flex-col items-center">
         <img
           className="min-w-[100px]  max-h-[100px] rounded mb-10"
-          src={profile.photoUrl}
+          src={profile.photo_url}
         />
         <h1 className="font-bold tablet:text-xl text-5xl mb-7">
           {profile.username}
@@ -40,26 +32,14 @@ function ProfilePage() {
             {profile.following}:Following
           </p>
           <p className="text-base tablet:text-sm font-bold text-gray-300">
-            {profile.songs}:Songs
+            {profile.songs_uploaded_number}:Songs
           </p>
         </div>
-        {myId !== String(profile.id) ? (
-          followed ? (
-            <UnFollowBtn id={profile.id} setFollowing={setFollowed} />
-          ) : (
-            <FollowBtn id={profile.id} setFollowing={setFollowed} />
-          )
-        ) : (
-          ""
-        )}
       </div>
       <Suspense fallback={<Loading />}>
         <Await resolve={data}>
-          {({ uploadedSongs, likedSongs }: ProfilePageType) => (
-            <>
-              <SongsSection data={uploadedSongs} title={"Uploaded Songs"} />
-              <SongsSection data={likedSongs} title={"Liked Songs"} />
-            </>
+          {(data: ISongCard[]) => (
+            <SongsSection data={data} title={"Uploaded Songs"} />
           )}
         </Await>
       </Suspense>

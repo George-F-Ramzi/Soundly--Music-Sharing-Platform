@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { RiSearch2Line, RiInboxArchiveLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import { NavBarData } from "../api/authorization";
-import { Artist } from "../lib/types.def";
+import { Me } from "../api/authorization";
+import { IArtist } from "../lib/types.def";
 
 function NavBar() {
-  const [data, setData] = useState<Artist>();
+  const [data, setData] = useState<IArtist>();
   const navigate = useNavigate();
   useEffect(() => {
     const GetInfo = async () => {
-      let response: Artist = await NavBarData();
+      let response: IArtist = await Me();
       setData(response);
-      localStorage.setItem("myId", String(response.id));
-      localStorage.setItem("myProfile", JSON.stringify(response));
+      localStorage.setItem("my_profile", JSON.stringify(response));
     };
     GetInfo();
   }, []);
@@ -54,7 +53,7 @@ function NavBar() {
           }
         >
           <img
-            src={data?.photoUrl}
+            src={data?.photo_url}
             className="h-12 w-12 cursor-pointer rounded-full ml-4 "
           />
         </div>

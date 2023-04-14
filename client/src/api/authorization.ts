@@ -1,11 +1,16 @@
-import { Artist, HomePageType, InboxCardType } from "../lib/types.def";
+import {
+  Artist,
+  HomePageType,
+  ISongCard,
+  InboxCardType,
+} from "../lib/types.def";
 
 let server = "http://localhost:3999";
 
 let token = localStorage.getItem("token")!;
 
 export const HomePageData = async (): Promise<HomePageType> => {
-  let response: Response = await fetch(`${server}/homepage`, {
+  let response: Response = await fetch(`${server}/home`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
@@ -13,8 +18,8 @@ export const HomePageData = async (): Promise<HomePageType> => {
   return data;
 };
 
-export const NavBarData = async (): Promise<Artist> => {
-  let response: Response = await fetch(`${server}/navbar`, {
+export const Me = async (): Promise<Artist> => {
+  let response: Response = await fetch(`${server}/me`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
@@ -55,14 +60,14 @@ export const UploadPoint = async (form: FormData) => {
   });
 };
 
-// export const GetProfileData = async (id: string) => {
-//   let response: Response = await fetch(`${server}/getProfile/${id}`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json", "x-auth-token": token },
-//   });
-//   let data: Promise<ProfilePageType> = await response.json();
-//   return data;
-// };
+export const UploadedSongs = async (id: string) => {
+  let response: Response = await fetch(`${server}/uploaded/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<ISongCard[]> = await response.json();
+  return data;
+};
 
 // export const Like = async (songId: string) => {
 //   await fetch(`${server}/like/${songId}`, {

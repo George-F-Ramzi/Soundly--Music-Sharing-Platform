@@ -9,7 +9,7 @@ export interface LoginForm {
   password: FormDataEntryValue;
 }
 
-export interface Artist {
+export interface IArtist {
   id: number;
   followers: number;
   photo_url: string;
@@ -18,31 +18,21 @@ export interface Artist {
   following: number;
 }
 
-export interface SongCard {
+export interface ISongCard {
   id: number;
   song_name: string;
   song_cover_url: string;
   song_file_url: string;
   likes: number;
   artist_id: number;
-  artist: {
-    username: string;
-  };
+  artist: IArtist;
 }
 
 export interface HomePageType {
-  discover: SongCard[];
-  artists: Artist[];
+  discover: ISongCard[];
+  artists: IArtist[];
 }
 
 export interface ContextPlayerType {
-  setSong?: (song: SongCard) => void;
-}
-
-export interface InboxCardType {
-  triggerId: number;
-  messageId: number;
-  photoUrl: string;
-  songId: number;
-  username: string;
+  setSong?: (song: ISongCard) => void;
 }

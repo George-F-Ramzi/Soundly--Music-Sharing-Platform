@@ -7,6 +7,18 @@ export default async function UploadedSongs(req: Request, res: Response) {
   try {
     let songs = await prisma_client.song.findMany({
       where: { artist_id },
+      include: {
+        artist: {
+          select: {
+            id: true,
+            followers: true,
+            photo_url: true,
+            username: true,
+            songs_uploaded_number: true,
+            following: true,
+          },
+        },
+      },
     });
 
     res.status(200).json(songs);

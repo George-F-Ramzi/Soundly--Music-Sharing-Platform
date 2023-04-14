@@ -1,9 +1,9 @@
-import { Song } from "../lib/types.def";
+import { ISongCard } from "../lib/types.def";
 import SongCard from "./songCard";
 
 interface Prop {
   title: String;
-  data: Song[];
+  data: ISongCard[];
 }
 function SongsSection({ title, data }: Prop) {
   return (

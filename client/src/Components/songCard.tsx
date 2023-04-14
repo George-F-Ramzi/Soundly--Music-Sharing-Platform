@@ -1,27 +1,20 @@
 import { useContext } from "react";
-import { Artist, ContextPlayerType, Song } from "../lib/types.def";
+import { ContextPlayerType, ISongCard } from "../lib/types.def";
 import PlayerContext from "../ComponentHelper/playerContext";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-function SongCard({ data }: { data: Song }) {
+function SongCard({ data }: { data: ISongCard }) {
   const { setSong }: ContextPlayerType = useContext(PlayerContext);
   const navigate = useNavigate();
-
-  let profile: Artist = {
-    followed: data.followed,
-    followers: data.followers,
-    following: data.following,
-    id: data.userId,
-    photoUrl: data.photoUrl,
-    songs: data.songs,
-    username: data.username,
-  };
 
   return (
     <div className="w-full items-center  p-[8px] flex  h-[80px] bg-gray-800 text-white rounded-[4px]">
       <div className="w-[64px] h-full relative">
-        <img src={data.coverUrl} className="min-w-[64px] h-full rounded" />
+        <img
+          src={data.song_cover_url}
+          className="min-w-[64px] h-full rounded"
+        />
         <div
           onClick={() => setSong && setSong(data)}
           className="absolute cursor-pointer w-full bg-opacity-20 h-full top-0 flex bg-black items-center justify-center rounded"
@@ -36,15 +29,17 @@ function SongCard({ data }: { data: Song }) {
           }
           className="font-bold cursor-pointer mb-2"
         >
-          {data.songName}
+          {data.song_name}
         </h5>
         <p
           onClick={() =>
-            navigate(`/profile/${data.userId}`, { state: { profile } })
+            navigate(`/profile/${data.artist_id}`, {
+              state: { profile: data.artist },
+            })
           }
-          className="text-gray-300"
+          className="text-gray-300 cursor-pointer"
         >
-          {data.username}
+          {data.artist.username}
         </p>
       </div>
     </div>

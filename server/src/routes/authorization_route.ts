@@ -14,6 +14,7 @@ import UploadedSongs from "../controllers/uploaded_songs";
 import LikedSongs from "../controllers/liked_songs.";
 import IsLiked from "../controllers/is_liked";
 import IsFollowed from "../controllers/is_followed";
+import Me from "../controllers/me";
 
 let Handler: Router = express.Router();
 
@@ -38,5 +39,6 @@ Handler.route("/liked_songs").get(JwtVerfiy, LikedSongs);
 Handler.route("/search/:query").post(JwtVerfiy, Search);
 Handler.route("/is_liked/:song_id").get(JwtVerfiy, IsLiked);
 Handler.route("/is_followed/:artist_id").get(JwtVerfiy, IsFollowed);
+Handler.route("/me").get(JwtVerfiy, Me);
 
 export default Handler;

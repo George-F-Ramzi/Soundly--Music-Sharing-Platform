@@ -1,6 +1,7 @@
 import {
-  Artist,
   HomePageType,
+  IArtist,
+  IFollowed,
   ISongCard,
   InboxCardType,
 } from "../lib/types.def";
@@ -18,12 +19,12 @@ export const HomePageData = async (): Promise<HomePageType> => {
   return data;
 };
 
-export const Me = async (): Promise<Artist> => {
+export const Me = async (): Promise<IArtist> => {
   let response: Response = await fetch(`${server}/me`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
-  let data: Promise<Artist> = await response.json();
+  let data: Promise<IArtist> = await response.json();
   return data;
 };
 
@@ -39,6 +40,15 @@ export const UnFollow = async (userId: number): Promise<void> => {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
+};
+
+export const IsFollowedPoint = async (userId: number): Promise<IFollowed> => {
+  let response = await fetch(`${server}/is_followed/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let result: IFollowed = await response.json();
+  return result;
 };
 
 export const InboxData = async (): Promise<InboxCardType[]> => {
@@ -69,64 +79,16 @@ export const UploadedSongs = async (id: string) => {
   return data;
 };
 
-// export const Like = async (songId: string) => {
-//   await fetch(`${server}/like/${songId}`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json", "x-auth-token": token },
-//   });
-// };
+export const Like = async (songId: string) => {
+  await fetch(`${server}/like/${songId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
 
-// export const Dislike = async (songId: string) => {
-//   await fetch(`${server}/dislike/${songId}`, {
-//     method: "DELETE",
-//     headers: { "Content-Type": "application/json", "x-auth-token": token },
-//   });
-// };
-
-// export const GetSongData = async (songId) => {
-//   const token = localStorage.getItem("token");
-//   const song = `https://soundly-nodejs.vercel.app/songData/${songId}`;
-//   const { data } = await axios.get(song, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
-
-// export const DoComment = async (songId, userId, details) => {
-//   const token = localStorage.getItem("token");
-//   const comment = `https://soundly-nodejs.vercel.app/comment/${songId}/${userId}`;
-//   await axios.post(
-//     comment,
-//     { details },
-//     {
-//       headers: { "x-auth-token": token },
-//     }
-//   );
-// };
-
-// export const GetComments = async (songId) => {
-//   const token = localStorage.getItem("token");
-//   const comments = `https://soundly-nodejs.vercel.app/getComments/${songId}`;
-//   const { data } = await axios.get(comments, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
-
-// export const SearchUsers = async (value) => {
-//   const token = localStorage.getItem("token");
-//   const users = `https://soundly-nodejs.vercel.app/search/users/${value}`;
-//   const { data } = await axios.get(users, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
-
-// export const SearchSongs = async (value) => {
-//   const token = localStorage.getItem("token");
-//   const songs = `https://soundly-nodejs.vercel.app/search/songs/${value}`;
-//   const { data } = await axios.get(songs, {
-//     headers: { "x-auth-token": token },
-//   });
-//   return data;
-// };
+export const Dislike = async (songId: string) => {
+  await fetch(`${server}/dislike/${songId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};

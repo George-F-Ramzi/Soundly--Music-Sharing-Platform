@@ -11,7 +11,7 @@ function NavBar() {
     const GetInfo = async () => {
       let response: IArtist = await Me();
       setData(response);
-      localStorage.setItem("my_profile", JSON.stringify(response));
+      localStorage.setItem("my_id", String(response.id));
     };
     GetInfo();
   }, []);

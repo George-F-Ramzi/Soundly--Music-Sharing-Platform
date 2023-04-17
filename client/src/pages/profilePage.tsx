@@ -3,6 +3,7 @@ import { IArtist, ISongCard } from "../lib/types.def";
 import { Suspense } from "react";
 import SongsSection from "../Components/songsSection";
 import Loading from "../ComponentHelper/loading";
+import IsFollowed from "../ComponentHelper/isFollowed";
 
 interface ReturnDefer {
   data: (id: string) => Promise<ISongCard[]>;
@@ -12,7 +13,7 @@ function ProfilePage() {
   const { data } = useLoaderData() as ReturnDefer;
   const location = useLocation();
   let profile: IArtist = location.state.profile;
-  let my_profile: IArtist = JSON.parse(localStorage.getItem("my_profile")!);
+  let my_id = Number(localStorage.getItem("my_id"));
 
   return (
     <div className="mt-16 pb-36 text-white">
@@ -35,6 +36,7 @@ function ProfilePage() {
             {profile.songs_uploaded_number}:Songs
           </p>
         </div>
+        <IsFollowed id={profile.id} />
       </div>
       <Suspense fallback={<Loading />}>
         <Await resolve={data}>

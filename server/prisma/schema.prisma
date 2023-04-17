@@ -45,11 +45,11 @@ model Song {
 }
 
 model Follower {
-  id    Int     @id @default(autoincrement())
   artist Artist  @relation("artist_id",fields: [artist_id], references: [id])
   artist_id Int
   fan Artist  @relation("fan_id",fields: [ fan_id], references: [id])
   fan_id Int
+  @@id([artist_id,fan_id])
 }
 
 model Comment {
@@ -62,11 +62,11 @@ model Comment {
 }
 
 model Like {
-  id    Int     @id @default(autoincrement())
   fan Artist  @relation(fields: [fan_id], references: [id])
   fan_id Int
   song Song  @relation(fields: [song_id], references: [id])
   song_id Int
+  @@id([song_id,fan_id])
 }
 
 model Notification {

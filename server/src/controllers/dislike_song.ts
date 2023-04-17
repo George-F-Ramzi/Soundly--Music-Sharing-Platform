@@ -6,16 +6,8 @@ export default async function DislikeSong(req: Request, res: Response) {
   let song_id: number = Number(req.params.song_id);
 
   try {
-    let like_row = await prisma_client.like.findFirst({
-      where: { song_id, fan_id: my_id },
-      select: { id: true },
-    });
-
-    if (like_row === null)
-      return res.status(400).send("Something Wrong Happen");
-
     await prisma_client.like.delete({
-      where: { id: like_row.id },
+      where: { song_id_fan_id: { fan_id: my_id, song_id } },
     });
 
     await prisma_client.song.update({

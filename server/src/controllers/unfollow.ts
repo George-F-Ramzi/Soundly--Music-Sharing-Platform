@@ -6,16 +6,10 @@ export default async function UnFollow(req: Request, res: Response) {
   let artist_id: number = Number(req.params.artist_id);
 
   try {
-    let follower_row = await prisma_client.follower.findFirst({
-      where: { fan_id: my_id, artist_id },
-      select: { id: true },
+    await prisma_client.follower.delete({
+      where: { artist_id_fan_id: { artist_id, fan_id: my_id } },
     });
 
-    if (follower_row === null) {
-      return res.status(400).json("You don't follow this user");
-    }
-
-    await prisma_client.follower.delete({ where: { id: follower_row.id } });
     await prisma_client.artist.update({
       where: { id: my_id },
       data: { following: { decrement: 1 } },

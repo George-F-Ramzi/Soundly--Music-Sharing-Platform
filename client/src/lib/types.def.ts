@@ -36,3 +36,11 @@ export interface HomePageType {
 export interface ContextPlayerType {
   setSong?: (song: ISongCard) => void;
 }
+
+export interface IFollowed {
+  indicator: { artist_id: number; fan_id: number } | null;
+}
+
+export interface ILiked {
+  indicator: { song_id: number; fan_id: number } | null;
+}

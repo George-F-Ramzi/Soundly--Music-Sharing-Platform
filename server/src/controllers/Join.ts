@@ -17,18 +17,14 @@ export default async function Join(req: Request, res: Response) {
 
   const { email, password, username }: JoinForm = req.body;
 
-  try {
-    let artist = await prisma_client.artist.findFirst({ where: { email } });
-    if (artist !== null) return res.status(400).send("Email ALready Joined");
+  let artist = await prisma_client.artist.findFirst({ where: { email } });
+  if (artist !== null) return res.status(400).send("Email ALready Joined");
 
-    let hashed_pass: string = await hashing.hash(password, 10);
-    let { id } = await prisma_client.artist.create({
-      data: { email, password: hashed_pass, username },
-    });
+  let hashed_pass: string = await hashing.hash(password, 10);
+  let { id } = await prisma_client.artist.create({
+    data: { email, password: hashed_pass, username },
+  });
 
-    let token = jwt.sign({ id }, process.env.JWT_PASS!);
-    res.status(200).header({ "x-auth-token": token }).send("joining Done");
-  } catch (error) {
-    res.json(error);
-  }
+  let token = jwt.sign({ id }, process.env.JWT_PASS!);
+  res.status(200).header({ "x-auth-token": token }).send("joining Done");
 }

@@ -26,18 +26,17 @@ function IsFollowed({ id }: { id: number }) {
       </button>
     );
 
-  if (!followed)
-    return (
-      <button
-        onClick={async () => {
-          await Follow(id);
-          setFollowed(true);
-        }}
-        className="mt-16 w-full bg-gradient1 text-black font-bold p-4 rounded mb-8"
-      >
-        Follow
-      </button>
-    );
+  return (
+    <button
+      onClick={async () => {
+        await Follow(id);
+        setFollowed(true);
+      }}
+      className="mt-16 w-full bg-gradient1 text-black font-bold p-4 rounded mb-8"
+    >
+      Follow
+    </button>
+  );
 }
 
 export default IsFollowed;

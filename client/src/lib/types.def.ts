@@ -44,3 +44,11 @@ export interface IFollowed {
 export interface ILiked {
   indicator: { song_id: number; fan_id: number } | null;
 }
+
+export interface IComment {
+  id: number;
+  artist_id: number;
+  song_id: number;
+  details: string;
+  artist: IArtist;
+}

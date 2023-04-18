@@ -29,7 +29,7 @@ export default async function Comment(req: Request, res: Response) {
     await prisma_client.comment.create({
       data: {
         details,
-        artist_id: song_row.artist_id,
+        artist_id: my_id,
         song_id,
       },
     });

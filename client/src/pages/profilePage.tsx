@@ -36,7 +36,7 @@ function ProfilePage() {
             {profile.songs_uploaded_number}:Songs
           </p>
         </div>
-        <IsFollowed id={profile.id} />
+        {my_id == profile.id ? "" : <IsFollowed id={profile.id} />}
       </div>
       <Suspense fallback={<Loading />}>
         <Await resolve={data}>

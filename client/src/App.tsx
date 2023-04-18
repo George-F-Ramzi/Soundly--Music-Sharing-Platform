@@ -1,5 +1,10 @@
 import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
-import { HomePageData, InboxData, UploadedSongs } from "./api/authorization";
+import {
+  GetComments,
+  HomePageData,
+  InboxData,
+  UploadedSongs,
+} from "./api/authorization";
 import LandingPage from "./pages/landingPage";
 import HomePage from "./pages/homePage";
 import NavBar from "./Components/navBar";
@@ -9,7 +14,7 @@ import ErrorPage from "./pages/errorPage";
 import Inbox from "./pages/inbox";
 import UploadPage from "./pages/uploadPage";
 import ProfilePage from "./pages/profilePage";
-// import SongPage from "./pages/songPage";
+import SongPage from "./pages/songPage";
 
 function App() {
   const AppLayout = () => (
@@ -51,13 +56,13 @@ function App() {
             return defer({ data: UploadedSongs(params.id!) });
           },
         },
-        // {
-        //   path: "/song/:id",
-        //   element: <SongPage />,
-        //   loader: async ({ params }) => {
-        //     return defer({ data: GetProfileData(params.id!) });
-        //   },
-        // },
+        {
+          path: "/song/:id",
+          element: <SongPage />,
+          loader: async ({ params }) => {
+            return defer({ data: GetComments(params.id!) });
+          },
+        },
       ],
     },
   ]);

@@ -1,7 +1,9 @@
 import {
   HomePageType,
   IArtist,
+  IComment,
   IFollowed,
+  ILiked,
   ISongCard,
   InboxCardType,
 } from "../lib/types.def";
@@ -79,16 +81,43 @@ export const UploadedSongs = async (id: string) => {
   return data;
 };
 
-export const Like = async (songId: string) => {
+export const Like = async (songId: number) => {
   await fetch(`${server}/like/${songId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
 };
 
-export const Dislike = async (songId: string) => {
+export const Dislike = async (songId: number) => {
   await fetch(`${server}/dislike/${songId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
+
+export const IsLikedPoint = async (userId: number): Promise<ILiked> => {
+  let response = await fetch(`${server}/is_liked/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let result: ILiked = await response.json();
+  return result;
+};
+
+export const GetComments = async (id: string): Promise<IComment[]> => {
+  let response: Response = await fetch(`${server}/comments/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<IComment[]> = await response.json();
+  return data;
+};
+
+export const PostComment = async (data: FormData, id: number) => {
+  let value = { details: data.get("details") };
+  await fetch(`${server}/comment/${id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+    body: JSON.stringify(value),
   });
 };

@@ -52,3 +52,8 @@ export interface IComment {
   details: string;
   artist: IArtist;
 }
+
+export interface SearchPageType {
+  songs: ISongCard[];
+  artists: IArtist[];
+}

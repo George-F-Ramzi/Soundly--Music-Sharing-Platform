@@ -6,6 +6,7 @@ import {
   ILiked,
   ISongCard,
   InboxCardType,
+  SearchPageType,
 } from "../lib/types.def";
 
 let server = "http://localhost:3999";
@@ -128,5 +129,14 @@ export const GetLikedSongs = async (): Promise<ISongCard[]> => {
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
   let data: Promise<ISongCard[]> = await response.json();
+  return data;
+};
+
+export const SearchPoint = async (value: string): Promise<SearchPageType> => {
+  let response: Response = await fetch(`${server}/search/${value}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<SearchPageType> = await response.json();
   return data;
 };

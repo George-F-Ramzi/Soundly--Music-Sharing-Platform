@@ -4,6 +4,7 @@ import {
   GetLikedSongs,
   HomePageData,
   InboxData,
+  SearchPoint,
   UploadedSongs,
 } from "./api/authorization";
 import LandingPage from "./pages/landingPage";
@@ -17,6 +18,7 @@ import UploadPage from "./pages/uploadPage";
 import ProfilePage from "./pages/profilePage";
 import SongPage from "./pages/songPage";
 import LikedPage from "./pages/liked_page";
+import SearchPage from "./pages/search_page";
 
 function App() {
   const AppLayout = () => (
@@ -70,6 +72,13 @@ function App() {
           element: <LikedPage />,
           loader: async () => {
             return defer({ data: GetLikedSongs() });
+          },
+        },
+        {
+          path: "/search/:value",
+          element: <SearchPage />,
+          loader: async ({ params }) => {
+            return defer({ data: SearchPoint(params.value!) });
           },
         },
       ],

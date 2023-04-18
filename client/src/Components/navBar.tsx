@@ -10,6 +10,7 @@ import { IArtist } from "../lib/types.def";
 
 function NavBar() {
   const [data, setData] = useState<IArtist>();
+  const [Ivalue, setIvalue] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     const GetInfo = async () => {
@@ -29,16 +30,26 @@ function NavBar() {
       >
         Soundly
       </Link>
-      <div className="w-[300px] mx-4 h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
-        <input
-          placeholder="Search"
-          className="w-full h-full  rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
-        />
-        <RiSearch2Line
-          size={"24px"}
-          className="absolute right-4 top-[10px] text-gray-300 "
-        />
-      </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate(`/search/${Ivalue}`);
+        }}
+      >
+        <div className="w-[300px] mx-4 h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
+          <input
+            placeholder="Search"
+            className="w-full h-full  rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
+            value={Ivalue}
+            onChange={(e) => setIvalue(e.currentTarget.value)}
+          />
+
+          <RiSearch2Line
+            size={"24px"}
+            className="absolute right-4 top-[10px] text-gray-300 "
+          />
+        </div>
+      </form>
       <div className="flex tablet:hidden">
         <Link
           to={"/upload"}

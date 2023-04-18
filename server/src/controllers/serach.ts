@@ -5,7 +5,7 @@ export default async function Search(req: Request, res: Response) {
   let query: string = req.params.query;
 
   try {
-    let artist = await prisma_client.artist.findMany({
+    let artists = await prisma_client.artist.findMany({
       where: { username: { search: `${query}*` } },
       select: {
         id: true,
@@ -33,7 +33,7 @@ export default async function Search(req: Request, res: Response) {
       },
     });
 
-    let result = { songs, artist };
+    let result = { songs, artists };
 
     return res.status(200).json(result);
   } catch (error) {

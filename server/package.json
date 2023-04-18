@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "express server for music sharing platform",
   "main": "index.js",
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "engines": {
     "node": "18.x"
   },

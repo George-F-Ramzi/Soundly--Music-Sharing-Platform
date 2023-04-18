@@ -5,7 +5,7 @@ import {
   IFollowed,
   ILiked,
   ISongCard,
-  InboxCardType,
+  InboxPageType,
   SearchPageType,
 } from "../lib/types.def";
 
@@ -54,12 +54,12 @@ export const IsFollowedPoint = async (userId: number): Promise<IFollowed> => {
   return result;
 };
 
-export const InboxData = async (): Promise<InboxCardType[]> => {
+export const InboxData = async (): Promise<InboxPageType[]> => {
   let response: Response = await fetch(`${server}/inbox`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
-  let data: Promise<InboxCardType[]> = await response.json();
+  let data: Promise<InboxPageType[]> = await response.json();
   return data;
 };
 

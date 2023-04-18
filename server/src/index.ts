@@ -12,6 +12,10 @@ app.use(
   cors({
     exposedHeaders: "x-auth-token",
     methods: "GET,PUT,POST,DELETE",
+    origin: [
+      "https://soundly-music-sharing-platform.vercel.app",
+      "https://localhost:5173",
+    ],
   })
 );
 

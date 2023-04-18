@@ -57,3 +57,13 @@ export interface SearchPageType {
   songs: ISongCard[];
   artists: IArtist[];
 }
+
+export interface InboxPageType {
+  id: number;
+  trigger_id: number;
+  nottifer_id: number;
+  song_id: number;
+  message_detail: string;
+  nottifer: IArtist;
+  song: ISongCard;
+}

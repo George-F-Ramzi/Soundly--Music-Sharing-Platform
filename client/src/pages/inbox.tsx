@@ -1,11 +1,11 @@
 import { Await, useLoaderData } from "react-router-dom";
-import { InboxCardType } from "../lib/types.def";
+import { InboxPageType } from "../lib/types.def";
 import InboxCard from "../Components/inboxCard";
 import { Suspense } from "react";
 import Loading from "../ComponentHelper/loading";
 
 interface ReturnDefer {
-  data: () => Promise<InboxCardType[]>;
+  data: () => Promise<InboxPageType[]>;
 }
 
 function Inbox() {
@@ -15,7 +15,7 @@ function Inbox() {
       <h5 className="text-white mt-12 mb-8 font-bold text-xl">Notifications</h5>
       <Suspense fallback={<Loading />}>
         <Await resolve={data}>
-          {(all: InboxCardType[]) => (
+          {(all: InboxPageType[]) => (
             <>
               {Array.isArray(all) &&
                 all.map((el, index) => {

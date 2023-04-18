@@ -9,7 +9,7 @@ import {
   SearchPageType,
 } from "../lib/types.def";
 
-let server = "http://localhost:3999";
+let server = "https://soundly-nodejs.vercel.app/";
 
 let token = localStorage.getItem("token")!;
 

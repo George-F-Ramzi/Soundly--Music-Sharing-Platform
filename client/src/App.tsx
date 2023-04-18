@@ -1,6 +1,7 @@
 import { createBrowserRouter, defer, RouterProvider } from "react-router-dom";
 import {
   GetComments,
+  GetLikedSongs,
   HomePageData,
   InboxData,
   UploadedSongs,
@@ -15,6 +16,7 @@ import Inbox from "./pages/inbox";
 import UploadPage from "./pages/uploadPage";
 import ProfilePage from "./pages/profilePage";
 import SongPage from "./pages/songPage";
+import LikedPage from "./pages/liked_page";
 
 function App() {
   const AppLayout = () => (
@@ -61,6 +63,13 @@ function App() {
           element: <SongPage />,
           loader: async ({ params }) => {
             return defer({ data: GetComments(params.id!) });
+          },
+        },
+        {
+          path: "/liked",
+          element: <LikedPage />,
+          loader: async () => {
+            return defer({ data: GetLikedSongs() });
           },
         },
       ],

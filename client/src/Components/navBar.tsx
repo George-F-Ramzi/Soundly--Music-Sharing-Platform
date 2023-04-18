@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { RiSearch2Line, RiInboxArchiveLine } from "react-icons/ri";
+import {
+  RiSearch2Line,
+  RiInboxArchiveLine,
+  RiHeart2Line,
+} from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { Me } from "../api/authorization";
 import { IArtist } from "../lib/types.def";
@@ -25,10 +29,10 @@ function NavBar() {
       >
         Soundly
       </Link>
-      <div className="w-[300px] h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
+      <div className="w-[300px] mx-4 h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
         <input
           placeholder="Search"
-          className="w-full h-full rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
+          className="w-full h-full  rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
         />
         <RiSearch2Line
           size={"24px"}
@@ -47,6 +51,12 @@ function NavBar() {
           to={"/inbox"}
         >
           <RiInboxArchiveLine size={"26px"} />
+        </Link>
+        <Link
+          className="h-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
+          to={"/liked"}
+        >
+          <RiHeart2Line size={"26px"} />
         </Link>
         <div
           onClick={() =>

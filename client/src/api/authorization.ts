@@ -121,3 +121,12 @@ export const PostComment = async (data: FormData, id: number) => {
     body: JSON.stringify(value),
   });
 };
+
+export const GetLikedSongs = async (): Promise<ISongCard[]> => {
+  let response: Response = await fetch(`${server}/liked_songs`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<ISongCard[]> = await response.json();
+  return data;
+};

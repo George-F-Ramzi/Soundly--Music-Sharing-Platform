@@ -6,9 +6,15 @@ interface Args {
   form: FormData;
   navigate: NavigateFunction;
   setError: (value: string) => void;
+  setLoading: (value: boolean) => void;
 }
 
-async function HandleJoin({ form, setError, navigate }: Args): Promise<void> {
+async function HandleJoin({
+  form,
+  setError,
+  navigate,
+  setLoading,
+}: Args): Promise<void> {
   let username: FormDataEntryValue = form.get("username")!;
   let email: FormDataEntryValue = form.get("email")!;
   let password: FormDataEntryValue = form.get("password")!;
@@ -17,7 +23,10 @@ async function HandleJoin({ form, setError, navigate }: Args): Promise<void> {
     let data: JoinForm = { username, email, password };
     let message: string = await JoinPoint(data);
     if (message === "Done") navigate("/home", { replace: true });
-    else setError(message);
+    else {
+      setLoading(false);
+      setError(message);
+    }
   }
 }
 

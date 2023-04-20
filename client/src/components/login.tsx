@@ -7,6 +7,7 @@ import FormError from "../lib/form_error";
 const Login = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const FastLogin = () => {
     let token =
@@ -20,8 +21,9 @@ const Login = ({ hide }: { hide: (check: boolean) => void }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          setLoading(true);
           let form: FormData = new FormData(e.currentTarget);
-          HandleLogin({ form, setError, navigate });
+          HandleLogin({ form, setError, navigate, setLoading });
         }}
         className="max-w-[384px] w-[384px]"
       >
@@ -50,12 +52,19 @@ const Login = ({ hide }: { hide: (check: boolean) => void }) => {
         />
         {error.includes("password") ? <FormError text={error} /> : ""}
 
-        <button
-          type="submit"
-          className="bg-gradient1 mt-[48px] w-full h-[48px] font-bold drop-shadow-md rounded-[4px]"
-        >
-          Join
-        </button>
+        {!loading ? (
+          <button
+            type="submit"
+            className="bg-gradient1 mt-[48px] w-full h-[48px] font-bold drop-shadow-md rounded-[4px]"
+          >
+            Join
+          </button>
+        ) : (
+          <div className="bg-gradient1 flex items-center justify-center mt-[48px] w-full h-[48px] font-bold drop-shadow-md rounded-[4px]">
+            Loading...
+          </div>
+        )}
+
         <p className="mt-[48px] text-center text-white">
           You don't have account?{" "}
           <span

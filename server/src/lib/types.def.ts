@@ -1,4 +1,4 @@
-import { Song } from "@prisma/client";
+import { Comment, Song } from "@prisma/client";
 
 export interface JoinForm {
   username: string;
@@ -29,15 +29,8 @@ export interface IArtistPage {
   songs: Song[];
 }
 
-export interface IComment {
-  id: number;
-  artist_id: number;
-  song_id: number;
-  details: string;
-}
-
 export interface ISongPage {
   info: Song;
   liked: boolean;
-  comments: IComment[];
+  comments: Comment[];
 }

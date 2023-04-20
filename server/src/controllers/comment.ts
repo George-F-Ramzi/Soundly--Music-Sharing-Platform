@@ -17,33 +17,28 @@ export default async function Comment(req: Request, res: Response) {
     return res.status(400).json(error.message);
   }
 
-  try {
-    let song_row = await prisma_client.song.findUnique({
-      where: { id: song_id },
-      select: { artist_id: true },
-    });
+  let song_row = await prisma_client.song.findUnique({
+    where: { id: song_id },
+    select: { artist_id: true },
+  });
 
-    if (song_row === null)
-      return res.status(400).send("something wrong happen");
+  if (song_row === null) return res.status(400).send("something wrong happen");
 
-    await prisma_client.comment.create({
-      data: {
-        details,
-        artist_id: my_id,
-        song_id,
-      },
-    });
+  await prisma_client.comment.create({
+    data: {
+      details,
+      artist_id: my_id,
+      song_id,
+    },
+  });
 
-    await prisma_client.notification.create({
-      data: {
-        message_detail: "Commented on your song",
-        nottifer_id: song_row.artist_id,
-        trigger_id: my_id,
-        song_id,
-      },
-    });
-    res.status(200).send("Commenting Done");
-  } catch (error) {
-    return res.status(400).json("Something Wrong Happen");
-  }
+  await prisma_client.notification.create({
+    data: {
+      message_detail: "Commented on your song",
+      nottifer_id: song_row.artist_id,
+      trigger_id: my_id,
+      song_id,
+    },
+  });
+  res.status(200).send("Commenting Done");
 }

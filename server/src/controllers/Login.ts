@@ -16,19 +16,15 @@ export default async function Login(req: Request, res: Response) {
 
   const { email, password }: LoginForm = req.body;
 
-  try {
-    let artist = await prisma_client.artist.findFirst({
-      where: { email },
-      select: { email: true, password: true, id: true },
-    });
-    if (artist === null) return res.status(400).send("Email Doesn't Exist");
+  let artist = await prisma_client.artist.findFirst({
+    where: { email },
+    select: { email: true, password: true, id: true },
+  });
+  if (artist === null) return res.status(400).send("Email Doesn't Exist");
 
-    let hashed_pass: boolean = await hashing.compare(password, artist.password);
-    if (!hashed_pass) return res.status(400).send("Invalid Password");
+  let hashed_pass: boolean = await hashing.compare(password, artist.password);
+  if (!hashed_pass) return res.status(400).send("Invalid Password");
 
-    let token = jwt.sign({ id: artist.id }, process.env.JWT_PASS!);
-    res.status(200).header({ "x-auth-token": token }).send("You Can Login");
-  } catch (error) {
-    res.json(error);
-  }
+  let token = jwt.sign({ id: artist.id }, process.env.JWT_PASS!);
+  res.status(200).header({ "x-auth-token": token }).send("You Can Login");
 }

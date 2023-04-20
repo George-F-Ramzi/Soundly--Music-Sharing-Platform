@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { DeleteUploaded, Uploader } from "../lib/global";
 import { UploadedFiles } from "../lib/types.def";
 import Joi, { Schema } from "joi";
+import cloudinary from "../lib/cloudinary";
+import prisma_client from "../lib/database";
 
 export default async function Upload(req: Request, res: Response) {
   const { name }: { name: string } = req.body;
@@ -32,4 +33,62 @@ export default async function Upload(req: Request, res: Response) {
     DeleteUploaded({ song_id, cover_id });
     return res.status(400).json("Something Wrong Happen");
   }
+}
+
+//
+
+interface DeleteUploadedArgs {
+  song_id: string;
+  cover_id: string;
+}
+
+async function DeleteUploaded({ song_id, cover_id }: DeleteUploadedArgs) {
+  await cloudinary.uploader.destroy(song_id, { resource_type: "video" });
+  await cloudinary.uploader.destroy(cover_id);
+}
+
+//
+
+interface UploaderArgs {
+  id: number;
+  song_url: string;
+  cover_url: string;
+  name: string;
+}
+
+export async function Uploader({
+  id,
+  song_url,
+  name,
+  cover_url,
+}: UploaderArgs) {
+  await prisma_client.song.create({
+    data: {
+      song_name: name,
+      song_cover_url: cover_url,
+      song_file_url: song_url,
+      artist_id: id,
+    },
+  });
+  await prisma_client.artist.update({
+    data: { songs_uploaded_number: { increment: 1 } },
+    where: { id },
+  });
+
+  let followers = await prisma_client.follower.findMany({
+    where: { artist_id: id },
+    select: { fan_id: true },
+  });
+
+  let data = followers.map((f) => {
+    return {
+      message_detail: "Uploaded A New Song",
+      nottifer_id: f.fan_id,
+      trigger_id: id,
+    };
+  });
+
+  await prisma_client.notification.createMany({
+    data,
+  });
 }

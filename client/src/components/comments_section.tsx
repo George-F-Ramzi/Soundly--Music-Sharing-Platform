@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IComment, IME } from "../lib/types.def";
 import { PostComment } from "../api/authorization";
 import { Link } from "react-router-dom";
+import NothingHere from "../lib/nothing_here";
 
 function CommentsSection({ data, id }: { data: IComment[]; id: number }) {
   const [comments, setComments] = useState<IComment[]>([]);
@@ -37,7 +38,7 @@ function CommentsSection({ data, id }: { data: IComment[]; id: number }) {
         className="mt-20 w-full"
       >
         <input
-          className="w-full h-16 rounded-full font-bold bg-gray-800 p-4 text-white"
+          className="w-full h-16 border border-gray-500 rounded-full font-bold bg-gray-800 p-4 text-white"
           placeholder="what's on your mind?"
           required
           minLength={1}
@@ -46,11 +47,14 @@ function CommentsSection({ data, id }: { data: IComment[]; id: number }) {
           onChange={(e) => setInput(e.currentTarget.value)}
         />
       </form>
-      {Array.isArray(comments)
-        ? comments.map((c, i) => {
-            return <CommentCard key={i} data={c} />;
-          })
-        : ""}
+      <h5 className="my-8 font-bold text-xl">Comments</h5>
+      {Array.isArray(comments) && data.length ? (
+        comments.map((c, i) => {
+          return <CommentCard key={i} data={c} />;
+        })
+      ) : (
+        <NothingHere />
+      )}
     </div>
   );
 }

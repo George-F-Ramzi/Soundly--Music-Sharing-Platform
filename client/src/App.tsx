@@ -10,11 +10,13 @@ import {
   GetLikedSongs,
   GetSongData,
   HomePageData,
+  SearchPoint,
 } from "./api/authorization";
 import LikedPage from "./pages/liked_page";
 import UploadPage from "./pages/upload";
 import ArtistPage from "./pages/artist_page";
 import SongPage from "./pages/song_page";
+import SearchPage from "./pages/search_page";
 
 function App() {
   const AppLayout = () => (
@@ -60,6 +62,13 @@ function App() {
           element: <SongPage />,
           loader: async ({ params }) => {
             return defer({ data: GetSongData(params.id!) });
+          },
+        },
+        {
+          path: "/search/:value",
+          element: <SearchPage />,
+          loader: async ({ params }) => {
+            return defer({ data: SearchPoint(params.value!) });
           },
         },
       ],

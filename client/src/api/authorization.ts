@@ -4,6 +4,7 @@ import {
   IME,
   ISongCard,
   ISongPage,
+  SearchPageType,
 } from "../lib/types.def";
 
 let server = "http://localhost:3999";
@@ -99,4 +100,13 @@ export const PostComment = async (data: FormData, id: number) => {
     headers: { "Content-Type": "application/json", "x-auth-token": token },
     body: JSON.stringify(value),
   });
+};
+
+export const SearchPoint = async (value: string): Promise<SearchPageType> => {
+  let response: Response = await fetch(`${server}/search/${value}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<SearchPageType> = await response.json();
+  return data;
 };

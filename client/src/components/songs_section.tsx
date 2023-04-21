@@ -1,3 +1,4 @@
+import NothingHere from "../lib/nothing_here";
 import { ISongCard } from "../lib/types.def";
 import SongCard from "./song_card";
 
@@ -10,10 +11,13 @@ function SongsSection({ title, data }: Prop) {
     <div className="mt-10">
       <h5 className="text-white font-bold text-2xl mb-8">{title}</h5>
       <div className="grid gap-8 grid-cols-cards ">
-        {Array.isArray(data) &&
+        {Array.isArray(data) && data.length ? (
           data.map((song, index) => {
             return <SongCard key={index} data={song} />;
-          })}
+          })
+        ) : (
+          <NothingHere />
+        )}
       </div>
     </div>
   );

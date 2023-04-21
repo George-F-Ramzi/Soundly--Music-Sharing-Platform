@@ -72,3 +72,8 @@ export interface IME {
   photo_url: string;
   username: string;
 }
+
+export interface SearchPageType {
+  artists: IArtistCard[];
+  songs: ISongCard[];
+}

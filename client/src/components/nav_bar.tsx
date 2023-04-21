@@ -12,7 +12,6 @@ function NavBar() {
     const GetInfo = async () => {
       let response: IME = await Me();
       setData(response);
-      localStorage.setItem("my_id", String(response.id));
       localStorage.setItem("me", JSON.stringify(response));
     };
     GetInfo();

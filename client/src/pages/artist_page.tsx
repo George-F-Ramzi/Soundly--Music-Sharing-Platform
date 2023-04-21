@@ -1,6 +1,6 @@
 import { Await, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
-import { IArtistPage } from "../lib/types.def";
+import { IArtistPage, IME } from "../lib/types.def";
 import SongsSection from "../components/songs_section";
 import Loading from "../lib/loading";
 import SetFollow from "../components/set_follow";
@@ -22,7 +22,7 @@ export default function ArtistPage() {
 }
 
 function PageBody({ data }: { data: IArtistPage }) {
-  let my_id = Number(localStorage.getItem("my_id"));
+  let me: IME = JSON.parse(localStorage.getItem("me")!);
 
   return (
     <div className="mt-16 pb-36 text-white">
@@ -45,7 +45,7 @@ function PageBody({ data }: { data: IArtistPage }) {
             {data.info.songs_uploaded_number}:Songs
           </p>
         </div>
-        {my_id == data.info.id ? (
+        {me.id == data.info.id ? (
           ""
         ) : (
           <SetFollow id={data.info.id} followed={data.followed} />

@@ -8,7 +8,7 @@ import {
   SearchPageType,
 } from "../lib/types.def";
 
-let server = "http://localhost:3999";
+let server = "http://soundly-nodejs.vercel.app";
 let token = localStorage.getItem("token")!;
 
 export const Me = async (): Promise<IME> => {

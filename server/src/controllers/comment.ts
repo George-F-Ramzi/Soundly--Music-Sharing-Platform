@@ -32,6 +32,10 @@ export default async function Comment(req: Request, res: Response) {
     },
   });
 
+  if (my_id === song_row.artist_id) {
+    return res.status(200).send("Commenting Done");
+  }
+
   await prisma_client.notification.create({
     data: {
       message_detail: "Commented on your song",

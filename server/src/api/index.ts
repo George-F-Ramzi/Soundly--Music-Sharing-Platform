@@ -3,8 +3,8 @@ dotenv.config();
 import Responserror from "responserror";
 import express, { Express } from "express";
 import cors from "cors";
-import authentication_route from "./routes/authentication_route";
-import authorization_route from "./routes/authorization_route";
+import authentication_route from "../routes/authentication_route";
+import authorization_route from "../routes/authorization_route";
 
 const app: Express = express();
 let { errorHandler } = new Responserror();

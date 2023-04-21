@@ -4,6 +4,7 @@ import {
   IME,
   ISongCard,
   ISongPage,
+  InboxCardType,
   SearchPageType,
 } from "../lib/types.def";
 
@@ -108,5 +109,14 @@ export const SearchPoint = async (value: string): Promise<SearchPageType> => {
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
   let data: Promise<SearchPageType> = await response.json();
+  return data;
+};
+
+export const InboxData = async (): Promise<InboxCardType[]> => {
+  let response: Response = await fetch(`${server}/inbox`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<InboxCardType[]> = await response.json();
   return data;
 };

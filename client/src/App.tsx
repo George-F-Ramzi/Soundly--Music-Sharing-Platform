@@ -10,6 +10,7 @@ import {
   GetLikedSongs,
   GetSongData,
   HomePageData,
+  InboxData,
   SearchPoint,
 } from "./api/authorization";
 import LikedPage from "./pages/liked_page";
@@ -17,6 +18,7 @@ import UploadPage from "./pages/upload";
 import ArtistPage from "./pages/artist_page";
 import SongPage from "./pages/song_page";
 import SearchPage from "./pages/search_page";
+import InboxPage from "./pages/inbox_page";
 
 function App() {
   const AppLayout = () => (
@@ -69,6 +71,13 @@ function App() {
           element: <SearchPage />,
           loader: async ({ params }) => {
             return defer({ data: SearchPoint(params.value!) });
+          },
+        },
+        {
+          path: "/inbox",
+          element: <InboxPage />,
+          loader: async () => {
+            return defer({ data: InboxData() });
           },
         },
       ],

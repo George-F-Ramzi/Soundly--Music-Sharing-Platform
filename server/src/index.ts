@@ -15,7 +15,7 @@ app.use(
     exposedHeaders: "x-auth-token",
     methods: "GET,PUT,POST,DELETE",
     origin: [
-      "http://soundly-music-sharing-platform.vercel.app",
+      "https://soundly-music-sharing-platform.vercel.app",
       "http://localhost:5173",
     ],
   })

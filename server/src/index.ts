@@ -24,6 +24,4 @@ app.use(
 app.use(authentication_route, errorHandler);
 app.use(authorization_route, errorHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log("Server Start At: " + process.env.PORT);
-});
+app.listen(process.env.PORT, () => {});

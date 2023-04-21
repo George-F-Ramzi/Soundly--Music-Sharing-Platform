@@ -1,4 +1,4 @@
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
 import { InboxCardType } from "../lib/types.def";
 import Loading from "../lib/loading";
@@ -35,12 +35,19 @@ export default function InboxPage() {
 function InboxCard({ data }: { data: InboxCardType }) {
   return (
     <div className="mb-8 flex text-white">
-      <img
-        src={data.nottifer.photo_url}
-        className="w-12 min-w-[48px]  h-12 rounded-full"
-      />
+      <Link to={`/artist/${data.trigger_id}`}>
+        <img
+          src={data.nottifer.photo_url}
+          className="w-12 min-w-[48px]  h-12 rounded-full"
+        />
+      </Link>
       <div className="grow ml-4">
-        <p className="text-gray-300 tablet:text-sm">{data.nottifer.username}</p>
+        <Link
+          to={`/artist/${data.trigger_id}`}
+          className="text-gray-300 tablet:text-sm"
+        >
+          {data.nottifer.username}
+        </Link>
         <h5 className="font-bold text-lg">{data.message_detail}</h5>
       </div>
     </div>

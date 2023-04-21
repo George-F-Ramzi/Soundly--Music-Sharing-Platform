@@ -2,9 +2,7 @@ import { Request, Response } from "express";
 import prisma_client from "../lib/database";
 
 export default async function LikeSong(req: Request, res: Response) {
-  if (!req.user) return;
-
-  let my_id: number = req.user;
+  let my_id: number = req.user!;
   let song_id: number = Number(req.params.song_id);
 
   let song_row = await prisma_client.song.findUnique({

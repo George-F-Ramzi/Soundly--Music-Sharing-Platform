@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-app.use("/api", authentication_route, errorHandler);
-app.use("/api", authorization_route, errorHandler);
+app.use(authentication_route, errorHandler);
+app.use(authorization_route, errorHandler);
 
 app.listen(process.env.PORT, () => {});

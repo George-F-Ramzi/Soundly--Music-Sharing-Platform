@@ -16,7 +16,7 @@
   "rewrites": [
     {
       "source": "build/api/(.*)",
-      "destination": "https://soundly-nodejs.vercel.app/"
+      "destination": "/"
     }
   ]
 }

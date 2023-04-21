@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "express server for music sharing platform",
   "main": "index.js",
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "engines": {
     "node": "18.x"
   },
@@ -15,8 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:dev": "npx nodemon",
-    "build": "./build && tsc",
-    "add-build": "git add build"
+    "build": "build && tsc"
   },
   "repository": {
     "type": "git",
@@ -40,7 +34,6 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "pre-commit": "^1.2.2",
     "responserror": "^1.0.1"
   },
   "devDependencies": {
@@ -52,7 +45,6 @@
     "@types/node": "^18.15.11",
     "nodemon": "^2.0.22",
     "prisma": "^4.12.0",
-    "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }

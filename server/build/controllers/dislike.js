@@ -40,41 +40,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
-function GetComments(req, res) {
+function DislikeSong(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var song_id, comments, error_1;
+        var my_id, song_id;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    my_id = req.user;
                     song_id = Number(req.params.song_id);
-                    _a.label = 1;
+                    return [4 /*yield*/, database_1.default.like.delete({
+                            where: { song_id_fan_id: { fan_id: my_id, song_id: song_id } },
+                        })];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, database_1.default.comment.findMany({
-                            where: { song_id: song_id },
-                            include: {
-                                artist: {
-                                    select: {
-                                        followers: true,
-                                        following: true,
-                                        photo_url: true,
-                                        songs_uploaded_number: true,
-                                        username: true,
-                                        id: true,
-                                    },
-                                },
-                            },
+                    _a.sent();
+                    return [4 /*yield*/, database_1.default.song.update({
+                            where: { id: song_id },
+                            data: { likes: { decrement: 1 } },
                         })];
                 case 2:
-                    comments = _a.sent();
-                    res.status(200).json(comments);
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 4: return [2 /*return*/];
+                    _a.sent();
+                    res.status(200).send("DisLike Done");
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = GetComments;
+exports.default = DislikeSong;

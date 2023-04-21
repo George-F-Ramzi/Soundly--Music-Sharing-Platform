@@ -39,8 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var global_1 = require("../lib/global");
+exports.Uploader = void 0;
 var joi_1 = __importDefault(require("joi"));
+var cloudinary_1 = __importDefault(require("../lib/cloudinary"));
+var database_1 = __importDefault(require("../lib/database"));
 function Upload(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var name, id, files, cover_url, song_url, cover_id, song_id, schema, error, error_1;
@@ -59,20 +61,20 @@ function Upload(req, res) {
                     });
                     error = schema.validate(req.body).error;
                     if (error) {
-                        (0, global_1.DeleteUploaded)({ song_id: song_id, cover_id: cover_id });
+                        DeleteUploaded({ song_id: song_id, cover_id: cover_id });
                         return [2 /*return*/, res.status(400).json(error.message)];
                     }
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, (0, global_1.Uploader)({ id: id, song_url: song_url, name: name, cover_url: cover_url })];
+                    return [4 /*yield*/, Uploader({ id: id, song_url: song_url, name: name, cover_url: cover_url })];
                 case 2:
                     _a.sent();
                     res.status(200).send("Uploading Done");
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
-                    (0, global_1.DeleteUploaded)({ song_id: song_id, cover_id: cover_id });
+                    DeleteUploaded({ song_id: song_id, cover_id: cover_id });
                     return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
                 case 4: return [2 /*return*/];
             }
@@ -80,3 +82,65 @@ function Upload(req, res) {
     });
 }
 exports.default = Upload;
+function DeleteUploaded(_a) {
+    var song_id = _a.song_id, cover_id = _a.cover_id;
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, cloudinary_1.default.uploader.destroy(song_id, { resource_type: "video" })];
+                case 1:
+                    _b.sent();
+                    return [4 /*yield*/, cloudinary_1.default.uploader.destroy(cover_id)];
+                case 2:
+                    _b.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function Uploader(_a) {
+    var id = _a.id, song_url = _a.song_url, name = _a.name, cover_url = _a.cover_url;
+    return __awaiter(this, void 0, void 0, function () {
+        var followers, data;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, database_1.default.song.create({
+                        data: {
+                            song_name: name,
+                            song_cover_url: cover_url,
+                            song_file_url: song_url,
+                            artist_id: id,
+                        },
+                    })];
+                case 1:
+                    _b.sent();
+                    return [4 /*yield*/, database_1.default.artist.update({
+                            data: { songs_uploaded_number: { increment: 1 } },
+                            where: { id: id },
+                        })];
+                case 2:
+                    _b.sent();
+                    return [4 /*yield*/, database_1.default.follower.findMany({
+                            where: { artist_id: id },
+                            select: { fan_id: true },
+                        })];
+                case 3:
+                    followers = _b.sent();
+                    data = followers.map(function (f) {
+                        return {
+                            message_detail: "Uploaded A New Song",
+                            nottifer_id: f.fan_id,
+                            trigger_id: id,
+                        };
+                    });
+                    return [4 /*yield*/, database_1.default.notification.createMany({
+                            data: data,
+                        })];
+                case 4:
+                    _b.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.Uploader = Uploader;

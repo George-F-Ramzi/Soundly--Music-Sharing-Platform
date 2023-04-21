@@ -40,41 +40,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
-function UploadedSongs(req, res) {
+function HomePageData(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var artist_id, songs, error_1;
+        var artists, discover, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    artist_id = Number(req.params.artist_id);
-                    _a.label = 1;
+                case 0: return [4 /*yield*/, database_1.default.artist.findMany({
+                        orderBy: { followers: "desc" },
+                        select: {
+                            id: true,
+                            followers: true,
+                            photo_url: true,
+                            username: true,
+                        },
+                        take: 9,
+                    })];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
+                    artists = _a.sent();
                     return [4 /*yield*/, database_1.default.song.findMany({
-                            where: { artist_id: artist_id },
-                            include: {
-                                artist: {
-                                    select: {
-                                        id: true,
-                                        followers: true,
-                                        photo_url: true,
-                                        username: true,
-                                        songs_uploaded_number: true,
-                                        following: true,
-                                    },
-                                },
-                            },
+                            orderBy: { likes: "desc" },
+                            include: { artist: { select: { username: true } } },
+                            take: 9,
                         })];
                 case 2:
-                    songs = _a.sent();
-                    res.status(200).json(songs);
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 4: return [2 /*return*/];
+                    discover = _a.sent();
+                    result = { artists: artists, discover: discover };
+                    res.status(200).json(result);
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = UploadedSongs;
+exports.default = HomePageData;

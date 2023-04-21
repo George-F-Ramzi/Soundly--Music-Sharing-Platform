@@ -42,14 +42,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
 function Search(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var query, artists, songs, result, error_1;
+        var query, artists, songs, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     query = req.params.query;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 4, , 5]);
                     return [4 /*yield*/, database_1.default.artist.findMany({
                             where: { username: { search: "".concat(query, "*") } },
                             select: {
@@ -57,35 +54,24 @@ function Search(req, res) {
                                 followers: true,
                                 photo_url: true,
                                 username: true,
-                                songs_uploaded_number: true,
-                                following: true,
                             },
                         })];
-                case 2:
+                case 1:
                     artists = _a.sent();
                     return [4 /*yield*/, database_1.default.song.findMany({
                             where: { song_name: { search: "".concat(query, "*") } },
                             include: {
                                 artist: {
                                     select: {
-                                        id: true,
-                                        followers: true,
-                                        photo_url: true,
                                         username: true,
-                                        songs_uploaded_number: true,
-                                        following: true,
                                     },
                                 },
                             },
                         })];
-                case 3:
+                case 2:
                     songs = _a.sent();
                     result = { songs: songs, artists: artists };
                     return [2 /*return*/, res.status(200).json(result)];
-                case 4:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json(error_1)];
-                case 5: return [2 /*return*/];
             }
         });
     });

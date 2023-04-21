@@ -42,25 +42,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
 function Me(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, result, error_1;
+        var my_id, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     my_id = req.user;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, database_1.default.artist.findUnique({
                             where: { id: my_id },
+                            select: { id: true, photo_url: true, username: true },
                         })];
-                case 2:
+                case 1:
                     result = _a.sent();
                     res.status(200).json(result);
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 4: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

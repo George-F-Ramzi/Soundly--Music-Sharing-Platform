@@ -42,33 +42,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
 function LikeSong(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, song_id, song_row, error_1;
+        var my_id, song_id, song_row;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     my_id = req.user;
                     song_id = Number(req.params.song_id);
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 6, , 7]);
                     return [4 /*yield*/, database_1.default.song.findUnique({
                             where: { id: song_id },
                             select: { artist_id: true },
                         })];
-                case 2:
+                case 1:
                     song_row = _a.sent();
                     if (song_row === null)
                         return [2 /*return*/, res.status(400).send("Something Wrong Happen")];
                     return [4 /*yield*/, database_1.default.like.create({
                             data: { fan_id: my_id, song_id: song_id },
                         })];
-                case 3:
+                case 2:
                     _a.sent();
                     return [4 /*yield*/, database_1.default.song.update({
                             where: { id: song_id },
                             data: { likes: { increment: 1 } },
                         })];
-                case 4:
+                case 3:
                     _a.sent();
                     return [4 /*yield*/, database_1.default.notification.create({
                             data: {
@@ -78,14 +75,10 @@ function LikeSong(req, res) {
                                 song_id: song_id,
                             },
                         })];
-                case 5:
+                case 4:
                     _a.sent();
                     res.status(200).send("Like Done");
-                    return [3 /*break*/, 7];
-                case 6:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).send("Something Wrong Happen")];
-                case 7: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

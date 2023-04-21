@@ -45,7 +45,7 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function Join(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var schema, error, _a, email, password, username, artist, hashed_pass, id, token, error_1;
+        var schema, error, _a, email, password, username, artist, hashed_pass, id, token;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -58,30 +58,22 @@ function Join(req, res) {
                     if (error)
                         return [2 /*return*/, res.status(400).send(error.message)];
                     _a = req.body, email = _a.email, password = _a.password, username = _a.username;
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 5, , 6]);
                     return [4 /*yield*/, database_1.default.artist.findFirst({ where: { email: email } })];
-                case 2:
+                case 1:
                     artist = _b.sent();
                     if (artist !== null)
                         return [2 /*return*/, res.status(400).send("Email ALready Joined")];
                     return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
-                case 3:
+                case 2:
                     hashed_pass = _b.sent();
                     return [4 /*yield*/, database_1.default.artist.create({
                             data: { email: email, password: hashed_pass, username: username },
                         })];
-                case 4:
+                case 3:
                     id = (_b.sent()).id;
                     token = jsonwebtoken_1.default.sign({ id: id }, process.env.JWT_PASS);
                     res.status(200).header({ "x-auth-token": token }).send("joining Done");
-                    return [3 /*break*/, 6];
-                case 5:
-                    error_1 = _b.sent();
-                    res.json(error_1);
-                    return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

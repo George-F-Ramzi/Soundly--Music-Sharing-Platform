@@ -43,7 +43,7 @@ var database_1 = __importDefault(require("../lib/database"));
 var joi_1 = __importDefault(require("joi"));
 function Comment(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, song_id, details, schema, error, song_row, error_1;
+        var my_id, song_id, details, schema, error, song_row;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -57,14 +57,11 @@ function Comment(req, res) {
                     if (error) {
                         return [2 /*return*/, res.status(400).json(error.message)];
                     }
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 5, , 6]);
                     return [4 /*yield*/, database_1.default.song.findUnique({
                             where: { id: song_id },
                             select: { artist_id: true },
                         })];
-                case 2:
+                case 1:
                     song_row = _a.sent();
                     if (song_row === null)
                         return [2 /*return*/, res.status(400).send("something wrong happen")];
@@ -75,8 +72,11 @@ function Comment(req, res) {
                                 song_id: song_id,
                             },
                         })];
-                case 3:
+                case 2:
                     _a.sent();
+                    if (my_id === song_row.artist_id) {
+                        return [2 /*return*/, res.status(200).send("Commenting Done")];
+                    }
                     return [4 /*yield*/, database_1.default.notification.create({
                             data: {
                                 message_detail: "Commented on your song",
@@ -85,14 +85,10 @@ function Comment(req, res) {
                                 song_id: song_id,
                             },
                         })];
-                case 4:
+                case 3:
                     _a.sent();
                     res.status(200).send("Commenting Done");
-                    return [3 /*break*/, 6];
-                case 5:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 6: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

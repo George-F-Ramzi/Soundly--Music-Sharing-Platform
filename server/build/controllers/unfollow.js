@@ -42,38 +42,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
 function UnFollow(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, artist_id, error_1;
+        var my_id, artist_id;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     my_id = req.user;
                     artist_id = Number(req.params.artist_id);
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 5, , 6]);
                     return [4 /*yield*/, database_1.default.follower.delete({
                             where: { artist_id_fan_id: { artist_id: artist_id, fan_id: my_id } },
                         })];
-                case 2:
+                case 1:
                     _a.sent();
                     return [4 /*yield*/, database_1.default.artist.update({
                             where: { id: my_id },
                             data: { following: { decrement: 1 } },
                         })];
-                case 3:
+                case 2:
                     _a.sent();
                     return [4 /*yield*/, database_1.default.artist.update({
                             where: { id: artist_id },
                             data: { followers: { decrement: 1 } },
                         })];
-                case 4:
+                case 3:
                     _a.sent();
                     res.status(200).send("UnFollowing Done");
-                    return [3 /*break*/, 6];
-                case 5:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 6: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });

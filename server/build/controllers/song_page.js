@@ -40,36 +40,47 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
-function DislikeSong(req, res) {
+function SongPage(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, song_id, error_1;
+        var song_id, my_id, song_info, song_liked, liked, song_comments, reuslt;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    my_id = req.user;
                     song_id = Number(req.params.song_id);
-                    _a.label = 1;
+                    my_id = req.user;
+                    return [4 /*yield*/, database_1.default.song.findUnique({
+                            where: { id: song_id },
+                            include: { artist: { select: { username: true } } },
+                        })];
                 case 1:
-                    _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, database_1.default.like.delete({
-                            where: { song_id_fan_id: { fan_id: my_id, song_id: song_id } },
+                    song_info = _a.sent();
+                    if (song_info === null)
+                        return [2 /*return*/, res.status(400).send("Song Dosen't Exist")];
+                    return [4 /*yield*/, database_1.default.like.findUnique({
+                            where: { song_id_fan_id: { song_id: song_id, fan_id: my_id } },
                         })];
                 case 2:
-                    _a.sent();
-                    return [4 /*yield*/, database_1.default.song.update({
-                            where: { id: song_id },
-                            data: { likes: { decrement: 1 } },
+                    song_liked = _a.sent();
+                    liked = false;
+                    if (song_liked === null)
+                        liked = false;
+                    else
+                        liked = true;
+                    return [4 /*yield*/, database_1.default.comment.findMany({
+                            where: { song_id: song_id },
+                            include: { artist: { select: { username: true, photo_url: true } } },
                         })];
                 case 3:
-                    _a.sent();
-                    res.status(200).send("DisLike Done");
-                    return [3 /*break*/, 5];
-                case 4:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).send("Something Wrong Happen")];
-                case 5: return [2 /*return*/];
+                    song_comments = _a.sent();
+                    reuslt = {
+                        info: song_info,
+                        liked: liked,
+                        comments: song_comments,
+                    };
+                    res.status(200).json(reuslt);
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = DislikeSong;
+exports.default = SongPage;

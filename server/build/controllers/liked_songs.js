@@ -40,54 +40,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
-function HomePageData(req, res) {
+function LikedSongs(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var artists, discover, result, error_1;
+        var my_id, songs, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, database_1.default.artist.findMany({
-                            orderBy: { followers: "desc" },
-                            select: {
-                                id: true,
-                                followers: true,
-                                photo_url: true,
-                                username: true,
-                                songs_uploaded_number: true,
-                                following: true,
-                            },
-                            take: 9,
+                    my_id = req.user;
+                    return [4 /*yield*/, database_1.default.like.findMany({
+                            where: { fan_id: my_id },
+                            include: { song: { include: { artist: { select: { username: true } } } } },
                         })];
                 case 1:
-                    artists = _a.sent();
-                    return [4 /*yield*/, database_1.default.song.findMany({
-                            orderBy: { likes: "desc" },
-                            include: {
-                                artist: {
-                                    select: {
-                                        id: true,
-                                        followers: true,
-                                        photo_url: true,
-                                        username: true,
-                                        songs_uploaded_number: true,
-                                        following: true,
-                                    },
-                                },
-                            },
-                            take: 9,
-                        })];
-                case 2:
-                    discover = _a.sent();
-                    result = { artists: artists, discover: discover };
+                    songs = _a.sent();
+                    result = songs.map(function (s) {
+                        return {
+                            id: s.song.id,
+                            song_name: s.song.song_name,
+                            song_cover_url: s.song.song_cover_url,
+                            song_file_url: s.song.song_file_url,
+                            artist_id: s.song.artist_id,
+                            artist: s.song.artist,
+                        };
+                    });
                     res.status(200).json(result);
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 4: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = HomePageData;
+exports.default = LikedSongs;

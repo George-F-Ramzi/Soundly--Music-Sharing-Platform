@@ -40,30 +40,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("../lib/database"));
-function IsFollowed(req, res) {
+function ArtistPage(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var my_id, artist_id, result, error_1;
+        var artist_id, my_id, artist_info, artist_followed, followed, artist_songs, reuslt;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    my_id = req.user;
                     artist_id = Number(req.params.artist_id);
-                    _a.label = 1;
+                    my_id = req.user;
+                    return [4 /*yield*/, database_1.default.artist.findUnique({
+                            where: { id: artist_id },
+                            select: {
+                                id: true,
+                                followers: true,
+                                photo_url: true,
+                                username: true,
+                                following: true,
+                                songs_uploaded_number: true,
+                            },
+                        })];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, database_1.default.follower.findFirst({
-                            where: { fan_id: my_id, artist_id: artist_id },
+                    artist_info = _a.sent();
+                    if (artist_info === null)
+                        return [2 /*return*/, res.status(400).send("Artist Dosen't Exist")];
+                    return [4 /*yield*/, database_1.default.follower.findUnique({
+                            where: { artist_id_fan_id: { artist_id: artist_id, fan_id: my_id } },
                         })];
                 case 2:
-                    result = _a.sent();
-                    res.status(200).json(result);
-                    return [3 /*break*/, 4];
+                    artist_followed = _a.sent();
+                    followed = false;
+                    if (artist_followed === null)
+                        followed = false;
+                    else
+                        followed = true;
+                    return [4 /*yield*/, database_1.default.song.findMany({
+                            where: { artist_id: artist_id },
+                            include: { artist: { select: { username: true } } },
+                        })];
                 case 3:
-                    error_1 = _a.sent();
-                    return [2 /*return*/, res.status(400).json("Something Wrong Happen")];
-                case 4: return [2 /*return*/];
+                    artist_songs = _a.sent();
+                    reuslt = {
+                        info: artist_info,
+                        followed: followed,
+                        songs: artist_songs,
+                    };
+                    res.status(200).json(reuslt);
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.default = IsFollowed;
+exports.default = ArtistPage;

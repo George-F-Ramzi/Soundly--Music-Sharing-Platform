@@ -4,7 +4,7 @@
   "description": "express server for music sharing platform",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "19.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,7 +37,7 @@
     "express": "^4.18.2",
     "express-exception-handler": "^1.3.44",
     "joi": "^17.7.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "pre-commit": "^1.2.2",

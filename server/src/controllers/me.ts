@@ -6,7 +6,7 @@ export default async function Me(req: Request, res: Response) {
 
   let result = await prisma_client.artist.findUnique({
     where: { id: my_id },
-    select: { id: true, photo_url: true },
+    select: { id: true, photo_url: true, username: true },
   });
 
   res.status(200).json(result);

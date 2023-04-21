@@ -8,6 +8,7 @@ export default async function SongPage(req: Request, res: Response) {
 
   let song_info = await prisma_client.song.findUnique({
     where: { id: song_id },
+    include: { artist: { select: { username: true } } },
   });
 
   if (song_info === null) return res.status(400).send("Song Dosen't Exist");
@@ -23,6 +24,7 @@ export default async function SongPage(req: Request, res: Response) {
 
   let song_comments = await prisma_client.comment.findMany({
     where: { song_id },
+    include: { artist: { select: { username: true, photo_url: true } } },
   });
 
   let reuslt: ISongPage = {

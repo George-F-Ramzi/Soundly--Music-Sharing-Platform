@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { RiSearch2Line, RiInboxArchiveLine, RiHeartLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { Me } from "../api/authorization";
-
-interface IME {
-  id: number;
-  photo_url: string;
-}
+import { IME } from "../lib/types.def";
 
 function NavBar() {
   const [data, setData] = useState<IME>();
@@ -17,6 +13,7 @@ function NavBar() {
       let response: IME = await Me();
       setData(response);
       localStorage.setItem("my_id", String(response.id));
+      localStorage.setItem("me", JSON.stringify(response));
     };
     GetInfo();
   }, []);
@@ -45,7 +42,7 @@ function NavBar() {
 
           <RiSearch2Line
             size={"24px"}
-            className="absolute right-4 top-[10px] text-gray-300 "
+            className="absolute right-4 top-[14px] text-gray-300 "
           />
         </div>
       </form>

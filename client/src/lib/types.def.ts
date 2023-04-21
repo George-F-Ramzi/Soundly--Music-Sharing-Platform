@@ -36,3 +36,39 @@ export interface HomePageType {
 export interface IContextPlayer {
   setSong?: (song: ISongCard) => void;
 }
+
+export interface IArtistPage {
+  info: {
+    id: number;
+    followers: number;
+    photo_url: string;
+    username: string;
+    following: number;
+    songs_uploaded_number: number;
+  };
+  followed: boolean;
+  songs: ISongCard[];
+}
+
+export interface IComment {
+  id: number;
+  artist_id: number;
+  song_id: number;
+  details: string;
+  artist: {
+    username: string;
+    photo_url: string;
+  };
+}
+
+export interface ISongPage {
+  info: ISongCard;
+  liked: boolean;
+  comments: IComment[];
+}
+
+export interface IME {
+  id: number;
+  photo_url: string;
+  username: string;
+}

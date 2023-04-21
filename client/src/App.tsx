@@ -5,9 +5,16 @@ import LandingPage from "./pages/landing_page";
 import NavBar from "./components/nav_bar";
 import Player from "./components/player";
 import HomePage from "./pages/home_page";
-import { GetLikedSongs, HomePageData } from "./api/authorization";
+import {
+  GetArtistData,
+  GetLikedSongs,
+  GetSongData,
+  HomePageData,
+} from "./api/authorization";
 import LikedPage from "./pages/liked_page";
 import UploadPage from "./pages/upload";
+import ArtistPage from "./pages/artist_page";
+import SongPage from "./pages/song_page";
 
 function App() {
   const AppLayout = () => (
@@ -40,6 +47,20 @@ function App() {
         {
           path: "/upload",
           element: <UploadPage />,
+        },
+        {
+          path: "/artist/:id",
+          element: <ArtistPage />,
+          loader: async ({ params }) => {
+            return defer({ data: GetArtistData(params.id!) });
+          },
+        },
+        {
+          path: "/song/:id",
+          element: <SongPage />,
+          loader: async ({ params }) => {
+            return defer({ data: GetSongData(params.id!) });
+          },
         },
       ],
     },

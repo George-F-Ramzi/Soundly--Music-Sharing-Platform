@@ -1,14 +1,20 @@
-import { HomePageType, ISongCard } from "../lib/types.def";
+import {
+  HomePageType,
+  IArtistPage,
+  IME,
+  ISongCard,
+  ISongPage,
+} from "../lib/types.def";
 
 let server = "http://localhost:3999";
 let token = localStorage.getItem("token")!;
 
-export const Me = async (): Promise<{ id: number; photo_url: string }> => {
+export const Me = async (): Promise<IME> => {
   let response: Response = await fetch(`${server}/me`, {
     method: "GET",
     headers: { "Content-Type": "application/json", "x-auth-token": token },
   });
-  let data: Promise<{ id: number; photo_url: string }> = await response.json();
+  let data: Promise<IME> = await response.json();
   return data;
 };
 
@@ -37,5 +43,60 @@ export const UploadPoint = async (form: FormData) => {
       "x-auth-token": token,
     },
     body: form,
+  });
+};
+
+export const GetArtistData = async (id: string): Promise<IArtistPage> => {
+  let response: Response = await fetch(`${server}/artist/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<IArtistPage> = await response.json();
+  return data;
+};
+
+export const Follow = async (userId: number): Promise<void> => {
+  await fetch(`${server}/follow/${userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
+
+export const UnFollow = async (userId: number): Promise<void> => {
+  await fetch(`${server}/unfollow/${userId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
+
+export const GetSongData = async (id: string): Promise<ISongPage> => {
+  let response: Response = await fetch(`${server}/song/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+  let data: Promise<ISongPage> = await response.json();
+  return data;
+};
+
+export const Like = async (songId: number) => {
+  await fetch(`${server}/like/${songId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
+
+export const Dislike = async (songId: number) => {
+  await fetch(`${server}/dislike/${songId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+  });
+};
+
+export const PostComment = async (data: FormData, id: number) => {
+  let value = { details: data.get("details") };
+  await fetch(`${server}/comment/${id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-auth-token": token },
+    body: JSON.stringify(value),
   });
 };

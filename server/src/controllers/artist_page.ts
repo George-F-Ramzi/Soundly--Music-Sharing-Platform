@@ -31,6 +31,7 @@ export default async function ArtistPage(req: Request, res: Response) {
 
   let artist_songs = await prisma_client.song.findMany({
     where: { artist_id },
+    include: { artist: { select: { username: true } } },
   });
 
   let reuslt: IArtistPage = {

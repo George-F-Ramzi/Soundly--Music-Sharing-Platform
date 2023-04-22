@@ -4,6 +4,7 @@ import cloudinary from "./cloudinary";
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
+  // @ts-ignore
   params: { resource_type: "auto" },
 });
 

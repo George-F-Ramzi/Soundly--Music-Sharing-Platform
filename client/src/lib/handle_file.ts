@@ -1,10 +1,6 @@
 import { UploadPoint } from "../api/authorization";
 
-interface Args {
-  form: FormData;
-}
-
-async function HandleFileUpload({ form }: Args): Promise<void> {
+async function HandleFileUpload(form: FormData): Promise<void> {
   let name: FormDataEntryValue = form.get("name")!;
   let song: FormDataEntryValue = form.get("song")!;
   let photo: FormDataEntryValue = form.get("photo")!;

@@ -51,7 +51,7 @@ function InboxCard({ data }: { data: InboxCardType }) {
     <div className="mb-4 phone:p-3 h-[100px] rounded p-[20px] flex items-center bg-gray-800  text-white">
       <Link to={`/artist/${data.trigger_id}`}>
         <img
-          src={data.nottifer.photo_url}
+          src={data.trigger.photo_url}
           className="w-12 min-w-[72px] phone:min-w-[56px] phone:h-[56px] h-[72px] rounded-full"
         />
       </Link>
@@ -60,7 +60,7 @@ function InboxCard({ data }: { data: InboxCardType }) {
           to={`/artist/${data.trigger_id}`}
           className="text-gray-300  tablet:text-sm"
         >
-          {data.nottifer.username}
+          {data.trigger.username}
         </Link>
         <h5 className="font-bold  phone:text-base  phone:mt-1 mt-2 text-lg">
           {data.message_detail}

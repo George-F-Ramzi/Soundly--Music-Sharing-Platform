@@ -12,7 +12,7 @@ function UploadPage() {
 
   return (
     <div className="grid phone:bg-transparent  tablet:grid-cols-1 tablet:mt-8 grid-cols-2 mx-auto mt-[100px] max-w-[800px] rounded-xl h-[500px] bg-gray-800">
-      <div className="py-[40px]  phone:px-3 relative text-white px-8">
+      <div className="py-[40px] phone:px-3 relative text-white px-8">
         <h5 className="font-bold mb-12 text-2xl">Upload</h5>
         <form
           encType="multipart/form-data"
@@ -20,7 +20,7 @@ function UploadPage() {
             e.preventDefault();
             setLoading(true);
             let form: FormData = new FormData(e.currentTarget);
-            await HandleFileUpload({ form });
+            await HandleFileUpload(form);
             navigate(`/artist/${me.id}`);
           }}
         >

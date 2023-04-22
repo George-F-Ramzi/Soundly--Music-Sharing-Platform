@@ -48,7 +48,7 @@ function CommentsSection({ data, id }: { data: IComment[]; id: number }) {
         />
       </form>
       <h5 className="my-8 font-bold text-xl">Comments</h5>
-      {Array.isArray(comments) && data.length ? (
+      {Array.isArray(comments) && comments.length ? (
         comments.map((c, i) => {
           return <CommentCard key={i} data={c} />;
         })
@@ -66,13 +66,13 @@ export default CommentsSection;
 function CommentCard({ data }: { data: IComment }) {
   return (
     <div className="mt-8 flex">
-      <Link to={`/artist/${data.artist_id}`}>
+      <Link className="min-w-fit" to={`/artist/${data.artist_id}`}>
         <img
           src={data.artist.photo_url}
-          className="max-w-12 w-12 h-12 mr-4 rounded-full"
+          className="min-w-12 w-12  h-12  rounded-full"
         />
       </Link>
-      <div className="h-fit  p-4 max-w-[512px] rounded-lg bg-gray-800">
+      <div className="h-fit ml-4 p-4 max-w-[512px] rounded-lg bg-gray-800">
         <Link to={`/artist/${data.artist_id}`} className="font-bold text-white">
           {data.artist.username}
         </Link>

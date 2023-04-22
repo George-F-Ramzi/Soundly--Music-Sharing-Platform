@@ -84,7 +84,7 @@ export interface InboxCardType {
   nottifer_id: number;
   song_id: number | null;
   message_detail: string;
-  nottifer: {
+  trigger: {
     photo_url: string;
     username: string;
   };

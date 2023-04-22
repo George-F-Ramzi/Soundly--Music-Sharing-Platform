@@ -31,24 +31,28 @@ function BarBody({ show }: { show: (v: boolean) => void }) {
       </div>
       <div className="w-full flex flex-col">
         <Link
+          onClick={() => show(false)}
           to={`/artist/${my_id.id}`}
           className="w-full mb-4 flex items-center justify-center border border-gray-500 h-12 rounded"
         >
           Profile
         </Link>
         <Link
+          onClick={() => show(false)}
           to={`/inbox`}
           className="w-full mb-4 flex items-center justify-center border border-gray-500 h-12 rounded"
         >
           Inbox
         </Link>
         <Link
+          onClick={() => show(false)}
           to={`/liked`}
           className="w-full mb-4 flex items-center justify-center border border-gray-500 h-12 rounded"
         >
           Liked
         </Link>
         <Link
+          onClick={() => show(false)}
           to={`/upload`}
           className="w-full flex items-center justify-center border border-gray-500 h-12 rounded"
         >
@@ -59,6 +63,7 @@ function BarBody({ show }: { show: (v: boolean) => void }) {
         onSubmit={(e) => {
           e.preventDefault();
           navigate(`/search/${Ivalue}`);
+          show(false);
         }}
       >
         <div className="w-full  h-12  relative rounded mt-10  border-gray-500 border-[0.4px] ">

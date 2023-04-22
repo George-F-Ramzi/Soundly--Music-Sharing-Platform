@@ -3,18 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Input from "../lib/input";
 import HandleJoin from "../lib/handle_join";
 import FormError from "../lib/form_error";
+import FastLogin from "../lib/fast_login";
 
 const Join = ({ hide }: { hide: (check: boolean) => void }) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
-
-  const FastLogin = () => {
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgxOTgxMDM2fQ.5Tpi0kXh7Hv6d7MaB8l8mIrJ8TJ3wz6Q72NOS8Het4g";
-    localStorage.setItem("token", token);
-    navigate("/home", { replace: true });
-  };
 
   return (
     <div className="w-full h-full p-6 tablet:p-4 flex items-center justify-center">

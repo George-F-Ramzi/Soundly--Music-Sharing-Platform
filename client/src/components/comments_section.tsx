@@ -17,7 +17,7 @@ function CommentsSection({ data, id }: { data: IComment[]; id: number }) {
     e.preventDefault();
     let form: FormData = new FormData(e.currentTarget);
     let clone: IComment[] = JSON.parse(JSON.stringify(comments));
-    clone.push({
+    clone.unshift({
       artist_id: me.id,
       details: Ivalue,
       id: Math.random(),

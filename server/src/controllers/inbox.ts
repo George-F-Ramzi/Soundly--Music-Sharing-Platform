@@ -7,7 +7,7 @@ export default async function Inbox(req: MYREQEUST, res: Response) {
 
   let data = await prisma_client.notification.findMany({
     where: { nottifer_id: my_id },
-    include: { nottifer: { select: { photo_url: true, username: true } } },
+    include: { trigger: { select: { photo_url: true, username: true } } },
   });
 
   res.status(200).json(data);

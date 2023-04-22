@@ -31,7 +31,7 @@ function NavBar() {
           navigate(`/search/${Ivalue}`);
         }}
       >
-        <div className="w-[300px] mx-4 h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
+        <div className="w-[280px] mx-4 h-full tablet:hidden  relative rounded-full  border-gray-500 border-[0.4px] ">
           <input
             placeholder="Search"
             className="w-full h-full  rounded-full border-none outline-none bg-gray-800 text-gray-300  p-4"
@@ -45,21 +45,21 @@ function NavBar() {
           />
         </div>
       </form>
-      <div className="flex tablet:hidden">
+      <div className="flex min-w-fit tablet:hidden">
         <Link
           to={"/upload"}
-          className="h-12 rounded-full font-bold px-7 flex items-center justify-center bg-gradient1"
+          className="h-12  rounded-full font-bold px-7 flex items-center justify-center bg-gradient1"
         >
           Upload
         </Link>
         <Link
-          className="h-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
+          className="h-12 min-w-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
           to={"/inbox"}
         >
           <RiInboxArchiveLine size={"26px"} />
         </Link>
         <Link
-          className="h-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
+          className="h-12  min-w-12 w-12 rounded-full ml-4  flex items-center justify-center bg-gradient1"
           to={"/liked"}
         >
           <RiHeartLine size={"26px"} />

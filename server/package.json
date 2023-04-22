@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "npx nodemon",
-    "build": "rimraf public && tsc",
-    "add-build": "git add public",
+    "build": "rimraf build && tsc",
+    "add-build": "git add build",
     "ts.check": "tsc --project tsconfig.json"
   },
   "pre-commit": [

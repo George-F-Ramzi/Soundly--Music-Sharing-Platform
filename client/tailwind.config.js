@@ -11,6 +11,7 @@ export default {
 
       screens: {
         desktop: { max: "1160px" },
+        "desktop-min": { min: "1160px" },
         tablet: { max: "744px" },
         phone: { max: "430px" },
       },

@@ -3,6 +3,7 @@ import { RiSearch2Line, RiInboxArchiveLine, RiHeartLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { Me } from "../api/authorization";
 import { IME } from "../lib/types.def";
+import SideBar from "./side_bar";
 
 function NavBar() {
   const [data, setData] = useState<IME>();
@@ -73,6 +74,7 @@ function NavBar() {
           </Link>
         </div>
       </div>
+      <SideBar />
     </div>
   );
 }

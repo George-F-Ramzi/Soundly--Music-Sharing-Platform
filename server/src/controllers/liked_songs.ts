@@ -1,7 +1,8 @@
 import prisma_client from "../lib/database";
-import { Response, Request } from "express";
+import { Response } from "express";
+import { MYREQEUST } from "../lib/types.def";
 
-export default async function LikedSongs(req: Request, res: Response) {
+export default async function LikedSongs(req: MYREQEUST, res: Response) {
   let my_id = req.user!;
 
   let songs = await prisma_client.like.findMany({

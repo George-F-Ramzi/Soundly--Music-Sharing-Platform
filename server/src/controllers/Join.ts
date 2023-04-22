@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import Joi, { Schema } from "joi";
-import { JoinForm } from "../lib/types.def";
+import { JoinForm, MYREQEUST } from "../lib/types.def";
 import prisma_client from "../lib/database";
 import hashing from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export default async function Join(req: Request, res: Response) {
+export default async function Join(req: MYREQEUST, res: Response) {
   const schema: Schema = Joi.object({
     email: Joi.string().email().required().min(8).max(56).label("Email"),
     username: Joi.string().required().min(8).max(56).label("Username"),

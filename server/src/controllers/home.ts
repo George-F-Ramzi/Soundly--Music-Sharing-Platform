@@ -1,7 +1,8 @@
 import prisma_client from "../lib/database";
-import { Response, Request } from "express";
+import { Response } from "express";
+import { MYREQEUST } from "../lib/types.def";
 
-export default async function HomePageData(req: Request, res: Response) {
+export default async function HomePageData(req: MYREQEUST, res: Response) {
   let artists = await prisma_client.artist.findMany({
     orderBy: { followers: "desc" },
     select: {

@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { UploadedFiles } from "../lib/types.def";
+import { Response } from "express";
+import { MYREQEUST, UploadedFiles } from "../lib/types.def";
 import Joi, { Schema } from "joi";
 import cloudinary from "../lib/cloudinary";
 import prisma_client from "../lib/database";
 
-export default async function Upload(req: Request, res: Response) {
+export default async function Upload(req: MYREQEUST, res: Response) {
   const { name }: { name: string } = req.body;
   let id: number = req.user!;
 

@@ -1,8 +1,8 @@
 import prisma_client from "../lib/database";
-import { Response, Request } from "express";
-import { IArtistPage } from "../lib/types.def";
+import { Response } from "express";
+import { IArtistPage, MYREQEUST } from "../lib/types.def";
 
-export default async function ArtistPage(req: Request, res: Response) {
+export default async function ArtistPage(req: MYREQEUST, res: Response) {
   let artist_id = Number(req.params.artist_id);
   let my_id = req.user!;
 

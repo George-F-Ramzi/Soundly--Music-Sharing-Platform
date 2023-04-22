@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import prisma_client from "../lib/database";
+import { MYREQEUST } from "../lib/types.def";
 
-export default async function Search(req: Request, res: Response) {
+export default async function Search(req: MYREQEUST, res: Response) {
   let query: string = req.params.query;
 
   let artists = await prisma_client.artist.findMany({

@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import prisma_client from "../lib/database";
+import { MYREQEUST } from "../lib/types.def";
 
-export default async function DislikeSong(req: Request, res: Response) {
+export default async function DislikeSong(req: MYREQEUST, res: Response) {
   let my_id: number = req.user!;
   let song_id: number = Number(req.params.song_id);
 

@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import Joi, { Schema } from "joi";
-import { LoginForm } from "../lib/types.def";
+import { LoginForm, MYREQEUST } from "../lib/types.def";
 import prisma_client from "../lib/database";
 import hashing from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export default async function Login(req: Request, res: Response) {
+export default async function Login(req: MYREQEUST, res: Response) {
   const schema: Schema = Joi.object({
     email: Joi.string().required().min(8).max(56).label("email"),
     password: Joi.string().required().min(8).max(56).label("Password"),

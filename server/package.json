@@ -9,8 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "npx nodemon",
-    "start": "npx ts-node ./src/api/index.ts",
-    "build": "rimraf build && tsc",
+    "start": "npx ts-node ./src/index.ts",
+    "build:vercel": "rimraf build && tsc",
+    "build": "tsc",
     "add-build": "git add build",
     "ts.check": "tsc --project tsconfig.json"
   },

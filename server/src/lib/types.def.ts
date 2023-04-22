@@ -1,4 +1,5 @@
 import { Comment, Song } from "@prisma/client";
+import { Request } from "express";
 
 export interface JoinForm {
   username: string;
@@ -33,4 +34,8 @@ export interface ISongPage {
   info: Song;
   liked: boolean;
   comments: Comment[];
+}
+
+export interface MYREQEUST extends Request {
+  user?: number;
 }

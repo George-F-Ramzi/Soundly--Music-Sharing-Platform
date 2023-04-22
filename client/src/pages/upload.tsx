@@ -36,7 +36,7 @@ function UploadPage() {
               type="file"
               accept="audio/*"
               required
-              name="song"
+              name="song_file"
             />
             Click Here To Choose Song File
           </div>
@@ -46,7 +46,7 @@ function UploadPage() {
               type="file"
               required
               accept="image/*"
-              name="photo"
+              name="cover_file"
             />
             Click Here To Choose Thumbnail File
           </div>

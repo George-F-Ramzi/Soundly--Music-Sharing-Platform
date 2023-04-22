@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import HandleLogin from "../lib/handle_login";
 import Input from "../lib/input";
 import FormError from "../lib/form_error";
 import FastLogin from "../lib/fast_login";
 
 const Login = ({ hide }: { hide: (check: boolean) => void }) => {
-  const navigate = useNavigate();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -17,7 +15,7 @@ const Login = ({ hide }: { hide: (check: boolean) => void }) => {
           e.preventDefault();
           setLoading(true);
           let form: FormData = new FormData(e.currentTarget);
-          HandleLogin({ form, setError, navigate, setLoading });
+          HandleLogin({ form, setError, setLoading });
         }}
         className="max-w-[384px] w-[384px]"
       >

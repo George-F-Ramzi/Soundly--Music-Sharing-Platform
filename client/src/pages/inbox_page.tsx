@@ -41,9 +41,11 @@ function InboxCard({ data }: { data: InboxCardType }) {
     if (data.message_detail.includes("Commented")) {
       return `/song/${data.song_id}`;
     }
-    if (data.message_detail.includes("Likes")) {
+
+    if (data.message_detail.includes("Uploaded")) {
       return `/song/${data.song_id}`;
     }
+
     return `/song/${data.song_id}`;
   };
 

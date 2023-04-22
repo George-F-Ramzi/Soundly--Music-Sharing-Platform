@@ -62,7 +62,7 @@ export async function Uploader({
   name,
   cover_url,
 }: UploaderArgs) {
-  await prisma_client.song.create({
+  let song_id = await prisma_client.song.create({
     data: {
       song_name: name,
       song_cover_url: cover_url,
@@ -85,6 +85,7 @@ export async function Uploader({
       message_detail: "Uploaded A New Song",
       nottifer_id: f.fan_id,
       trigger_id: id,
+      song_id: song_id.id,
     };
   });
 
